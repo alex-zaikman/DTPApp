@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "aszUtils.h"
 
 @interface aszWebBrain : NSObject 
+
++(aszWebBrain*)the;
+
+-(void)exec:(NSString*)jsFunction withParams:(NSArray*)params onSuccessCall:(void (^)(NSString *)) success onFailureCall:(void (^)(NSString*)) faliure;
 
 @end

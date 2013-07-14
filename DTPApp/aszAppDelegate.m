@@ -6,16 +6,33 @@
 //  Copyright (c) 2013 alex zaikman. All rights reserved.
 //
 
+
 #import "aszAppDelegate.h"
+#import "aszUtils.h"
+
 
 @implementation aszAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
-    UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
-    splitViewController.delegate = (id)navigationController.topViewController;
+
+    
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSMutableDictionary *prefs;
+    
+    if(DEBUG)
+      prefs = [NSMutableDictionary dictionaryWithObjectsAndKeys: domain_def , @"http://cto.timetoknow.com" ,username_def, @"devb.teacher",password_def , @"123456" ,nil];
+    else
+      prefs = [NSMutableDictionary dictionaryWithObjectsAndKeys: domain_def , @"http://www.timetoknow.com" ,username_def, @"user name",password_def , @"password" ,nil];  
+        
+    [defaults registerDefaults:prefs];
+    [defaults synchronize];
+    
+    
+    
+    
     return YES;
 }
 							

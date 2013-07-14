@@ -14,11 +14,29 @@
 
 @property (atomic,strong) UIWebView *brain;
 
+-(id) init;
+
 @end
 
 @implementation aszWebBrain
 
--(id) init{
+static aszWebBrain *the = nil;
+
++(aszWebBrain*)the
+{
+    if(the)
+        return the;
+    
+    static dispatch_once_t pred;        // Lock
+    dispatch_once(&pred, ^{             // This code is called at most once per app
+        the = [[aszWebBrain alloc] init];
+    });
+    
+    return the;
+}
+
+-(id) init
+{
     
     self = [super init];
     if(self){
@@ -33,11 +51,9 @@
 }
 
 
-
-
-
 /*injects js function with the name <functionName> into the current context loadded in the webView */
--(void)registerFunctionWithName:(NSString*)functionName{
+-(void)registerFunctionWithName:(NSString*)functionName
+{
     
     NSMutableString *command = [[NSMutableString alloc]init];
     
@@ -54,8 +70,6 @@
     [self.brain stringByEvaluatingJavaScriptFromString:command];
     
 }
-
-
 
 
 #pragma mark – call JS API
@@ -108,8 +122,6 @@
     
 }
 
-
-
 #pragma mark – registered Ios Functions
 
 -(void)functionInjectionTest{
@@ -117,9 +129,6 @@
     NSLog(@"%@",@"AOK");
     
 }
-
-
-
 
 //preset some JS hook functions here...
 -(void)registerIosFunctions{
@@ -129,12 +138,7 @@
 }
 
 
-
-
-
-
 #pragma mark – UIWebViewDelegate
-
 
 -(void) webViewDidFinishLoad:(UIWebView *)webView{
 
@@ -146,9 +150,6 @@
         
         firstTime=NO;
     }
-
-
-
 
 }
 
@@ -178,3 +179,5 @@
 }
 
 @end
+
+
