@@ -16,10 +16,11 @@
 {
     if (self = [super initWithFrame:frame]) {
         self.lable = [[UILabel alloc]
-                      initWithFrame:CGRectMake(10, 10, 190, 20)
+                      initWithFrame:CGRectMake(10, 10, 180, 40)
                       ];
         
         self.lable.textColor = [UIColor blackColor];
+        self.lable.numberOfLines = 2;
         self.lable.backgroundColor = [UIColor whiteColor];
         [self addSubview:self.lable];
         

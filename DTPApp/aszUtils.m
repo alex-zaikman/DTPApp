@@ -29,14 +29,41 @@ NSString const * const password_def=@"password_def";
 
 +(NSString*)getDomain
 {
-    
     NSString *domain = [[NSUserDefaults standardUserDefaults] stringForKey:[domain_def copy]];
     return domain;
+}
+
++(NSArray*)jsonToArray:(NSString*)json
+{
+    NSError *error;
+    
+    NSString *myString = [self.class decodeFromPercentEscapeString:json];
+    
+    NSData *data = [myString dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSArray *ret =  [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+       
+    return ret;
     
 }
 
++(NSDictionary*)jsonToDictionarry:(NSString*)json
+{
+    NSError *error;
+    
+    NSString *myString = [self.class decodeFromPercentEscapeString:json];
+    
+    NSData *data = [myString dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSDictionary *ret =  [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+  
+    return ret;
 
+}
 
++(NSString*) decodeFromPercentEscapeString:(NSString *)string {
+    return (__bridge NSString *) CFURLCreateStringByReplacingPercentEscapesUsingEncoding(NULL,  (__bridge CFStringRef) string,CFSTR(""), kCFStringEncodingUTF8);
+}
 
 #pragma mark - debug funcs
 

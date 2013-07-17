@@ -23,13 +23,12 @@
     NSMutableDictionary *prefs;
     
     if(DEBUG)
-      prefs = [NSMutableDictionary dictionaryWithObjectsAndKeys: domain_def , @"http://cto.timetoknow.com" ,username_def, @"devb.teacher",password_def , @"123456" ,nil];
+      prefs = [NSMutableDictionary dictionaryWithObjectsAndKeys: @"http://cto.timetoknow.com" ,domain_def , @"devb.teacher", username_def , @"123456" ,password_def ,nil];
     else
-      prefs = [NSMutableDictionary dictionaryWithObjectsAndKeys: domain_def , @"http://www.timetoknow.com" ,username_def, @"user name",password_def , @"password" ,nil];  
+      prefs = [NSMutableDictionary dictionaryWithObjectsAndKeys: @"http://www.timetoknow.com" ,domain_def, @"user name", username_def  , @"password" ,password_def,nil];
         
     [defaults registerDefaults:prefs];
     [defaults synchronize];
-    
     
     
     

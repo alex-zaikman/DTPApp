@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface aszDTPApi : NSObject
+@interface aszDTPApi : NSObject <UIWebViewDelegate>
 
-+(void) logIn:(NSString*)domain withUser:(NSString*)user andPassword:(NSString*)pass onSuccessCall:(void (^)(NSString *))success onFaliureCall:(void (^)(NSString *))faliure ;
++(void) logInWithUser:(NSString*)user andPassword:(NSString*)pass callBack:(void (^)(NSString *))callme;
 
++(void) logOutCall:(void (^)(NSString *))callme ;
 
-+(void) logOutonSuccessCall:(void (^)(NSString *))success onFaliureCall:(void (^)(NSString *))faliure ;
-
++(void) getStudyClassesCall:(void (^)(NSString *))callme;
 
 @end

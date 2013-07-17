@@ -6,8 +6,10 @@
 //  Copyright (c) 2013 alex zaikman. All rights reserved.
 //
 
-#import "aszTEMPViewController.h"
+#warning TEMP 
 
+#import "aszTEMPViewController.h"
+#import "aszWebBrain.h"
 @interface aszTEMPViewController ()
 
 @property (weak, nonatomic) IBOutlet UIWebView *web;
@@ -29,8 +31,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    [[aszWebBrain the].brain setFrame:self.web.frame];
     
-    [self.web loadRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://cto.timetoknow.com/lms"] ]];
+    [self.view addSubview:  [aszWebBrain the].brain];
+    
+
+     NSString *domain = [[NSUserDefaults standardUserDefaults] stringForKey:[domain_def copy]];
+    
+    [ [aszWebBrain the].brain loadRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:[domain stringByAppendingString:@"/lms"]] ]];
     
 }
 

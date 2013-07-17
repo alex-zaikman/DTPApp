@@ -9,25 +9,84 @@
 #import "aszDTPApi.h"
 #import "aszWebBrain.h"
 
+@interface aszDTPApi()
+
+@property (nonatomic,strong) void (^callback)(NSString*);
+
+-(void)doit:(NSString*)msg;
+
+@end
 
 @implementation aszDTPApi
 
-+(void) logIn:(NSString*)domain withUser:(NSString*)user andPassword:(NSString*)pass onSuccessCall:(void (^)(NSString *))success onFaliureCall:(void (^)(NSString *))faliure
-{
+
+-(void)doit:(NSString*)msg{
+    self.callback( msg);
+}
+
+-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     
-#warning not implemented
+    NSString  *requestString=[[request URL] absoluteString];
     
-    success(@"loggged in");
+    // Intercept custom location change, URL begins with "js-call:"
+    if ([requestString hasPrefix:@"http://js-call"]) {
+        
+        // Extract the selector name from the URL
+        NSArray *components = [requestString componentsSeparatedByString:@";:;:;"];
+        NSString *function = [components objectAtIndex:1];
+        
+        NSString *param = [components objectAtIndex:2];
+        
+        // Call the given selector
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        [self performSelector:NSSelectorFromString(function) withObject:param];
+        
+        // Cancel the location change
+        return NO;
+    }
+    
+    // Accept this location change
+    return YES;
+    
     
 }
 
-+(void) logOutonSuccessCall:(void (^)(NSString *))success onFaliureCall:(void (^)(NSString *))faliure ;
+
+#pragma mark JS API
+
++(void) logInWithUser:(NSString*)user andPassword:(NSString*)pass callBack:(void (^)(NSString *))callme
 {
-    
-#warning not implemented
-    
-    success(@"loggged out");
-    
+    NSArray *param=@[user,pass];
+    static aszDTPApi  *me;
+    if(!me){
+        me = [[aszDTPApi alloc]init];
+    }
+    me.callback=callme;
+    [aszWebBrain the].brain.delegate = me ;
+    [[aszWebBrain the] callJs:@"T2K.user.login"  withParams:param call:@"doit:"];
+}
+
++(void) logOutCall:(void (^)(NSString *))callme
+{
+    static aszDTPApi  *me;
+    if(!me){
+        me = [[aszDTPApi alloc]init];
+    }
+    me.callback=callme;
+    [aszWebBrain the].brain.delegate = me ;
+    [[aszWebBrain the] callJs:@"T2K.user.logout"  withParams:nil call:@"doit:"];
+}
+
++(void) getStudyClassesCall:(void (^)(NSString *))callme
+{
+    static aszDTPApi  *me;
+    if(!me){
+        me = [[aszDTPApi alloc]init];
+    }
+    me.callback=callme;
+    [aszWebBrain the].brain.delegate = me ;
+    [[aszWebBrain the] callJs:@"T2K.user.getStudyClasses"  withParams:nil call:@"doit:"];
 }
 
 @end
+

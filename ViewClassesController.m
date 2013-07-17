@@ -8,9 +8,17 @@
 
 #import "ViewClassesController.h"
 #import "aszClassesViewCell.h"
-#import "aszWebBrain.h"
+#import "aszDTPApi.h"
+#import "aszUtils.h"
+
 
 @interface ViewClassesController ()
+
+@property (nonatomic,strong) NSArray* rawData;
+
+@property (nonatomic,strong) NSNumber *selectedClass;
+
+@property (nonatomic,assign) BOOL loggedin;
 
 @end
 
@@ -23,13 +31,29 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"updateParent" object:nil];
+        _rawData = [[NSArray alloc]init];
+        _loggedin = NO;
     }
     return self;
 }
 
 -(void) refresh{
-    #warning not implemented
-    [self.view setNeedsDisplay];
+    
+    [aszDTPApi getStudyClassesCall:^(NSString *msg) {
+        
+    
+       NSString *decoddedJson = [aszUtils decodeFromPercentEscapeString:msg] ;
+        
+       [aszUtils LOG:decoddedJson];
+        
+       self.rawData =  [aszUtils jsonToArray: decoddedJson];
+        
+       [self.collectionView reloadData];
+        
+        self.loggedin=YES;
+    }];
+    
+    
 }
 
 - (void)viewDidLoad
@@ -41,6 +65,7 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    if(!self.loggedin)
         [self login:self];
 }
 
@@ -58,9 +83,7 @@
 #pragma mark - UICollectionView Datasource
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
-    #warning not implemented
-    
-    return 1;
+    return [self.rawData count];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView {
@@ -69,55 +92,62 @@
 
 // 3
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    #warning not implemented
-    
+       
     aszClassesViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     
-    NSString *url;//= (NSString*)[(NSDictionary*)[(NSArray*)[self.data valueForKey:@"classes"] objectAtIndex:indexPath.item] valueForKey:@"classImageUrl"];
+    int index = indexPath.row;
     
-   // url = [[[NSUserDefaults standardUserDefaults] stringForKey:@"domain_preference"]  stringByAppendingString:url];
+    NSDictionary *class = self.rawData[index];
     
+    NSString *url = (NSString*)[class valueForKey:@"imageURL"] ;
     
+    NSString *domain = [[NSUserDefaults standardUserDefaults] stringForKey:[domain_def copy]] ;
     
-    NSURL *bgImageURL = [NSURL URLWithString:url];
+    NSURL *bgImageURL = [NSURL URLWithString:[domain stringByAppendingString:url]];
     NSData *bgImageData = [NSData dataWithContentsOfURL:bgImageURL];
     UIImage *img = [UIImage imageWithData:bgImageData];
     
-    [cell setBackgroundColor: [UIColor colorWithRed:255/255.0f green:237/255.0f blue:108/255.0f alpha:1.0f]];
-    
+  //  [cell setBackgroundColor: [UIColor colorWithRed:255/255.0f green:237/255.0f blue:108/255.0f alpha:1.0f]];
     
     [cell setBackgroundView:[[UIImageView alloc]initWithImage:img]];
     
-    //NSString *className = (NSString*)[(NSDictionary*)[(NSArray*)[self.data valueForKey:@"classes"] objectAtIndex:indexPath.item] valueForKey:@"className"];
+    NSString *className = (NSString*)[class valueForKey:@"name"] ;
     
-   // cell.lable.text = className;
+    cell.lable.text = className;
+
     
-//    NSArray *classes = (NSArray*)[self.data valueForKey:@"classes"];
-  //  NSUInteger index =  [indexPath indexAtPosition:[indexPath length]-1];
-  //  NSDictionary *class = [classes objectAtIndex:index];
- //   NSNumber *cid = [class valueForKey:@"classId"];
+    NSNumber *cid = (NSNumber*)[class valueForKey:@"id"];
     
-    
- //   cell.tag =[cid integerValue] ;
+    cell.tag =[cid integerValue] ;
     
     return cell;
 }
 
 #pragma mark - UICollectionViewDelegate
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-       #warning not implemented
-  
-       aszClassesViewCell *currentCell = [collectionView cellForItemAtIndexPath:indexPath];
-    
 
+       aszClassesViewCell *currentCell = (aszClassesViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
+        
+       self.selectedClass = @(currentCell.tag);
     
+       [self performSegueWithIdentifier:@"overview" sender:self];
     
     
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-       #warning not implemented
+    
+    if([[segue identifier] isEqualToString:@"overview"]){
+        
+        [segue.destinationViewController performSelector:@selector(setClassId:)
+                                              withObject: self.selectedClass];
+        
+        
+        
+        
+    }
 
        
 }

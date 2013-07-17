@@ -9,10 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "aszUtils.h"
 
-@interface aszWebBrain : NSObject 
+@interface aszWebBrain : NSObject <UIWebViewDelegate>
+
+@property (atomic,strong) UIWebView *brain;
 
 +(aszWebBrain*)the;
 
--(void)exec:(NSString*)jsFunction withParams:(NSArray*)params onSuccessCall:(void (^)(NSString *)) success onFailureCall:(void (^)(NSString*)) faliure;
+-(NSString*)callJs:(NSString*)name withParams:(NSArray*)params call:(NSString *)callme;
 
 @end

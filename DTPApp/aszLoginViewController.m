@@ -9,6 +9,8 @@
 #import "aszLoginViewController.h"
 #import "aszDTPApi.h"
 #import "aszUtils.h"
+#import "aszWebBrain.h"
+
 
 @interface aszLoginViewController ()
 
@@ -32,6 +34,7 @@ static BOOL logged = NO;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+
         
     }
     return self;
@@ -40,6 +43,13 @@ static BOOL logged = NO;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+    NSURLRequest *request =[[NSURLRequest alloc]initWithURL:[[NSURL alloc]initWithString:API_URL]];
+    [aszWebBrain the].brain.delegate=[aszWebBrain the];
+    [[aszWebBrain the].brain loadRequest:request];
+
+    
 	// Do any additional setup after loading the view.
     
     if(logged)
@@ -67,13 +77,13 @@ static BOOL logged = NO;
     
     self.loginButton.enabled=NO;
     
+    
+    self.progressBar.hidden = NO;
     [self.progressBar startAnimating];
     
     
     if(! logged)
     {
-        
-        
         //store user and password
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         
@@ -96,79 +106,48 @@ static BOOL logged = NO;
         
         //use msg
         self.outputView.text=@"Logging... \n please wait.";
+
+        [aszDTPApi logInWithUser:@"" andPassword:@"" callBack:^(NSString *msg) {
+            
+          //  NSDictionary *dic =  [aszUtils jsonToDictionarry:msg];
+            
+                
+               // NSDictionary *dic =  [aszUtils jsonToDictionarry:msg];
+                
+                self.outputView.text=@"You are logged in.";
+                
+                [self.loginButton setTitle:@"Logout" forState:UIControlStateNormal];
+                
+                logged = YES;
+                
+                
+                self.loginButton.enabled=YES;
+                
+                [self.progressBar stopAnimating];
+                
+                [self dismissViewControllerAnimated:YES completion:^{
+                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateParent" object:nil];
+            }];
+            
+        }];
         
-        
-        
-        [aszDTPApi logIn:[aszUtils getDomain] withUser:self.userName.text andPassword:self.password.text
          
-           onSuccessCall:^(NSString* msg){
-               
-               //if success
-               
-               
-               self.outputView.text=@"You are logged in.";
-               
-               [self.loginButton setTitle:@"Logout" forState:UIControlStateNormal];
-               
-               logged = YES;
-               
-               
-               self.loginButton.enabled=YES;
-               [self.progressBar stopAnimating];
-               
-               [aszUtils LOG:msg];
-               
-               [self dismissViewControllerAnimated:YES completion:^{
-                   
-                   [[NSNotificationCenter defaultCenter] postNotificationName:@"updateParent" object:nil];
-                   
-               }];
-               
-               
-               
-               
-           } onFaliureCall:^(NSString* msg){
-               
-               self.outputView.text= [NSString stringWithFormat: @"Login faild: %@",msg];
-               
-               [aszUtils ERROR:msg];
-               
-           }  ];
-        
-        
         
         
         
     }else{
+      
+        [aszDTPApi logOutCall:^(NSString *msg){
+    
+                    [self.loginButton setTitle:@"Login" forState:UIControlStateNormal];
+                    logged = NO;
         
-        [aszDTPApi logOutonSuccessCall:^(NSString *msg) {
-            
-            
-            self.outputView.text=@"You are logged out.";
-            [self.loginButton setTitle:@"Login" forState:UIControlStateNormal];
-            logged = NO;
-            
-            self.loginButton.enabled=YES;
-            [self.progressBar stopAnimating];
-            
-            [aszUtils LOG:msg];
-            
-        } onFaliureCall:^(NSString *msg) {
-            
-            self.outputView.text= [NSString stringWithFormat: @"Log out faild: %@",msg];
-            
-            [aszUtils ERROR:msg];
-            
+                    self.loginButton.enabled=YES;
+                    [self.progressBar stopAnimating];
         }];
         
-        
-        
-        
     }
-    
-    
-    
-    
     
 }
 
