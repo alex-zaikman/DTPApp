@@ -7,25 +7,38 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "DTPApp/brain/aszDTPApi.m"
-         timestampString = "395672227.113574"
+         filePath = "DTPApp/aszOverViewViewController.m"
+         timestampString = "396092415.725539"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "38"
-         endingLineNumber = "38"
-         landmarkName = "-webView:shouldStartLoadWithRequest:navigationType:"
+         startingLineNumber = "147"
+         endingLineNumber = "147"
+         landmarkName = "-tableView:numberOfRowsInSection:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "DTPApp/brain/aszWebBrain.m"
-         timestampString = "395664521.780363"
+         filePath = "DTPApp/aszDescriptionViewController.h"
+         timestampString = "396090065.084801"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "82"
-         endingLineNumber = "82"
+         startingLineNumber = "15"
+         endingLineNumber = "15"
+         landmarkName = "o"
+         landmarkType = "19">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "DTPApp/brain/aszWebBrain.m"
+         timestampString = "396096947.09473"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "91"
+         endingLineNumber = "91"
          landmarkName = "-callJs:withParams:call:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -33,52 +46,26 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "DTPApp/aszLoginViewController.m"
-         timestampString = "395734462.901909"
+         filePath = "DTPApp/aszDlPagerViewController.m"
+         timestampString = "396099182.11014"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "37"
-         endingLineNumber = "37"
-         landmarkName = "-initWithNibName:bundle:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ViewClassesController.m"
-         timestampString = "395741365.118146"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "96"
-         endingLineNumber = "96"
-         landmarkName = "-collectionView:cellForItemAtIndexPath:"
+         startingLineNumber = "91"
+         endingLineNumber = "91"
+         landmarkName = "-pageViewController:viewControllerAfterViewController:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "ViewClassesController.m"
-         timestampString = "395741365.118146"
+         filePath = "DTPApp/aszDlPagerViewController.m"
+         timestampString = "396099184.428076"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "145"
-         endingLineNumber = "145"
-         landmarkName = "-prepareForSegue:sender:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ViewClassesController.m"
-         timestampString = "395741365.118146"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "142"
-         endingLineNumber = "142"
-         landmarkName = "-prepareForSegue:sender:"
+         startingLineNumber = "106"
+         endingLineNumber = "106"
+         landmarkName = "-pageViewController:spineLocationForInterfaceOrientation:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

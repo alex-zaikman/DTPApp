@@ -12,6 +12,8 @@
 
 @property (nonatomic,strong) NSString *value;
 
+@property (nonatomic,strong) NSString *overview;
+@property (nonatomic,strong) NSString *cid;
 
 -(id)initWithValue:(NSString*)value;
 -(id)init;

@@ -8,6 +8,8 @@
 
 #import "aszDlPagerViewController.h"
 #import "aszDlViewController.h"
+#import "aszDTPApi.h"
+#import "aszUtils.h"
 
 
 @interface aszDlPagerViewController ()
@@ -16,11 +18,12 @@
 
 @implementation aszDlPagerViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithCoder:(NSCoder *)aDecoder
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithCoder:aDecoder];
     if (self) {
-        // Custom initialization
+
+        
     }
     return self;
 }
@@ -29,12 +32,24 @@
 {
     [super viewDidLoad];
 	
-
-    UIViewController *startingViewController = [self viewControllerAtIndex:0 storyboard:self.storyboard];
-   
-    NSArray *viewControllers = @[startingViewController];
     
-    [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
+    [aszDTPApi getLessonContent:self.courseId forLesson: self.lessonId Call:^(NSString *msg) {
+        
+        if(msg){
+            self.rawData = [aszUtils jsonToDictionarry: msg];
+        }
+
+        
+        UIViewController *startingViewController = [self viewControllerAtIndex:0 storyboard:self.storyboard];
+        
+        NSArray *viewControllers = @[startingViewController];
+        
+        [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
+
+        [self.parentViewController reloadInputViews];
+        
+    }];
+    
 
 }
 

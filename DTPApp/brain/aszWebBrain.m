@@ -59,10 +59,9 @@ static aszWebBrain *the = nil;
     [command appendString:@"("];
     if(params){
         for (int i=0 ; i<[params count] ; i++){
-            [command appendString:@"'"];
+
             [command appendString:params[i]];
-            [command appendString:@"'"];
-           
+
             if(i<[params count]-1)
                 [command appendString:@","];
         }
@@ -70,14 +69,24 @@ static aszWebBrain *the = nil;
     if(callme){
         if(params) 
             [command appendString:@","];
-        //[command appendString:@"'"];
+       
+        
         [command appendString:@"function(res){ callback(res,'"];
     
         [ command appendString:callme];
         
         [command appendString:@"'); }"];
+        
+        
+//        [command appendString:@",function(res){ callback(res,'"];
+//        
+//        [ command appendString:callme];
+//        
+//        [command appendString:@"'); }"];
     }
     [command appendString:@");"];
+    
+
     
  return  [self.brain stringByEvaluatingJavaScriptFromString:command];
     

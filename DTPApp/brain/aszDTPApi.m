@@ -56,6 +56,11 @@
 
 +(void) logInWithUser:(NSString*)user andPassword:(NSString*)pass callBack:(void (^)(NSString *))callme
 {
+    [aszWebBrain the];
+    
+    user = [[@"'" stringByAppendingString:user]stringByAppendingString:@"'"];
+    pass = [[@"'" stringByAppendingString:pass]stringByAppendingString:@"'"];
+    
     NSArray *param=@[user,pass];
     static aszDTPApi  *me;
     if(!me){
@@ -87,6 +92,37 @@
     [aszWebBrain the].brain.delegate = me ;
     [[aszWebBrain the] callJs:@"T2K.user.getStudyClasses"  withParams:nil call:@"doit:"];
 }
+
++(void) getCourse:(NSString*)cid Call:(void (^)(NSString *))callme
+{
+    static aszDTPApi  *me;
+    if(!me){
+        me = [[aszDTPApi alloc]init];
+    }
+    me.callback=callme;
+    [aszWebBrain the].brain.delegate = me ;
+    
+    [[aszWebBrain the] callJs:@"T2K.content.getCourse"  withParams:@[cid] call:@"doit:"];
+}
+
++(void) getLessonContent:(NSString*)courseId forLesson:(NSString*)lessonId Call:(void (^)(NSString *))callme
+{
+    static aszDTPApi  *me;
+    if(!me){
+        me = [[aszDTPApi alloc]init];
+    }
+    
+    courseId = [[@"'" stringByAppendingString:courseId]stringByAppendingString:@"'"];
+    lessonId = [[@"'" stringByAppendingString:lessonId]stringByAppendingString:@"'"];
+    NSArray *param=@[courseId,lessonId];
+    
+    me.callback=callme;
+    [aszWebBrain the].brain.delegate = me ;
+    
+    [[aszWebBrain the] callJs:@"T2K.content.getLessonContent"  withParams:param call:@"doit:"];
+}
+
+
 
 @end
 

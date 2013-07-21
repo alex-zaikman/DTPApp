@@ -44,7 +44,7 @@
     
        NSString *decoddedJson = [aszUtils decodeFromPercentEscapeString:msg] ;
         
-       [aszUtils LOG:decoddedJson];
+      // [aszUtils LOG:decoddedJson];
         
        self.rawData =  [aszUtils jsonToArray: decoddedJson];
         
@@ -144,12 +144,7 @@
         [segue.destinationViewController performSelector:@selector(setClassId:)
                                               withObject: self.selectedClass];
         
-        
-        
-        
     }
-
-       
 }
 
 

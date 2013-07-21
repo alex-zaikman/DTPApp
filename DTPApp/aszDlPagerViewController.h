@@ -10,6 +10,10 @@
 
 @interface aszDlPagerViewController : UIPageViewController <UIPageViewControllerDataSource , UIPageViewControllerDelegate>
 
+@property (nonatomic,strong) NSDictionary *rawData;
+
+@property (nonatomic,strong) NSString *courseId;
+@property (nonatomic,strong) NSString *lessonId;
 
 
 @end

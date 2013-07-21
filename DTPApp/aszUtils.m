@@ -32,7 +32,6 @@ NSString const * const password_def=@"password_def";
     NSString *domain = [[NSUserDefaults standardUserDefaults] stringForKey:[domain_def copy]];
     return domain;
 }
-
 +(NSArray*)jsonToArray:(NSString*)json
 {
     NSError *error;
@@ -62,7 +61,9 @@ NSString const * const password_def=@"password_def";
 }
 
 +(NSString*) decodeFromPercentEscapeString:(NSString *)string {
+    
     return (__bridge NSString *) CFURLCreateStringByReplacingPercentEscapesUsingEncoding(NULL,  (__bridge CFStringRef) string,CFSTR(""), kCFStringEncodingUTF8);
+    
 }
 
 #pragma mark - debug funcs

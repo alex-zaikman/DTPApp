@@ -10,6 +10,6 @@
 
 @interface aszOverViewViewController : UITableViewController <UITableViewDataSource,UITableViewDelegate>
 
-@property (nonatomic,assign) int classId;
+@property (nonatomic,strong) NSNumber *classId;
 
 @end

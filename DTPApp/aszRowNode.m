@@ -15,9 +15,6 @@
 @property (nonatomic,strong) NSMutableArray *children;
 @property (nonatomic,assign) BOOL expanded;
 
-
-
-
 @end
 
 

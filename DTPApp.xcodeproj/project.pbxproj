@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01157A74179BD41C004C23BE /* aszDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01157A73179BD41C004C23BE /* aszDescriptionViewController.m */; };
+		01157A78179BDFB3004C23BE /* aszSequenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01157A77179BDFB3004C23BE /* aszSequenseViewController.m */; };
 		0166EA12178EA39E005B249D /* aszDTPApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 0166EA11178EA39E005B249D /* aszDTPApi.m */; };
 		0166EA151792BAA2005B249D /* aszTEMPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0166EA141792BAA2005B249D /* aszTEMPViewController.m */; };
 		0166EA1C1792D2B1005B249D /* tree.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0166EA171792D2B1005B249D /* tree.jpg */; };
@@ -48,6 +50,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01157A72179BD41C004C23BE /* aszDescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aszDescriptionViewController.h; sourceTree = "<group>"; };
+		01157A73179BD41C004C23BE /* aszDescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aszDescriptionViewController.m; sourceTree = "<group>"; };
+		01157A76179BDFB3004C23BE /* aszSequenseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aszSequenseViewController.h; sourceTree = "<group>"; };
+		01157A77179BDFB3004C23BE /* aszSequenseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aszSequenseViewController.m; sourceTree = "<group>"; };
 		0166EA10178EA39E005B249D /* aszDTPApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aszDTPApi.h; sourceTree = "<group>"; };
 		0166EA11178EA39E005B249D /* aszDTPApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aszDTPApi.m; sourceTree = "<group>"; };
 		0166EA131792BAA2005B249D /* aszTEMPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aszTEMPViewController.h; sourceTree = "<group>"; };
@@ -119,6 +125,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01157A71179BD3FE004C23BE /* description */ = {
+			isa = PBXGroup;
+			children = (
+				01157A72179BD41C004C23BE /* aszDescriptionViewController.h */,
+				01157A73179BD41C004C23BE /* aszDescriptionViewController.m */,
+			);
+			name = description;
+			sourceTree = "<group>";
+		};
+		01157A75179BDF7D004C23BE /* sequenses */ = {
+			isa = PBXGroup;
+			children = (
+				01157A76179BDFB3004C23BE /* aszSequenseViewController.h */,
+				01157A77179BDFB3004C23BE /* aszSequenseViewController.m */,
+			);
+			name = sequenses;
+			sourceTree = "<group>";
+		};
 		0166EA0F178EA249005B249D /* view n controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -249,6 +273,7 @@
 		01FD99CD178BEC8B00B98A99 /* overView */ = {
 			isa = PBXGroup;
 			children = (
+				01157A71179BD3FE004C23BE /* description */,
 				01FD99CE178BECCC00B98A99 /* aszOverViewViewController.h */,
 				01FD99CF178BECCC00B98A99 /* aszOverViewViewController.m */,
 				01FD99D4178BED4600B98A99 /* aszOverViewCell.h */,
@@ -262,6 +287,7 @@
 		01FD99E0178E96AF00B98A99 /* dl */ = {
 			isa = PBXGroup;
 			children = (
+				01157A75179BDF7D004C23BE /* sequenses */,
 				01FD99E7178E9CAF00B98A99 /* aszDlWebViewDelegate.h */,
 				01FD99E8178E9CAF00B98A99 /* aszDlWebViewDelegate.m */,
 				01FD99E1178E96E800B98A99 /* aszDlPagerViewController.h */,
@@ -367,6 +393,8 @@
 				01FD99E9178E9CAF00B98A99 /* aszDlWebViewDelegate.m in Sources */,
 				0166EA12178EA39E005B249D /* aszDTPApi.m in Sources */,
 				0166EA151792BAA2005B249D /* aszTEMPViewController.m in Sources */,
+				01157A74179BD41C004C23BE /* aszDescriptionViewController.m in Sources */,
+				01157A78179BDFB3004C23BE /* aszSequenseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

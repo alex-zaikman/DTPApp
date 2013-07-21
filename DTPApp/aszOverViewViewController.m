@@ -9,21 +9,32 @@
 #import "aszOverViewViewController.h"
 #import "aszRowNode.h"
 #import "aszOverViewCell.h"
+#import "aszDTPApi.h"
+#import "aszUtils.h"
 
 
 @interface aszOverViewViewController ()
 
 @property (nonatomic,strong) aszRowNode *root;
+@property (nonatomic,strong) NSDictionary *rawData;
+
+-(void)initData:(NSDictionary*)raw;
+
+-(void)recPopulate:(aszRowNode*)root;
+
+@property (nonatomic,weak) aszRowNode *selectedNode;
+@property (nonatomic,strong) NSString *courseId;
 
 @end
 
 @implementation aszOverViewViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (id)initWithCoder:(NSCoder *)aDecoder
 {
-    self = [super initWithStyle:style];
+    self = [super initWithCoder:aDecoder];
     if (self) {
-        // Custom initialization
+       
+        _classId = [[NSNumber alloc]init];
         
     }
     return self;
@@ -33,38 +44,89 @@
 {
     [super viewDidLoad];
 
+    [aszDTPApi getCourse: [self.classId stringValue ] Call:^(NSString *msg) {
+    
+      
+       
+        if(msg){
+            self.rawData = [aszUtils jsonToDictionarry: msg];
+            [self initData:self.rawData];
+            [self.tableView reloadData];
+        }
+        
+    }];
+    
+    
+    
+
+    
     self.tableView.delegate = self;
     self.tableView.dataSource= self;
     
-    self.root = [[aszRowNode alloc]initWithValue:@"root"];
     
-    [self.root addChild:[[aszRowNode alloc]initWithValue:@"a"]];
-    [self.root addChild:[[aszRowNode alloc]initWithValue:@"b"]];
-    [self.root addChild:[[aszRowNode alloc]initWithValue:@"c"]];
-    [self.root addChild:[[aszRowNode alloc]initWithValue:@"d"]];
-    
-    NSArray *levelOne = [self.root getChildren];
-    
-    for (aszRowNode *node in levelOne){
-        
-        aszRowNode *tmpnode =[[aszRowNode alloc]initWithValue:[node.value stringByAppendingString:@"1"]];
-        [tmpnode addChild:[[aszRowNode alloc]initWithValue:[node.value stringByAppendingString:@"1.1"]]];
-        [tmpnode addChild:[[aszRowNode alloc]initWithValue:[node.value stringByAppendingString:@"1.2"]]];
-        [tmpnode addChild:[[aszRowNode alloc]initWithValue:[node.value stringByAppendingString:@"1.3"]]];
-        [node addChild:tmpnode];
-        
-        [node addChild:[[aszRowNode alloc]initWithValue:[node.value stringByAppendingString:@"2"]]];
-        [node addChild:[[aszRowNode alloc]initWithValue:[node.value stringByAppendingString:@"3"]]];
-        [node addChild:[[aszRowNode alloc]initWithValue:[node.value stringByAppendingString:@"4"]]];
-        
-    }
-    
+       
  //   [self.root toggleAllTo:YES];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void)initData:(NSDictionary*)raw
+{
+    
+    NSDictionary *data = [raw objectForKey:@"data"];
+    [self.navigationItem setTitle:[data valueForKey:@"title"]];
+    
+    NSDictionary *toc = [data objectForKey:@"toc"];
+    
+    self.courseId = [raw objectForKey:@"id"];
+    
+    
+    self.root = [[aszRowNode alloc]initWithValue:[toc valueForKey:@"title"]];
+        
+    self.root.overview = [toc valueForKey:@"overview"];
+    
+    self.root.cid = [toc valueForKey:@"cid"] ;
+    
+    [self recPopulate:self.root withData:toc];
+
+
+}
+
+-(void)recPopulate:(aszRowNode*)root withData:(NSDictionary*) data
+{
+    NSArray *tocItems = [data objectForKey:@"tocItems"];
+    
+    for (NSDictionary * tocitem in tocItems){
+        
+        aszRowNode *node = [[aszRowNode alloc]initWithValue:[tocitem valueForKey:@"title"]];
+        
+        node.overview = [tocitem valueForKey:@"overview"];
+        
+        node.cid = [tocitem valueForKey:@"cid"] ;
+        
+        [root addChild:node];
+        
+        [self recPopulate:node withData:tocitem];
+        
+    }
+    
+    NSArray *items = [data objectForKey:@"items"];
+    
+    for (NSDictionary * item in items){
+        
+        aszRowNode *node = [[aszRowNode alloc]initWithValue:[item valueForKey:@"title"]];
+        
+        node.overview = [item valueForKey:@"description"];
+        
+        node.cid = [item valueForKey:@"cid"] ;
+        
+        [root addChild:node];
+
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -77,15 +139,11 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
     return [self.root visibleCount];
 }
 
@@ -112,44 +170,7 @@
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
@@ -157,23 +178,47 @@
 {
     int index = indexPath.row;
     aszRowNode *node = [[self.root getVisibleSubTree] objectAtIndex:index];
-  //  [node togale];
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Click"
-                                                    message:node.value
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
-    
 
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    self.selectedNode = node;
+    
+    if(![node isLeaf]){
+         [self performSegueWithIdentifier:@"overviewDescription" sender:self];
+    }else{
+        
+        
+        [self performSegueWithIdentifier:@"dl" sender:self];
+        
+    }
+    
 }
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    if([[segue identifier] isEqualToString:@"overviewDescription"]){
+        
+        
+        [segue.destinationViewController performSelector:@selector(setT:)
+                                              withObject: self.selectedNode.value];
+        
+        
+        [segue.destinationViewController performSelector:@selector(setO:)
+                                              withObject:  self.selectedNode.overview];
+
+        
+    }
+    else if([[segue identifier] isEqualToString:@"dl"]){
+        
+        
+        [segue.destinationViewController performSelector:@selector(setCourseId:)
+                                              withObject: self.courseId];
+        
+        
+        [segue.destinationViewController performSelector:@selector(setLessonId:)
+                                              withObject:  self.selectedNode.cid];
+        
+        
+    }
+}
+
 
 @end

@@ -107,7 +107,8 @@ static BOOL logged = NO;
         //use msg
         self.outputView.text=@"Logging... \n please wait.";
 
-        [aszDTPApi logInWithUser:@"" andPassword:@"" callBack:^(NSString *msg) {
+        
+        [aszDTPApi logInWithUser:self.userName.text  andPassword:self.password.text callBack:^(NSString *msg) {
             
           //  NSDictionary *dic =  [aszUtils jsonToDictionarry:msg];
             

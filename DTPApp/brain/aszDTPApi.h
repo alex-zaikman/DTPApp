@@ -16,4 +16,8 @@
 
 +(void) getStudyClassesCall:(void (^)(NSString *))callme;
 
++(void) getCourse:(NSString*)cid Call:(void (^)(NSString *))callme;
+
++(void) getLessonContent:(NSString*)courseId forLesson:(NSString*)lessonId Call:(void (^)(NSString *))callme;
+
 @end
