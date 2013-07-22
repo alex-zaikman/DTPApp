@@ -47,25 +47,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DTPApp/aszDlPagerViewController.m"
-         timestampString = "396099182.11014"
+         timestampString = "396109047.544252"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "91"
-         endingLineNumber = "91"
+         startingLineNumber = "152"
+         endingLineNumber = "152"
          landmarkName = "-pageViewController:viewControllerAfterViewController:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DTPApp/aszDlPagerViewController.m"
-         timestampString = "396099184.428076"
+         timestampString = "396108288.369176"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "106"
-         endingLineNumber = "106"
-         landmarkName = "-pageViewController:spineLocationForInterfaceOrientation:"
+         startingLineNumber = "44"
+         endingLineNumber = "44"
+         landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

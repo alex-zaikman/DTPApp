@@ -12,7 +12,18 @@
 #import "aszUtils.h"
 
 
+@implementation aszSeq
+
+@end
+
+
+@implementation aszLo
+
+@end
+
 @interface aszDlPagerViewController ()
+
+-(void)prepLos:(NSArray *)learningObjects;
 
 @end
 
@@ -39,6 +50,11 @@
             self.rawData = [aszUtils jsonToDictionarry: msg];
         }
 
+        if(!self.los)
+            self.los = [[NSMutableArray alloc]init];
+        
+        [self prepLos:[[self.rawData objectForKey:@"data"] objectForKey:@"learningObjects" ]];
+        
         
         UIViewController *startingViewController = [self viewControllerAtIndex:0 storyboard:self.storyboard];
         
@@ -50,6 +66,51 @@
         
     }];
     
+
+}
+
+-(void)prepLos:(NSArray *)learningObjects
+{
+    for(int i=0 ; i<[learningObjects count] ;i++){
+        
+        aszLo *lo = [[aszLo alloc]init];
+    
+        lo.pedagogicalLoType = [(NSDictionary*)learningObjects[i] valueForKey:@"pedagogicalLoType"];
+       
+        lo.seqs = [[NSMutableArray alloc]init];
+    
+        NSArray *rawSeqs = [(NSDictionary*)learningObjects[i] valueForKey:@"sequences"];
+        
+        for(NSDictionary *rawSeq in rawSeqs){
+           
+            aszSeq *seq = [[aszSeq alloc]init];
+           
+            seq.stitle= [rawSeq valueForKey:@"title"] ;
+            seq.thumbnailHref= [rawSeq valueForKey:@"thumbnailHref"];
+            seq.contentHref= [rawSeq valueForKey:@"contentHref"];
+            
+            [lo.seqs addObject:seq];
+            
+        }
+        
+        
+        [self.los addObject:lo];
+    }
+    
+}
+
+
+
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    if([[segue identifier] isEqualToString:@"popSequences"]){
+        
+        [segue.destinationViewController performSelector:@selector(setLos:)
+    withObject: self.los];
+        
+        
+    }
 
 }
 

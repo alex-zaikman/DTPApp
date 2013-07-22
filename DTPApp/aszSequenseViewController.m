@@ -7,6 +7,9 @@
 //
 
 #import "aszSequenseViewController.h"
+#import "aszSequencesCell.h"
+#import "aszUtils.h"
+
 
 @interface aszSequenseViewController ()
 
@@ -14,9 +17,9 @@
 
 @implementation aszSequenseViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (id)initWithCoder:(NSCoder *)aDecoder
 {
-    self = [super initWithStyle:style];
+    self = [super initWithCoder:aDecoder];
     if (self) {
         // Custom initialization
     }
@@ -44,71 +47,60 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+
+    return [self.los count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    
+    aszLo* lo = (aszLo*)self.los[section];
+    
+    return [lo.seqs count] ;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    static NSString *CellIdentifier = @"cell";
+    aszSequencesCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    // Configure the cell...
+    int section = indexPath.section;
+    int row = indexPath.row;
+    
+    aszLo *lo = self.los[section];
+    NSArray *seqs = lo.seqs;
+    aszSeq* seq = seqs[row];
+    
+    cell.textLabel.text = seq.stitle;
+    
+    
+    NSString *domain = [[NSUserDefaults standardUserDefaults] stringForKey:[domain_def copy]];
+    NSString *url =   [domain stringByAppendingString:seq.thumbnailHref];
+    NSURL *bgImageURL = [NSURL URLWithString:url];
+    NSData *bgImageData = [NSData dataWithContentsOfURL:bgImageURL];
+    
+    cell.imageView.image =     [ [self class]  imageWithImage:[UIImage imageWithData:bgImageData] scaledToSize:CGSizeMake(300,200)] ;
+    
+
     
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+   
+    aszLo* lo = self.los[section];
+    
+    return lo.pedagogicalLoType;
 }
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    
     // Navigation logic may go here. Create and push another view controller.
     /*
      <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
@@ -116,6 +108,23 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+}
+
+
++ (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
+        if ([[UIScreen mainScreen] scale] == 2.0) {
+            UIGraphicsBeginImageContextWithOptions(newSize, YES, 2.0);
+        } else {
+            UIGraphicsBeginImageContext(newSize);
+        }
+    } else {
+        UIGraphicsBeginImageContext(newSize);
+    }
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 @end

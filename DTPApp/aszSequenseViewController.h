@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "aszDlPagerViewController.h"
+
 
 @interface aszSequenseViewController : UITableViewController
+
+@property (nonatomic,strong) NSMutableArray *los;
+
++ (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
 
 @end

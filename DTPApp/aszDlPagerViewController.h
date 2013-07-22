@@ -8,6 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@interface aszSeq :NSObject
+@property (nonatomic,strong) NSString *stitle;
+@property (nonatomic,strong) NSString *contentHref;
+@property (nonatomic,strong) NSString *thumbnailHref;
+@end
+
+
+@interface aszLo :NSObject
+@property (nonatomic,strong) NSString *pedagogicalLoType;
+@property (nonatomic,strong) NSMutableArray *seqs;
+@end
+
+
+
 @interface aszDlPagerViewController : UIPageViewController <UIPageViewControllerDataSource , UIPageViewControllerDelegate>
 
 @property (nonatomic,strong) NSDictionary *rawData;
@@ -15,5 +29,8 @@
 @property (nonatomic,strong) NSString *courseId;
 @property (nonatomic,strong) NSString *lessonId;
 
+@property (nonatomic,strong) NSMutableArray *los;
 
 @end
+
+
