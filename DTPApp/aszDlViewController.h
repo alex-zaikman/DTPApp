@@ -18,10 +18,11 @@
 
 @property (nonatomic,strong) NSArray *dlData;
 
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (strong, nonatomic)  UIWebView *dlWebView;
 
 @property (nonatomic,strong) NSURLRequest *request;
 @property (nonatomic,strong)  id<UIWebViewDelegate> wdelegate;
+
 
 
 @end

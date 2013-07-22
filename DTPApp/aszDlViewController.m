@@ -27,14 +27,7 @@
 
 
 
--(id) initWithCoder:(NSCoder *)aDecoder{
-    
-    self = [super initWithCoder:aDecoder];
-    if(self){
 
-    }
-    return self;
-}
 
 
 
@@ -42,16 +35,29 @@
 {
     [super viewDidLoad];
     
-    self.webView.delegate = self.wdelegate;
+    self.dlWebView.delegate = self.wdelegate;
     
     self.pageNumber.text = [NSString stringWithFormat:@"Page %d of %d" , self.pageNum , self.pageCount ];
 
-    [self.webView loadRequest:self.request];
+    [self.dlWebView loadRequest:self.request];
+    
+    [self.view addSubview:self.dlWebView];
     
     
 }
 
-
+-(void) viewWillLayoutSubviews{
+    
+    if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
+        
+        [self.dlWebView setFrame:CGRectMake(60,50,900,638)];
+        
+    } else {
+        
+        [self.dlWebView setFrame:CGRectMake(60,50,645,900)];
+        
+    }
+}
 
 - (void)didReceiveMemoryWarning
 {

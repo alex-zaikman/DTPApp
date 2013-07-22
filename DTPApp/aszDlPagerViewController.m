@@ -150,7 +150,7 @@
     ret= [storyboard instantiateViewControllerWithIdentifier:@"aszDlViewController"];
         
     
-
+        ret.dlWebView = [[UIWebView alloc]init];
     
     
     
