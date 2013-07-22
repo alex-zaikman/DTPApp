@@ -35,11 +35,11 @@
 {
     [super viewDidLoad];
     
-    self.dlWebView.delegate = self.wdelegate;
+   // self.dlWebView.delegate = self.wdelegate;
     
     self.pageNumber.text = [NSString stringWithFormat:@"Page %d of %d" , self.pageNum , self.pageCount ];
 
-    [self.dlWebView loadRequest:self.request];
+   // [self.dlWebView loadRequest:self.request];
     
     [self.view addSubview:self.dlWebView];
     

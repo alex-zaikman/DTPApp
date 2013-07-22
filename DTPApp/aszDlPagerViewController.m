@@ -150,28 +150,40 @@
     ret= [storyboard instantiateViewControllerWithIdentifier:@"aszDlViewController"];
         
     
-        ret.dlWebView = [[UIWebView alloc]init];
     
+    ret.dlWebView = [[UIWebView alloc]init];
     
-    
+        
+        
+        
     aszDlWebViewDelegate * delegate =[[aszDlWebViewDelegate alloc]initWtihData:@[((aszDl*)self.dls.dataArray[index]).iniData   ,  ((aszDl*)self.dls.dataArray[index]).playData  ] ];
-
-    ret.wdelegate =  delegate;
+        
+    ret.wdelegate =  delegate;   
+    ret.dlWebView.delegate = delegate;
+        
     
     NSString *urlAddress = @"http://cto.timetoknow.com/cms/player/dl/index2.html";
-    
     NSURLRequest *request2 = [aszUtils requestWithUrl:urlAddress usingMethod:@"GET" withUrlParams:nil andBodyData:nil];
     
     ret.request = request2;
- 
+    [ret.dlWebView loadRequest:request2];
+        
+        
+        
+        
     ret.pageCount = [self.dls.dataArray count];
     ret.pageNum = index+1;
-    //TODO init ret
+    
+        
+        
     }
     return ret;
     
 }
 
+-(UIWebView*)dlWebViewForIndex:(int)index{
+    
+}
 
 
 - (NSUInteger)indexOfViewController:(aszDlViewController *)viewController

@@ -36,6 +36,8 @@
 
 -(void) moveToPage:(NSNotification*)notification;
 
+-(UIWebView*)dlWebViewForIndex:(int)index;
+
 @end
 
 
