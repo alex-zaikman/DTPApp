@@ -33,4 +33,9 @@ extern NSString const * const password_def;
 
 +(NSString*) decodeFromPercentEscapeString:(NSString *)string ;
 
++(NSURLRequest*)requestWithUrl:(NSString*)url usingMethod:(NSString*)method withUrlParams: (NSDictionary*)urlVars andBodyData:(NSString*)bodyData;
+
++(NSString*)paramsToString:(NSDictionary*)vars;
+
+
 @end

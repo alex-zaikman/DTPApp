@@ -10,7 +10,7 @@
 #import "aszDlViewController.h"
 #import "aszDTPApi.h"
 #import "aszUtils.h"
-
+#import "aszDls.h"
 
 @implementation aszSeq
 
@@ -21,13 +21,20 @@
 
 @end
 
-@interface aszDlPagerViewController ()
+@interface aszDlPagerViewController ()<NSURLConnectionDelegate>
 
 -(void)prepLos:(NSArray *)learningObjects;
 
+@property (nonatomic,strong) NSMutableArray *seqList;
+
+
 @end
 
+
+
 @implementation aszDlPagerViewController
+
+
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -43,6 +50,10 @@
 {
     [super viewDidLoad];
 	
+
+
+    
+    self.seqList = [[NSMutableArray alloc]init];
     
     [aszDTPApi getLessonContent:self.courseId forLesson: self.lessonId Call:^(NSString *msg) {
         
@@ -55,6 +66,9 @@
         
         [self prepLos:[[self.rawData objectForKey:@"data"] objectForKey:@"learningObjects" ]];
         
+        
+        self.delegate=self;
+        self.dataSource=self;
         
         UIViewController *startingViewController = [self viewControllerAtIndex:0 storyboard:self.storyboard];
         
@@ -71,6 +85,8 @@
 
 -(void)prepLos:(NSArray *)learningObjects
 {
+    [self.seqList removeAllObjects];
+    
     for(int i=0 ; i<[learningObjects count] ;i++){
         
         aszLo *lo = [[aszLo alloc]init];
@@ -91,11 +107,13 @@
             
             [lo.seqs addObject:seq];
             
+            [self.seqList addObject:seq.contentHref];
         }
         
         
         [self.los addObject:lo];
     }
+    
     
 }
 
@@ -118,38 +136,65 @@
 - (aszDlViewController *)viewControllerAtIndex:(NSUInteger)index storyboard:(UIStoryboard *)storyboard
 {
     
-    //TODO use cashe
+    aszDlViewController *ret = nil;
     
-    aszDlViewController *ret= [storyboard instantiateViewControllerWithIdentifier:@"aszDlViewController"];
+   
+    if(!self.dls){
+        self.dls = [[aszDls alloc]initWithHrefs:self.seqList  forCourseId:self.courseId];
+    }
     
+    
+    if(index>=0 && index<[self.dls.dataArray count]){
+    
+    ret= [storyboard instantiateViewControllerWithIdentifier:@"aszDlViewController"];
+        
+    
+
+    
+    
+    
+    aszDlWebViewDelegate * delegate =[[aszDlWebViewDelegate alloc]initWtihData:@[((aszDl*)self.dls.dataArray[index]).iniData   ,  ((aszDl*)self.dls.dataArray[index]).playData  ] ];
+
+    ret.wdelegate =  delegate;
+    
+    NSString *urlAddress = @"http://cto.timetoknow.com/cms/player/dl/index2.html";
+    
+    NSURLRequest *request2 = [aszUtils requestWithUrl:urlAddress usingMethod:@"GET" withUrlParams:nil andBodyData:nil];
+    
+    ret.request = request2;
+ 
+   // ret.pageCount =
+    ret.pageNum = index;
     //TODO init ret
-    
+    }
     return ret;
     
 }
 
+
+
 - (NSUInteger)indexOfViewController:(aszDlViewController *)viewController
 {
-    return 0;
+    return viewController.pageNum;
 }
 
 
 #pragma mark - Page View Controller Data Source
 
-- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(aszDlViewController *)viewController
 {
     
-        int index = 0;
+        int index = viewController.pageNum;
     
   
         return [self viewControllerAtIndex:(index-1) storyboard:self.storyboard];
     
 }
 
-- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(aszDlViewController *)viewController
 {
     
-    int index = 0;
+    int index = viewController.pageNum;
     
     
     return [self viewControllerAtIndex:(index+1) storyboard:self.storyboard];

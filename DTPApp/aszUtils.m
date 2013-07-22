@@ -82,4 +82,48 @@ NSString const * const password_def=@"password_def";
 
 
 
++(NSURLRequest*)requestWithUrl:(NSString*)url usingMethod:(NSString*)method withUrlParams: (NSDictionary*)urlVars andBodyData:(NSString*)bodyData {
+    
+    NSString *vurl = url;
+    
+    if(urlVars!=nil && [urlVars count]>0){
+        vurl = [vurl stringByAppendingString:@"?"];
+        vurl = [vurl stringByAppendingString:[aszUtils paramsToString:urlVars]];
+        
+    }
+    
+    NSMutableURLRequest * request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString: vurl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:90.0];
+    
+    [request addValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    if( method!=nil)
+        [request setHTTPMethod:method];
+    
+    if(bodyData!=nil)
+        [request setHTTPBody:[NSData dataWithBytes:[bodyData UTF8String] length:[bodyData length]]];
+    
+    return [request copy];
+}
+
+
++(NSString*)paramsToString:(NSDictionary*)vars{
+    
+    NSMutableString *getVars=[[NSMutableString alloc]init];
+    
+    //  [getVars appendString:@"?"];
+    
+    NSEnumerator *it = [vars keyEnumerator];
+    
+    for(NSString *aKey in it) {
+        getVars = [[getVars stringByAppendingString:aKey]mutableCopy];
+        getVars = [[getVars stringByAppendingString:@"="]mutableCopy];
+        getVars = [[getVars stringByAppendingString:[vars valueForKey:aKey]]mutableCopy];
+        getVars = [[getVars stringByAppendingString:@"&"]mutableCopy];
+    }
+    NSString*  ret = [getVars substringToIndex:[getVars length] - 1];
+    
+    return ret;
+}
+
+
 @end

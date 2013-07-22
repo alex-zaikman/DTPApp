@@ -14,8 +14,6 @@
 
 @property (nonatomic,strong) aszDlWebViewDelegate *webViewDelegate;
 
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
-
 @property (weak, nonatomic) IBOutlet UILabel *pageNumber;
 
 
@@ -44,16 +42,11 @@
 {
     [super viewDidLoad];
     
-    if(!self.webViewDelegate){
-	         self.webViewDelegate = [[aszDlWebViewDelegate alloc]initWtihData:self.dlData];
-    }
-    
-    self.webView.delegate = self.webViewDelegate;
-    
+    self.webView.delegate = self.wdelegate;
     
     self.pageNumber.text = [NSString stringWithFormat:@"Page %d of %d" , self.pageNum , self.pageCount ];
 
-//TODO    [self.webView loadRequest:<#(NSURLRequest *)#>];
+    [self.webView loadRequest:self.request];
     
     
 }

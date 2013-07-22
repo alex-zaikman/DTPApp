@@ -20,7 +20,6 @@
 
 -(void)initData:(NSDictionary*)raw;
 
--(void)recPopulate:(aszRowNode*)root;
 
 @property (nonatomic,weak) aszRowNode *selectedNode;
 @property (nonatomic,strong) NSString *courseId;

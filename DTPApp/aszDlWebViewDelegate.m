@@ -26,6 +26,7 @@
 -(void) webViewDidFinishLoad:(UIWebView *)webView{
     
     
+        
     NSMutableString *js=[[NSMutableString alloc]init];
     
     [js appendString:@"window.dlhost.initAndPlay("];
@@ -47,8 +48,8 @@
     [javaScript appendString: @"   },0);    };  "];
     
     [webView stringByEvaluatingJavaScriptFromString: javaScript ];
-    
-    
+  
+    webView.delegate = nil;
 }
 
 

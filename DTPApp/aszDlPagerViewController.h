@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "aszDls.h"
 
 @interface aszSeq :NSObject
 @property (nonatomic,strong) NSString *stitle;
@@ -30,6 +31,8 @@
 @property (nonatomic,strong) NSString *lessonId;
 
 @property (nonatomic,strong) NSMutableArray *los;
+
+@property (nonatomic,strong)  aszDls *dls;
 
 @end
 
