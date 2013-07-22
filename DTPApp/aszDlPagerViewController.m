@@ -144,33 +144,28 @@
         self.dls = [[aszDls alloc]initWithHrefs:self.seqList  forCourseId:self.courseId];
     }
     
+        if(!self.delegates){
+        self.delegates = [[NSMutableArray alloc]initWithCapacity:[self.dls.dataArray count]];
+        
+        for(int i=0 ; i<[self.dls.dataArray count];i++){
+            
+            aszDlWebViewDelegate * delegate =[[aszDlWebViewDelegate alloc]initWtihData:@[((aszDl*)self.dls.dataArray[i]).iniData   ,  ((aszDl*)self.dls.dataArray[i]).playData  ] ];
+            
+            [self.delegates addObject:delegate];
+        }
+        
+        
+        
+    }
+    
     
     if(index>=0 && index<[self.dls.dataArray count]){
     
     ret= [storyboard instantiateViewControllerWithIdentifier:@"aszDlViewController"];
         
-    
-    
-    ret.dlWebView = [[UIWebView alloc]init];
-    
-        
-        
-        
-    aszDlWebViewDelegate * delegate =[[aszDlWebViewDelegate alloc]initWtihData:@[((aszDl*)self.dls.dataArray[index]).iniData   ,  ((aszDl*)self.dls.dataArray[index]).playData  ] ];
-        
-    ret.wdelegate =  delegate;   
-    ret.dlWebView.delegate = delegate;
-        
-    
-    NSString *urlAddress = @"http://cto.timetoknow.com/cms/player/dl/index2.html";
-    NSURLRequest *request2 = [aszUtils requestWithUrl:urlAddress usingMethod:@"GET" withUrlParams:nil andBodyData:nil];
-    
-    ret.request = request2;
-    [ret.dlWebView loadRequest:request2];
-        
-        
-        
-        
+    ret.dlWebView = [self dlWebViewForIndex:index];
+     
+    //det page numbers
     ret.pageCount = [self.dls.dataArray count];
     ret.pageNum = index+1;
     
@@ -183,6 +178,95 @@
 
 -(UIWebView*)dlWebViewForIndex:(int)index{
     
+    static NSString *urlAddress = @"http://cto.timetoknow.com/cms/player/dl/index2.html";
+    static NSURLRequest *request2;
+    
+    if(!request2)
+        request2 = [aszUtils requestWithUrl:urlAddress usingMethod:@"GET" withUrlParams:nil andBodyData:nil];
+    
+
+    
+    if(!self.dlWebviews){//first run
+        
+        self.dlWebviews=[[NSMutableArray alloc]initWithCapacity:[self.dls.dataArray count]];
+        
+        for(int i=0 ; i<[self.dls.dataArray count] ;i++){
+            [self.dlWebviews addObject:[NSNull null]];
+        }
+        
+        for(int i=index ; i<3+index ;i++){
+            self.dlWebviews[i] = [[UIWebView alloc]init];
+            
+            ((UIWebView*)self.dlWebviews[i]).delegate = self.delegates[i];
+            
+            [((UIWebView*)self.dlWebviews[i]) loadRequest:request2];
+        }
+
+    }
+    
+    //any way do:
+    UIWebView *ret = ((UIWebView*)self.dlWebviews[index]);
+    
+    if(ret == [NSNull null]){
+        
+        ret = [[UIWebView alloc]init];
+        
+        ret.delegate = self.delegates[index];
+        
+        [ret loadRequest:request2];
+
+        self.dlWebviews[index] = ret;
+    }
+    
+    if( index+1>=0 && index+1<[self.dlWebviews count]   &&   self.dlWebviews[index+1] == [NSNull null]){
+    
+        UIWebView *tmp = [[UIWebView alloc]init];
+        
+        tmp.delegate = self.delegates[index+1];
+        
+        [tmp loadRequest:request2];
+        
+        self.dlWebviews[index+1] = tmp;
+    }
+    if( index+2>=0 && index+2<[self.dlWebviews count]   &&   self.dlWebviews[index+2] == [NSNull null]){
+        
+        UIWebView *tmp = [[UIWebView alloc]init];
+        
+        tmp.delegate = self.delegates[index+2];
+        
+        [tmp loadRequest:request2];
+        
+        self.dlWebviews[index+2] = tmp;
+    }
+    if( index-1>=0 && index-1<[self.dlWebviews count]   &&   self.dlWebviews[index-1] == [NSNull null]){
+        
+        UIWebView *tmp = [[UIWebView alloc]init];
+        
+        tmp.delegate = self.delegates[index-1];
+        
+        [tmp loadRequest:request2];
+        
+        self.dlWebviews[index-1] = tmp;
+    }
+    if( index-2>=0 && index-2<[self.dlWebviews count]   &&   self.dlWebviews[index-2] == [NSNull null]){
+        
+        UIWebView *tmp = [[UIWebView alloc]init];
+        
+        tmp.delegate = self.delegates[index-2];
+        
+        [tmp loadRequest:request2];
+        
+        self.dlWebviews[index-2] = tmp;
+    }
+    
+    for(int i = index+3 ; i<[self.dlWebviews count] ;i++){
+        self.dlWebviews[i]=[NSNull null];
+    }
+    for(int i = index-3 ; i>=0 ;i--){
+        self.dlWebviews[i]=[NSNull null];
+    }
+    
+    return ret;
 }
 
 

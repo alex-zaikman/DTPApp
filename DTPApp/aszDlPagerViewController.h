@@ -32,9 +32,13 @@
 
 @property (nonatomic,strong) NSMutableArray *los;
 
-@property (nonatomic,strong)  aszDls *dls;
-
 -(void) moveToPage:(NSNotification*)notification;
+
+
+
+@property (nonatomic,strong)  aszDls *dls;
+@property (nonatomic,strong)  NSMutableArray *delegates;
+@property (nonatomic,strong)  NSMutableArray *dlWebviews;
 
 -(UIWebView*)dlWebViewForIndex:(int)index;
 
