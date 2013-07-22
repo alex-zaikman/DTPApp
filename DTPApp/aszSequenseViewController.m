@@ -81,7 +81,14 @@
     
     cell.imageView.image =     [ [self class]  imageWithImage:[UIImage imageWithData:bgImageData] scaledToSize:CGSizeMake(300,200)] ;
     
-
+    int tillnow=0;
+    
+    for(int i = 0 ; i<section ;i++)
+        tillnow+= [self tableView:tableView numberOfRowsInSection:i];
+    
+    
+    
+    cell.tag = row + tillnow;
     
     return cell;
 }
@@ -100,14 +107,28 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+
+       aszSequencesCell *myCell = (aszSequencesCell*) [tableView cellForRowAtIndexPath:indexPath];
     
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+       NSNumber * index =@(myCell.tag);
+    
+    NSDictionary *dic = @{ @"index" : index} ;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"moveToPage:" object:self userInfo:dic];
+    
+    
+    
+      // [[NSNotificationCenter defaultCenter] postNotificationName:@"moveToPage:" object:index];
+            
+        
+        
+  
+    
+    
+    
+    
+    
+    
 }
 
 

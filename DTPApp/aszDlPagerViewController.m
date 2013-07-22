@@ -41,6 +41,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
 
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveToPage:) name:@"moveToPage:" object:nil];
         
     }
     return self;
@@ -163,8 +164,8 @@
     
     ret.request = request2;
  
-   // ret.pageCount =
-    ret.pageNum = index;
+    ret.pageCount = [self.dls.dataArray count];
+    ret.pageNum = index+1;
     //TODO init ret
     }
     return ret;
@@ -184,7 +185,7 @@
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(aszDlViewController *)viewController
 {
     
-        int index = viewController.pageNum;
+        int index = viewController.pageNum-1;
     
   
         return [self viewControllerAtIndex:(index-1) storyboard:self.storyboard];
@@ -194,7 +195,7 @@
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(aszDlViewController *)viewController
 {
     
-    int index = viewController.pageNum;
+    int index = viewController.pageNum-1;
     
     
     return [self viewControllerAtIndex:(index+1) storyboard:self.storyboard];
@@ -215,5 +216,18 @@
     
 }
 
+
+-(void) moveToPage:(NSNotification*)notification{
+    
+    
+    NSNumber *indexnum = [notification.userInfo objectForKey:@"index"];
+    
+    UIViewController *startingViewController = [self viewControllerAtIndex:indexnum.intValue storyboard:self.storyboard];
+    
+    NSArray *viewControllers = @[startingViewController];
+    
+    [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
+
+}
 
 @end

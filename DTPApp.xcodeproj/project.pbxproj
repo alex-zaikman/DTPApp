@@ -11,7 +11,6 @@
 		01157A78179BDFB3004C23BE /* aszSequenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01157A77179BDFB3004C23BE /* aszSequenseViewController.m */; };
 		01157A7B179C1541004C23BE /* aszSequencesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01157A7A179C1541004C23BE /* aszSequencesCell.m */; };
 		01157A7F179D113F004C23BE /* aszDls.m in Sources */ = {isa = PBXBuildFile; fileRef = 01157A7E179D113F004C23BE /* aszDls.m */; };
-		01157A82179D27E5004C23BE /* aszaszDlViewControllerCash.m in Sources */ = {isa = PBXBuildFile; fileRef = 01157A81179D27E5004C23BE /* aszaszDlViewControllerCash.m */; };
 		0166EA12178EA39E005B249D /* aszDTPApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 0166EA11178EA39E005B249D /* aszDTPApi.m */; };
 		0166EA151792BAA2005B249D /* aszTEMPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0166EA141792BAA2005B249D /* aszTEMPViewController.m */; };
 		0166EA1C1792D2B1005B249D /* tree.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0166EA171792D2B1005B249D /* tree.jpg */; };
@@ -61,8 +60,6 @@
 		01157A7A179C1541004C23BE /* aszSequencesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aszSequencesCell.m; sourceTree = "<group>"; };
 		01157A7D179D113F004C23BE /* aszDls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aszDls.h; sourceTree = "<group>"; };
 		01157A7E179D113F004C23BE /* aszDls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aszDls.m; sourceTree = "<group>"; };
-		01157A80179D27E5004C23BE /* aszaszDlViewControllerCash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aszaszDlViewControllerCash.h; sourceTree = "<group>"; };
-		01157A81179D27E5004C23BE /* aszaszDlViewControllerCash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aszaszDlViewControllerCash.m; sourceTree = "<group>"; };
 		0166EA10178EA39E005B249D /* aszDTPApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aszDTPApi.h; sourceTree = "<group>"; };
 		0166EA11178EA39E005B249D /* aszDTPApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aszDTPApi.m; sourceTree = "<group>"; };
 		0166EA131792BAA2005B249D /* aszTEMPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aszTEMPViewController.h; sourceTree = "<group>"; };
@@ -161,8 +158,6 @@
 				01FD99E8178E9CAF00B98A99 /* aszDlWebViewDelegate.m */,
 				01157A7D179D113F004C23BE /* aszDls.h */,
 				01157A7E179D113F004C23BE /* aszDls.m */,
-				01157A80179D27E5004C23BE /* aszaszDlViewControllerCash.h */,
-				01157A81179D27E5004C23BE /* aszaszDlViewControllerCash.m */,
 			);
 			name = dlwebs;
 			sourceTree = "<group>";
@@ -420,7 +415,6 @@
 				01157A78179BDFB3004C23BE /* aszSequenseViewController.m in Sources */,
 				01157A7B179C1541004C23BE /* aszSequencesCell.m in Sources */,
 				01157A7F179D113F004C23BE /* aszDls.m in Sources */,
-				01157A82179D27E5004C23BE /* aszaszDlViewControllerCash.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

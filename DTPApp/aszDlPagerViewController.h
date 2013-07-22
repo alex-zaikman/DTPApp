@@ -34,6 +34,8 @@
 
 @property (nonatomic,strong)  aszDls *dls;
 
+-(void) moveToPage:(NSNotification*)notification;
+
 @end
 
 
