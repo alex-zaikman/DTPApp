@@ -70,14 +70,14 @@ NSString const * const password_def=@"password_def";
 
 +(void) LOG:(NSString *)msg
 {
-    if(DEBUG)
-        NSLog(@"asz - msg: %@",msg);
+//    if(DEBUG)
+//        NSLog(@"asz - msg: %@",msg);
 }
 
 +(void) ERROR:(NSString *)err
 {
-    if(DEBUG)
-        NSLog(@"asz - error: %@",err);
+//    if(DEBUG)
+//        NSLog(@"asz - error: %@",err);
 }
 
 

@@ -27,6 +27,11 @@
 
 @property (nonatomic,strong) NSMutableArray *seqList;
 
+-(UIWebView*)dlWebViewForIndex:(int)index;
+-(aszDlViewController*)vcForindex:(int)index Storyboard:(UIStoryboard*)storyboard;
+
+
+@property (nonatomic,strong) NSMutableArray *cashe;
 
 @end
 
@@ -51,8 +56,6 @@
 {
     [super viewDidLoad];
 	
-
-
     
     self.seqList = [[NSMutableArray alloc]init];
     
@@ -118,9 +121,6 @@
     
 }
 
-
-
-
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     
     if([[segue identifier] isEqualToString:@"popSequences"]){
@@ -136,135 +136,133 @@
 
 - (aszDlViewController *)viewControllerAtIndex:(NSUInteger)index storyboard:(UIStoryboard *)storyboard
 {
+    static aszDlViewController *mark;
     
-    aszDlViewController *ret = nil;
+    if(!mark)
+        mark = [[aszDlViewController alloc]init];
     
-   
     if(!self.dls){
         self.dls = [[aszDls alloc]initWithHrefs:self.seqList  forCourseId:self.courseId];
+        self.size = [self.dls.dataArray count];
+    
+    
     }
     
-        if(!self.delegates){
-        self.delegates = [[NSMutableArray alloc]initWithCapacity:[self.dls.dataArray count]];
+    
+    if(!self.cashe){//first run
         
-        for(int i=0 ; i<[self.dls.dataArray count];i++){
-            
-            aszDlWebViewDelegate * delegate =[[aszDlWebViewDelegate alloc]initWtihData:@[((aszDl*)self.dls.dataArray[i]).iniData   ,  ((aszDl*)self.dls.dataArray[i]).playData  ] ];
-            
-            [self.delegates addObject:delegate];
+        self.cashe = [[NSMutableArray alloc]init];
+        
+        for(int i = 0 ; i<self.size ; i++){
+            [self.cashe addObject:mark];
         }
         
-        
-        
-    }
-    
-    
-    if(index>=0 && index<[self.dls.dataArray count]){
-    
-    ret= [storyboard instantiateViewControllerWithIdentifier:@"aszDlViewController"];
-        
-    ret.dlWebView = [self dlWebViewForIndex:index];
-     
-    //det page numbers
-    ret.pageCount = [self.dls.dataArray count];
-    ret.pageNum = index+1;
-    
-        
+        for(int i = 0 ; i<MIN(4 , self.size ); i++){
+            
+            self.cashe[i] = [self vcForindex:i Storyboard:storyboard];
+            
+        }
         
     }
+
+    //bounds check
+    int inds = index;
+    if(inds<0 || index>= self.size) return nil;
+    
+    
+    //get target
+    aszDlViewController *ret = self.cashe[index];
+    
+    if([ret isEqual: mark])//if not in cash
+    {
+        ret = [self vcForindex:index Storyboard:storyboard];
+        self.cashe[index] = ret;
+    }
+    
+    //fill around if nedded
+    if( index+1<self.size && [self.cashe[index+1] isEqual: mark]){
+         self.cashe[index+1] = [self vcForindex:index+1 Storyboard:storyboard];
+    }
+
+    if( index>0 && [self.cashe[inds-1] isEqual:mark]){
+        self.cashe[index-1] = [self vcForindex:index-1 Storyboard:storyboard];
+    }
+
+    
+    //clear around
+
+        for(int i = 0 ; i<inds-1 && index!=0 ; i++){
+            
+            self.cashe[i]=mark;
+            
+        }
+        for(int i = index+2 ; i<self.size ; i++){
+            
+               self.cashe[i]=mark;
+            
+        }
+ 
+    
+    
     return ret;
     
 }
 
+-(aszDlViewController*)vcForindex:(int)index Storyboard:(UIStoryboard*)storyboard{
+    
+
+    
+     aszDlViewController *ret = nil;
+    
+    if(index>=0 && index<self.size){
+        
+        ret= [storyboard instantiateViewControllerWithIdentifier:@"aszDlViewController"];
+        
+        ret.dlWebView = [self dlWebViewForIndex:index];
+        
+        [ret.view addSubview:ret.dlWebView];
+        
+        //det page numbers
+        ret.pageCount = self.size;
+        ret.pageNum = index+1;
+
+    }
+    
+    return ret;
+}
+
 -(UIWebView*)dlWebViewForIndex:(int)index{
     
-    static NSString *urlAddress = @"http://cto.timetoknow.com/cms/player/dl/index2.html";
+    if(index<0 || index>=[self.dls.dataArray count]) return nil;
+    
+ 
+    if(!self.delegates){
+        
+        NSMutableArray*  tmp = [[NSMutableArray alloc]initWithCapacity:self.size];
+        
+        
+        for(int i=0 ; i<self.size;i++){
+            
+            aszDlWebViewDelegate * delegate =[[aszDlWebViewDelegate alloc]initWtihData:@[((aszDl*)self.dls.dataArray[i]).iniData   ,  ((aszDl*)self.dls.dataArray[i]).playData  ] ];
+            
+            [tmp addObject:delegate];
+        }
+        
+        self.delegates = [tmp copy];
+        
+    }
+
     static NSURLRequest *request2;
     
-    if(!request2)
-        request2 = [aszUtils requestWithUrl:urlAddress usingMethod:@"GET" withUrlParams:nil andBodyData:nil];
-    
+    if(!request2){
+        request2 = [aszUtils requestWithUrl:@"http://cto.timetoknow.com/cms/player/dl/index2.html" usingMethod:@"GET" withUrlParams:nil andBodyData:nil];
+    }
 
+    UIWebView *  ret = [[UIWebView alloc]init];
     
-    if(!self.dlWebviews){//first run
-        
-        self.dlWebviews=[[NSMutableArray alloc]initWithCapacity:[self.dls.dataArray count]];
-        
-        for(int i=0 ; i<[self.dls.dataArray count] ;i++){
-            [self.dlWebviews addObject:[NSNull null]];
-        }
-        
-        for(int i=index ; i<3+index ;i++){
-            self.dlWebviews[i] = [[UIWebView alloc]init];
-            
-            ((UIWebView*)self.dlWebviews[i]).delegate = self.delegates[i];
-            
-            [((UIWebView*)self.dlWebviews[i]) loadRequest:request2];
-        }
-
-    }
+    ret.delegate = self.delegates[index];
     
-    //any way do:
-    UIWebView *ret = ((UIWebView*)self.dlWebviews[index]);
-    
-    if(ret == [NSNull null]){
-        
-        ret = [[UIWebView alloc]init];
-        
-        ret.delegate = self.delegates[index];
-        
-        [ret loadRequest:request2];
-
-        self.dlWebviews[index] = ret;
-    }
-    
-    if( index+1>=0 && index+1<[self.dlWebviews count]   &&   self.dlWebviews[index+1] == [NSNull null]){
-    
-        UIWebView *tmp = [[UIWebView alloc]init];
-        
-        tmp.delegate = self.delegates[index+1];
-        
-        [tmp loadRequest:request2];
-        
-        self.dlWebviews[index+1] = tmp;
-    }
-    if( index+2>=0 && index+2<[self.dlWebviews count]   &&   self.dlWebviews[index+2] == [NSNull null]){
-        
-        UIWebView *tmp = [[UIWebView alloc]init];
-        
-        tmp.delegate = self.delegates[index+2];
-        
-        [tmp loadRequest:request2];
-        
-        self.dlWebviews[index+2] = tmp;
-    }
-    if( index-1>=0 && index-1<[self.dlWebviews count]   &&   self.dlWebviews[index-1] == [NSNull null]){
-        
-        UIWebView *tmp = [[UIWebView alloc]init];
-        
-        tmp.delegate = self.delegates[index-1];
-        
-        [tmp loadRequest:request2];
-        
-        self.dlWebviews[index-1] = tmp;
-    }
-    if( index-2>=0 && index-2<[self.dlWebviews count]   &&   self.dlWebviews[index-2] == [NSNull null]){
-        
-        UIWebView *tmp = [[UIWebView alloc]init];
-        
-        tmp.delegate = self.delegates[index-2];
-        
-        [tmp loadRequest:request2];
-        
-        self.dlWebviews[index-2] = tmp;
-    }
-    
-    for(int i = index+3 ; i<[self.dlWebviews count] ;i++){
-        self.dlWebviews[i]=[NSNull null];
-    }
-    for(int i = index-3 ; i>=0 ;i--){
-        self.dlWebviews[i]=[NSNull null];
-    }
+    [ret loadRequest:request2];
     
     return ret;
 }
@@ -272,7 +270,7 @@
 
 - (NSUInteger)indexOfViewController:(aszDlViewController *)viewController
 {
-    return viewController.pageNum;
+    return viewController.pageNum-1;
 }
 
 
@@ -302,14 +300,41 @@
 
 -(UIPageViewControllerSpineLocation) pageViewController:(UIPageViewController *)pageViewController spineLocationForInterfaceOrientation:(UIInterfaceOrientation)orientation{
     
-    //    UIViewController *currentViewController = self.viewControllers[0];
-    //    NSArray *viewControllers = @[currentViewController];
-    //    [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
     
-    self.doubleSided = NO;
+
+  //  self.doubleSided = NO;
     
-    return UIPageViewControllerSpineLocationMin;
+   // return UIPageViewControllerSpineLocationMin;
+
     
+    if (UIInterfaceOrientationIsPortrait(orientation)) {
+        // In portrait orientation: Set the spine position to "min" and the page view controller's view controllers array to contain just one view controller. Setting the spine position to 'UIPageViewControllerSpineLocationMid' in landscape orientation sets the doubleSided property to YES, so set it to NO here.
+        UIViewController *currentViewController = self.viewControllers[0];
+        NSArray *viewControllers = @[currentViewController];
+        [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
+        
+        self.doubleSided = NO;
+        return UIPageViewControllerSpineLocationMin;
+    }
+    
+    // In landscape orientation: Set set the spine location to "mid" and the page view controller's view controllers array to contain two view controllers. If the current page is even, set it to contain the current and next view controllers; if it is odd, set the array to contain the previous and current view controllers.
+    aszDlViewController *currentViewController = self.viewControllers[0];
+    NSArray *viewControllers = nil;
+    
+    NSUInteger indexOfCurrentViewController = [self indexOfViewController:currentViewController];
+    if (indexOfCurrentViewController == 0 || indexOfCurrentViewController % 2 == 0) {
+        UIViewController *nextViewController = [self pageViewController:pageViewController viewControllerAfterViewController:currentViewController];
+        viewControllers = @[currentViewController, nextViewController];
+    } else {
+        UIViewController *previousViewController = [self pageViewController:pageViewController viewControllerBeforeViewController:currentViewController];
+        viewControllers = @[previousViewController, currentViewController];
+    }
+    [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
+    
+    
+    return UIPageViewControllerSpineLocationMid;
+    
+
 }
 
 
@@ -320,7 +345,7 @@
     
     UIViewController *startingViewController = [self viewControllerAtIndex:indexnum.intValue storyboard:self.storyboard];
     
-    NSArray *viewControllers = @[startingViewController];
+    NSArray *viewControllers = @[startingViewController , [self viewControllerAtIndex:indexnum.intValue+1 storyboard:self.storyboard] ];
     
     [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
 

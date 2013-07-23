@@ -22,10 +22,10 @@
     
     NSMutableDictionary *prefs;
     
-    if(DEBUG)
+ //   if(DEBUG)
       prefs = [NSMutableDictionary dictionaryWithObjectsAndKeys: @"http://cto.timetoknow.com" ,domain_def , @"devb.teacher", username_def , @"123456" ,password_def ,nil];
-    else
-      prefs = [NSMutableDictionary dictionaryWithObjectsAndKeys: @"http://www.timetoknow.com" ,domain_def, @"user name", username_def  , @"password" ,password_def,nil];
+ //   else
+ //     prefs = [NSMutableDictionary dictionaryWithObjectsAndKeys: @"http://www.timetoknow.com" ,domain_def, @"user name", username_def  , @"password" ,password_def,nil];
         
     [defaults registerDefaults:prefs];
     [defaults synchronize];

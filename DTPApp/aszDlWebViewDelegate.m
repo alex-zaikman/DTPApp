@@ -8,6 +8,8 @@
 
 #import "aszDlWebViewDelegate.h"
 
+
+
 @implementation aszDlWebViewDelegate
 
 
@@ -25,8 +27,10 @@
 
 -(void) webViewDidFinishLoad:(UIWebView *)webView{
     
+    NSString* loadded =   [webView stringByEvaluatingJavaScriptFromString: @"var check = function(){ return loadded};   check();" ];
     
-        
+    if(![loadded isEqualToString:@"YES"]){
+    
     NSMutableString *js=[[NSMutableString alloc]init];
     
     [js appendString:@"window.dlhost.initAndPlay("];
@@ -43,13 +47,14 @@
     
     
     NSMutableString *javaScript =[[NSMutableString alloc]init];
-    [javaScript appendString: @"var boo =function(){   setTimeout(function(){  "];
+    [javaScript appendString: @"var loadded = 'YES';   var boo =function(){   setTimeout(function(){  "];
     [javaScript appendString:js  ];
     [javaScript appendString: @"   },0);    };  "];
     
     [webView stringByEvaluatingJavaScriptFromString: javaScript ];
   
-    webView.delegate = nil;
+    }
+    
 }
 
 

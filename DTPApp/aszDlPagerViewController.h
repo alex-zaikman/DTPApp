@@ -34,13 +34,13 @@
 
 -(void) moveToPage:(NSNotification*)notification;
 
-
+@property(nonatomic,assign) int size;
 
 @property (nonatomic,strong)  aszDls *dls;
-@property (nonatomic,strong)  NSMutableArray *delegates;
-@property (nonatomic,strong)  NSMutableArray *dlWebviews;
+@property (nonatomic,strong)  NSArray *delegates;
 
--(UIWebView*)dlWebViewForIndex:(int)index;
+
+
 
 @end
 

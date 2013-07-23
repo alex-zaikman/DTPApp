@@ -10,51 +10,35 @@
 
 @interface aszDlViewController ()
 
-
-
 @property (nonatomic,strong) aszDlWebViewDelegate *webViewDelegate;
 
 @property (weak, nonatomic) IBOutlet UILabel *pageNumber;
 
-
-
 @end
-
 
 
 
 @implementation aszDlViewController
 
 
-
-
-
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-   // self.dlWebView.delegate = self.wdelegate;
-    
-    self.pageNumber.text = [NSString stringWithFormat:@"Page %d of %d" , self.pageNum , self.pageCount ];
 
-   // [self.dlWebView loadRequest:self.request];
-    
-    [self.view addSubview:self.dlWebView];
-    
-    
 }
 
 -(void) viewWillLayoutSubviews{
     
+    self.pageNumber.text = [NSString stringWithFormat:@"Page %d of %d" , self.pageNum , self.pageCount ];
+    
     if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
         
-        [self.dlWebView setFrame:CGRectMake(60,50,900,638)];
+        [self.dlWebView setFrame:CGRectMake(65,55,900,620)];
         
     } else {
         
-        [self.dlWebView setFrame:CGRectMake(60,50,645,900)];
+        [self.dlWebView setFrame:CGRectMake(65,55,630,870)];
         
     }
 }
