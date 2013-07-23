@@ -301,54 +301,25 @@
 -(UIPageViewControllerSpineLocation) pageViewController:(UIPageViewController *)pageViewController spineLocationForInterfaceOrientation:(UIInterfaceOrientation)orientation{
     
     
-
-  //  self.doubleSided = NO;
-    
-   // return UIPageViewControllerSpineLocationMin;
-
-    
-    if (UIInterfaceOrientationIsPortrait(orientation)) {
-        // In portrait orientation: Set the spine position to "min" and the page view controller's view controllers array to contain just one view controller. Setting the spine position to 'UIPageViewControllerSpineLocationMid' in landscape orientation sets the doubleSided property to YES, so set it to NO here.
-        UIViewController *currentViewController = self.viewControllers[0];
-        NSArray *viewControllers = @[currentViewController];
-        [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
-        
         self.doubleSided = NO;
         return UIPageViewControllerSpineLocationMin;
-    }
-    
-    // In landscape orientation: Set set the spine location to "mid" and the page view controller's view controllers array to contain two view controllers. If the current page is even, set it to contain the current and next view controllers; if it is odd, set the array to contain the previous and current view controllers.
-    aszDlViewController *currentViewController = self.viewControllers[0];
-    NSArray *viewControllers = nil;
-    
-    NSUInteger indexOfCurrentViewController = [self indexOfViewController:currentViewController];
-    if (indexOfCurrentViewController == 0 || indexOfCurrentViewController % 2 == 0) {
-        UIViewController *nextViewController = [self pageViewController:pageViewController viewControllerAfterViewController:currentViewController];
-        viewControllers = @[currentViewController, nextViewController];
-    } else {
-        UIViewController *previousViewController = [self pageViewController:pageViewController viewControllerBeforeViewController:currentViewController];
-        viewControllers = @[previousViewController, currentViewController];
-    }
-    [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
-    
-    
-    return UIPageViewControllerSpineLocationMid;
-    
+
 
 }
 
 
 -(void) moveToPage:(NSNotification*)notification{
     
-    
+
     NSNumber *indexnum = [notification.userInfo objectForKey:@"index"];
     
     UIViewController *startingViewController = [self viewControllerAtIndex:indexnum.intValue storyboard:self.storyboard];
     
-    NSArray *viewControllers = @[startingViewController , [self viewControllerAtIndex:indexnum.intValue+1 storyboard:self.storyboard] ];
+    NSArray *viewControllers = @[startingViewController ];
     
-    [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
-
+    [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
+    
+  //  [self.parentViewController reloadInputViews];
 }
 
 @end
