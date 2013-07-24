@@ -319,7 +319,6 @@
     
     [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
     
-  //  [self.parentViewController reloadInputViews];
 }
 
 @end

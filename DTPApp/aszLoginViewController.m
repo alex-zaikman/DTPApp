@@ -46,9 +46,15 @@ static BOOL logged = NO;
     
     
     NSURLRequest *request =[[NSURLRequest alloc]initWithURL:[[NSURL alloc]initWithString:API_URL]];
-    [aszWebBrain the].brain.delegate=[aszWebBrain the];
-    [[aszWebBrain the].brain loadRequest:request];
+    [aszWebBrain the].cdvbrain.webView.delegate=[aszWebBrain the];
+    
+//    [[aszWebBrain the].cdvbrain.webView loadRequest:request];
 
+    [aszWebBrain the].cdvbrain.wwwFolderName = @"";
+    [aszWebBrain the].cdvbrain.startPage = API_URL;
+    
+    
+    [aszWebBrain the].cdvbrain.view.frame =CGRectMake(0, 0, 500, 500);
     
 	// Do any additional setup after loading the view.
     

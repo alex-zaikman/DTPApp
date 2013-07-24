@@ -8,10 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "aszUtils.h"
+#import "CDVViewController.h"
 
 @interface aszWebBrain : NSObject <UIWebViewDelegate>
 
-@property (atomic,strong) UIWebView *brain;
+
+
+
+@property (atomic,strong) CDVViewController *cdvbrain;
 
 +(aszWebBrain*)the;
 

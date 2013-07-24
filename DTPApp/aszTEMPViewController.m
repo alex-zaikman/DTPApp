@@ -10,9 +10,14 @@
 
 #import "aszTEMPViewController.h"
 #import "aszWebBrain.h"
+
+#import <Cordova/CDVViewController.h>
+
 @interface aszTEMPViewController ()
 
 @property (weak, nonatomic) IBOutlet UIWebView *web;
+
+@property (strong,nonatomic) CDVViewController* mviewController;
 
 @end
 
@@ -31,14 +36,27 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [[aszWebBrain the].brain setFrame:self.web.frame];
+  //  [[aszWebBrain the].brain setFrame:self.web.frame];
     
-    [self.view addSubview:  [aszWebBrain the].brain];
+  //  [self.view addSubview:  [aszWebBrain the].brain];
     
 
      NSString *domain = [[NSUserDefaults standardUserDefaults] stringForKey:[domain_def copy]];
     
-    [ [aszWebBrain the].brain loadRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:[domain stringByAppendingString:@"/lms"]] ]];
+  //  [ [aszWebBrain the].brain loadRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:[domain stringByAppendingString:@"/lms"]] ]];
+    
+    self.mviewController = [CDVViewController new];
+
+    
+    
+    self.mviewController.wwwFolderName = @"http://cto.timetoknow.com/";
+    self.mviewController.startPage = @"lms";
+    
+    
+    self.mviewController.view.frame =CGRectMake(100, 100, 620, 780);
+    [self.view addSubview:self.mviewController.view];
+    
+    
     
 }
 

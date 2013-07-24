@@ -18,6 +18,21 @@
 
     
     
+    NSHTTPCookieStorage* cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    
+    [cookieStorage setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
+    
+    int cacheSizeMemory = 64 * 1024 * 1024;
+    int cacheSizeDisk = 1500 * 1024 * 1024;
+
+    NSURLCache* sharedCache = [[NSURLCache alloc] initWithMemoryCapacity:cacheSizeMemory diskCapacity:cacheSizeDisk diskPath:@"nsurlcache"];
+
+    [NSURLCache setSharedURLCache:sharedCache];
+    
+
+    
+    
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     NSMutableDictionary *prefs;

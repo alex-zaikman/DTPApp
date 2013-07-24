@@ -43,9 +43,21 @@ static aszWebBrain *the = nil;
         
         //load base
         NSURLRequest *request =[[NSURLRequest alloc]initWithURL:[[NSURL alloc]initWithString:API_URL]];
-        _brain = [[UIWebView alloc]init];
-        _brain.delegate=self;
-        [_brain loadRequest:request];
+       
+        _cdvbrain = [CDVViewController new];
+        
+        _cdvbrain.webView.delegate=self;
+        
+    
+        
+        _cdvbrain.wwwFolderName = @"";
+        _cdvbrain.startPage = API_URL;
+        
+        
+        _cdvbrain.view.frame =CGRectMake(0, 0, 620, 780);
+
+        
+
         
     }
     return self;
@@ -88,7 +100,7 @@ static aszWebBrain *the = nil;
     
 
     
- return  [self.brain stringByEvaluatingJavaScriptFromString:command];
+ return  [self.cdvbrain.webView stringByEvaluatingJavaScriptFromString:command];
     
 }
 
