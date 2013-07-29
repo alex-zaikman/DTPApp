@@ -7,6 +7,8 @@
 //
 
 #import "aszDescriptionViewController.h"
+#import <Cordova/CDVViewController.h>
+
 
 @interface aszDescriptionViewController ()
 
@@ -42,5 +44,7 @@
     [self dismissViewControllerAnimated:YES completion:^{ }];
     
 }
+
+
 
 @end

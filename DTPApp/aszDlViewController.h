@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "aszDlWebViewDelegate.h"
-
+#import <Cordova/CDVViewController.h>
 
 @interface aszDlViewController : UIViewController
 
@@ -18,7 +18,7 @@
 
 @property (nonatomic,strong) NSArray *dlData;
 
-@property (strong, nonatomic)  UIWebView *dlWebView;
+@property (strong, nonatomic)  CDVViewController *dlCDVWebView;
 
 @property (nonatomic,strong) NSURLRequest *request;
 @property (nonatomic,strong)  id<UIWebViewDelegate> wdelegate;

@@ -1,4 +1,4 @@
-//
+  //
 //  aszDTPApi.m
 //  DTPApp
 //
@@ -8,6 +8,8 @@
 
 #import "aszDTPApi.h"
 #import "aszWebBrain.h"
+#import "CDVWebViewDelegate.h"
+
 
 @interface aszDTPApi()
 
@@ -18,6 +20,7 @@
 @end
 
 @implementation aszDTPApi
+
 
 
 -(void)doit:(NSString*)msg{
@@ -67,7 +70,9 @@
         me = [[aszDTPApi alloc]init];
     }
     me.callback=callme;
-    [aszWebBrain the].cdvbrain.webView.delegate = me ;
+
+    [aszWebBrain the].cdvbrain.customDelegate = me;
+    
     [[aszWebBrain the] callJs:@"T2K.user.login"  withParams:param call:@"doit:"];
 }
 
@@ -78,18 +83,24 @@
         me = [[aszDTPApi alloc]init];
     }
     me.callback=callme;
-    [aszWebBrain the].cdvbrain.webView.delegate = me ;
+
+    [aszWebBrain the].cdvbrain.customDelegate = me;
+    
     [[aszWebBrain the] callJs:@"T2K.user.logout"  withParams:nil call:@"doit:"];
 }
 
 +(void) getStudyClassesCall:(void (^)(NSString *))callme
 {
+ 
+    
     static aszDTPApi  *me;
     if(!me){
         me = [[aszDTPApi alloc]init];
     }
     me.callback=callme;
-    [aszWebBrain the].cdvbrain.webView.delegate = me ;
+   
+    [aszWebBrain the].cdvbrain.customDelegate = me;
+    
     [[aszWebBrain the] callJs:@"T2K.user.getStudyClasses"  withParams:nil call:@"doit:"];
 }
 
@@ -100,9 +111,10 @@
         me = [[aszDTPApi alloc]init];
     }
     me.callback=callme;
-    [aszWebBrain the].cdvbrain.webView.delegate = me ;
     
-    [[aszWebBrain the] callJs:@"T2K.content.getCourse"  withParams:@[cid] call:@"doit:"];
+    [aszWebBrain the].cdvbrain.customDelegate = me;
+    
+    [[aszWebBrain the] callJs:@"T2K.content.getCourseByClass"  withParams:@[cid] call:@"doit:"];
 }
 
 +(void) getLessonContent:(NSString*)courseId forLesson:(NSString*)lessonId Call:(void (^)(NSString *))callme
@@ -117,7 +129,8 @@
     NSArray *param=@[courseId,lessonId];
     
     me.callback=callme;
-    [aszWebBrain the].cdvbrain.webView.delegate = me ;
+    
+    [aszWebBrain the].cdvbrain.customDelegate = me;
     
     [[aszWebBrain the] callJs:@"T2K.content.getLessonContent"  withParams:param call:@"doit:"];
 }

@@ -27,7 +27,7 @@
 
 @property (nonatomic,strong) NSMutableArray *seqList;
 
--(UIWebView*)dlWebViewForIndex:(int)index;
+-(CDVViewController*)dlWebViewForIndex:(int)index;
 -(aszDlViewController*)vcForindex:(int)index Storyboard:(UIStoryboard*)storyboard;
 
 
@@ -144,8 +144,6 @@
     if(!self.dls){
         self.dls = [[aszDls alloc]initWithHrefs:self.seqList  forCourseId:self.courseId];
         self.size = [self.dls.dataArray count];
-    
-    
     }
     
     
@@ -203,7 +201,8 @@
         }
  
     
-    
+//   aszDlViewController * ret = [self vcForindex:index Storyboard:storyboard];
+
     return ret;
     
 }
@@ -212,32 +211,37 @@
     
 
     
-     aszDlViewController *ret = nil;
-    
+        
     if(index>=0 && index<self.size){
         
-        ret= [storyboard instantiateViewControllerWithIdentifier:@"aszDlViewController"];
         
-        ret.dlWebView = [self dlWebViewForIndex:index];
+        aszDlViewController *ret= [storyboard instantiateViewControllerWithIdentifier:@"aszDlViewController"];
         
-        [ret.view addSubview:ret.dlWebView];
+        ret.dlCDVWebView = [self dlWebViewForIndex:index];
+        
+        [ret.view addSubview:ret.dlCDVWebView.view];
         
         //det page numbers
         ret.pageCount = self.size;
         ret.pageNum = index+1;
 
+        //[ret.view addSubview:ret.dlCDVWebView.view];
+
+        return ret;
     }
     
-    return ret;
+       
+    return nil;
 }
 
--(UIWebView*)dlWebViewForIndex:(int)index{
+-(CDVViewController*)dlWebViewForIndex:(int)index{
     
     if(index<0 || index>=[self.dls.dataArray count]) return nil;
     
  
     if(!self.delegates){
         
+               
         NSMutableArray*  tmp = [[NSMutableArray alloc]initWithCapacity:self.size];
         
         
@@ -248,21 +252,19 @@
             [tmp addObject:delegate];
         }
         
-        self.delegates = [tmp copy];
+        self.delegates = [[NSArray alloc] initWithArray:[tmp copy]];
+        
         
     }
 
-    static NSURLRequest *request2;
     
-    if(!request2){
-        request2 = [aszUtils requestWithUrl:@"http://cto.timetoknow.com/cms/player/dl/index2.html" usingMethod:@"GET" withUrlParams:nil andBodyData:nil];
-    }
+    CDVViewController *ret = [[CDVViewController alloc] initWithDelegate:self.delegates[index]];
+    
 
-    UIWebView *  ret = [[UIWebView alloc]init];
+    ret.wwwFolderName = @"";
+    ret.startPage = @"http://cto.timetoknow.com/cms/player/dl/index2.html";
     
-    ret.delegate = self.delegates[index];
-    
-    [ret loadRequest:request2];
+    ret.view.frame = CGRectMake(65,55,300,300);
     
     return ret;
 }

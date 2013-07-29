@@ -43,21 +43,21 @@ static BOOL logged = NO;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    if(!logged){
     
-    
-    NSURLRequest *request =[[NSURLRequest alloc]initWithURL:[[NSURL alloc]initWithString:API_URL]];
-    [aszWebBrain the].cdvbrain.webView.delegate=[aszWebBrain the];
-    
-//    [[aszWebBrain the].cdvbrain.webView loadRequest:request];
+    [aszWebBrain the].cdvbrain.customDelegate=[aszWebBrain the];
 
     [aszWebBrain the].cdvbrain.wwwFolderName = @"";
     [aszWebBrain the].cdvbrain.startPage = API_URL;
     
+    [aszWebBrain the].cdvbrain.view.frame =CGRectMake(30, 30, 100, 100);
     
-    [aszWebBrain the].cdvbrain.view.frame =CGRectMake(0, 0, 500, 500);
-    
-	// Do any additional setup after loading the view.
-    
+    [self.view addSubview:[aszWebBrain the].cdvbrain.view];    
+        
+        [self.view setNeedsDisplay];
+    }
+
     if(logged)
         [self.loginButton setTitle:@"Logout" forState:UIControlStateNormal];
     

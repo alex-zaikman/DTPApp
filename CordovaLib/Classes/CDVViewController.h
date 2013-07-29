@@ -72,5 +72,8 @@
 
 - (BOOL)URLisAllowed:(NSURL*)url;
 
+@property (nonatomic,strong) id<UIWebViewDelegate> customDelegate;
+- (id)initWithDelegate:(id<UIWebViewDelegate>)delegate;
+
 @end
 #endif

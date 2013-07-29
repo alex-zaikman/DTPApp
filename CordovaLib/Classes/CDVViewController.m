@@ -55,6 +55,7 @@
 @synthesize wwwFolderName, startPage, initialized, openURL;
 @synthesize commandDelegate = _commandDelegate;
 @synthesize commandQueue = _commandQueue;
+@synthesize customDelegate = _customDelegate;
 
 - (void)__init
 {
@@ -101,6 +102,15 @@
     [self __init];
     return self;
 }
+
+//asz
+- (id)initWithDelegate:(id<UIWebViewDelegate>)delegate{
+    self = [super init];
+    [self __init];
+    _customDelegate = delegate;
+    return self;
+}
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -620,6 +630,11 @@
      */
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 
+    //asz
+    if ([self.customDelegate respondsToSelector:@selector(webViewDidFinishLoad:)]) {
+        [self.customDelegate webViewDidFinishLoad:theWebView];
+    }
+    
     [self processOpenUrl];
 
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CDVPageDidLoadNotification object:self.webView]];
@@ -629,11 +644,28 @@
 {
     [CDVUserAgentUtil releaseLock:&_userAgentLockToken];
 
+    //asz
+    if ([self.customDelegate respondsToSelector:@selector(webView:didFailLoadWithError:)]) {
+        [self.customDelegate webView:theWebView didFailLoadWithError:error];
+    }
+    
+    
     NSLog(@"Failed to load webpage with error: %@", [error localizedDescription]);
 }
 
 - (BOOL)webView:(UIWebView*)theWebView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType
 {
+    
+    //asz
+    
+    BOOL shoulContinue = YES;
+    
+    if ([self.customDelegate respondsToSelector:@selector(webView:shouldStartLoadWithRequest:navigationType:)]) {
+        shoulContinue = [self.customDelegate webView:theWebView shouldStartLoadWithRequest:request navigationType:navigationType];
+    }
+    
+    if( shoulContinue){
+    
     NSURL* url = [request URL];
 
     /*
@@ -699,6 +731,10 @@
     }
 
     return YES;
+    
+    }else{
+        return NO;
+    }
 }
 
 #pragma mark GapHelpers

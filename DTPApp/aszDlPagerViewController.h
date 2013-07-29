@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "aszDls.h"
-
+#import <Cordova/CDVViewController.h>
 @interface aszSeq :NSObject
 @property (nonatomic,strong) NSString *stitle;
 @property (nonatomic,strong) NSString *contentHref;

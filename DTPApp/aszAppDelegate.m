@@ -17,7 +17,6 @@
 {
 
     
-    
     NSHTTPCookieStorage* cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     
     [cookieStorage setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
@@ -29,8 +28,6 @@
 
     [NSURLCache setSharedURLCache:sharedCache];
     
-
-    
     
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -38,7 +35,7 @@
     NSMutableDictionary *prefs;
     
  //   if(DEBUG)
-      prefs = [NSMutableDictionary dictionaryWithObjectsAndKeys: @"http://cto.timetoknow.com" ,domain_def , @"devb.teacher", username_def , @"123456" ,password_def ,nil];
+      prefs = [NSMutableDictionary dictionaryWithObjectsAndKeys: @"http://cto.timetoknow.com" ,domain_def , @"deva.teacher", username_def , @"123456" ,password_def ,nil];
  //   else
  //     prefs = [NSMutableDictionary dictionaryWithObjectsAndKeys: @"http://www.timetoknow.com" ,domain_def, @"user name", username_def  , @"password" ,password_def,nil];
         

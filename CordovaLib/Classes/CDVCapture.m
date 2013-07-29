@@ -16,7 +16,7 @@
  specific language governing permissions and limitations
  under the License.
  */
-
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 #import "CDVCapture.h"
 #import "CDVJSON.h"
 #import "CDVAvailability.h"

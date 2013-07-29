@@ -42,11 +42,11 @@ static aszWebBrain *the = nil;
     if(self){
         
         //load base
-        NSURLRequest *request =[[NSURLRequest alloc]initWithURL:[[NSURL alloc]initWithString:API_URL]];
+       // NSURLRequest *request =[[NSURLRequest alloc]initWithURL:[[NSURL alloc]initWithString:API_URL]];
        
         _cdvbrain = [CDVViewController new];
         
-        _cdvbrain.webView.delegate=self;
+        _cdvbrain.customDelegate=self;
         
     
         
@@ -54,7 +54,7 @@ static aszWebBrain *the = nil;
         _cdvbrain.startPage = API_URL;
         
         
-        _cdvbrain.view.frame =CGRectMake(0, 0, 620, 780);
+        _cdvbrain.view.frame =CGRectMake(30,30, 400, 400);
 
         
 
@@ -90,11 +90,11 @@ static aszWebBrain *the = nil;
         [command appendString:@"'); }"];
         
         
-//        [command appendString:@",function(res){ callback(res,'"];
-//        
-//        [ command appendString:callme];
-//        
-//        [command appendString:@"'); }"];
+        [command appendString:@",function(res){ callback(res,'"];
+        
+        [ command appendString:callme];
+        
+        [command appendString:@"'); }"];
     }
     [command appendString:@");"];
     
