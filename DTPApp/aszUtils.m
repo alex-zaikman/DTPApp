@@ -7,7 +7,7 @@
 //
 
 #import "aszUtils.h"
-
+#import "Base64.h"
 
 @implementation aszUtils
 
@@ -34,9 +34,19 @@ NSString const * const password_def=@"password_def";
 }
 +(NSArray*)jsonToArray:(NSString*)json
 {
+  
+//    NSData * ddata = [Base64 decode:json];
+    NSString * actualString = json;//[[NSString alloc] initWithData:ddata encoding:NSUTF8StringEncoding];
+   
+    
+    //NSLog(@"%@",actualString);
+    
+    
+    
+    
     NSError *error;
     
-    NSString *myString = [self.class decodeFromPercentEscapeString:json];
+    NSString *myString = actualString;// = [self.class decodeFromPercentEscapeString:json];
     
     NSData *data = [myString dataUsingEncoding:NSUTF8StringEncoding];
     
@@ -48,9 +58,16 @@ NSString const * const password_def=@"password_def";
 
 +(NSDictionary*)jsonToDictionarry:(NSString*)json
 {
+    
+
+  //  NSData * ddata = [Base64 decode:json];
+    NSString * actualString =json;// [[NSString alloc] initWithData:ddata encoding:NSUTF8StringEncoding];
+   // NSLog(@"%@",actualString);
+   
+    
     NSError *error;
     
-    NSString *myString = [self.class decodeFromPercentEscapeString:json];
+    NSString *myString = actualString; //[self.class decodeFromPercentEscapeString:json];
     
     NSData *data = [myString dataUsingEncoding:NSUTF8StringEncoding];
     

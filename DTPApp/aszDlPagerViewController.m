@@ -59,7 +59,7 @@
     
     self.seqList = [[NSMutableArray alloc]init];
     
-    [aszDTPApi getLessonContent:self.courseId forLesson: self.lessonId Call:^(NSString *msg) {
+    [aszDTPApi getLessonContent:self.courseId forLesson:self.lessonId Call:^(NSString *msg) {
         
         if(msg){
             self.rawData = [aszUtils jsonToDictionarry: msg];

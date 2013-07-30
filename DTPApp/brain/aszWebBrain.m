@@ -98,7 +98,7 @@ static aszWebBrain *the = nil;
     }
     [command appendString:@");"];
     
-
+//NSString *test = [self.cdvbrain.webView stringByEvaluatingJavaScriptFromString:@"echo('test')"];
     
  return  [self.cdvbrain.webView stringByEvaluatingJavaScriptFromString:command];
     

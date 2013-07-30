@@ -31,6 +31,9 @@
     
     NSString  *requestString=[[request URL] absoluteString];
     
+   // NSString* newStr = [[NSString alloc] initWithData:[request HTTPBody]
+  //                                           encoding:NSUTF8StringEncoding];
+    
     // Intercept custom location change, URL begins with "js-call:"
     if ([requestString hasPrefix:@"http://js-call"]) {
         
@@ -38,7 +41,13 @@
         NSArray *components = [requestString componentsSeparatedByString:@";:;:;"];
         NSString *function = [components objectAtIndex:1];
         
-        NSString *param = [components objectAtIndex:2];
+        NSString *test = [webView stringByEvaluatingJavaScriptFromString:@"echo()"];
+        
+        
+        NSString *param = test; //= [components objectAtIndex:2];
+        
+        //param = [newStr stringByReplacingOccurrencesOfString:[param stringByAppendingString:@"="] withString:@""];
+        
         
         // Call the given selector
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"

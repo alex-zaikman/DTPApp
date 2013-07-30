@@ -12,6 +12,7 @@
 		01157A7B179C1541004C23BE /* aszSequencesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01157A7A179C1541004C23BE /* aszSequencesCell.m */; };
 		01157A7F179D113F004C23BE /* aszDls.m in Sources */ = {isa = PBXBuildFile; fileRef = 01157A7E179D113F004C23BE /* aszDls.m */; };
 		012844F817A656FD005AC7CB /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = 012844F717A656FD005AC7CB /* config.xml */; };
+		012844FB17A6AD1D005AC7CB /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 012844FA17A6AD1B005AC7CB /* Base64.m */; };
 		0166EA12178EA39E005B249D /* aszDTPApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 0166EA11178EA39E005B249D /* aszDTPApi.m */; };
 		0166EA1C1792D2B1005B249D /* tree.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0166EA171792D2B1005B249D /* tree.jpg */; };
 		0166EA1D1792D2B1005B249D /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0166EA181792D2B1005B249D /* logo.jpg */; };
@@ -164,6 +165,8 @@
 		01157A7D179D113F004C23BE /* aszDls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aszDls.h; sourceTree = "<group>"; };
 		01157A7E179D113F004C23BE /* aszDls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aszDls.m; sourceTree = "<group>"; };
 		012844F717A656FD005AC7CB /* config.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = config.xml; sourceTree = "<group>"; };
+		012844F917A6AD1B005AC7CB /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
+		012844FA17A6AD1B005AC7CB /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
 		0166EA10178EA39E005B249D /* aszDTPApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aszDTPApi.h; sourceTree = "<group>"; };
 		0166EA11178EA39E005B249D /* aszDTPApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aszDTPApi.m; sourceTree = "<group>"; };
 		0166EA171792D2B1005B249D /* tree.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tree.jpg; sourceTree = "<group>"; };
@@ -737,6 +740,8 @@
 		01FD99B41789B5CC00B98A99 /* modle */ = {
 			isa = PBXGroup;
 			children = (
+				012844F917A6AD1B005AC7CB /* Base64.h */,
+				012844FA17A6AD1B005AC7CB /* Base64.m */,
 				01FD99BA178A9A6600B98A99 /* aszUtils.h */,
 				01FD99BB178A9A6600B98A99 /* aszUtils.m */,
 				01FD99B51789B63F00B98A99 /* aszWebBrain.h */,
@@ -955,6 +960,7 @@
 				0180CE75179FDA6800C26B05 /* NSMutableArray+QueueAdditions.m in Sources */,
 				0180CE76179FDA6800C26B05 /* UIDevice+Extensions.m in Sources */,
 				0180D02317A1219700C26B05 /* aszcdvViewController.m in Sources */,
+				012844FB17A6AD1D005AC7CB /* Base64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
