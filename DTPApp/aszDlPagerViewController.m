@@ -74,15 +74,38 @@
         self.delegate=self;
         self.dataSource=self;
         
-        UIViewController *startingViewController = [self viewControllerAtIndex:0 storyboard:self.storyboard];
         
-        NSArray *viewControllers = @[startingViewController];
+        
+        
+        
+        aszDlViewController *startingViewController = [self viewControllerAtIndex:0 storyboard:self.storyboard];
+        
+     //   aszDlViewController *next = [self viewControllerAtIndex:1 storyboard:self.storyboard];
+       
+     //   UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+        
+        NSArray *viewControllers;
+        
+       
+     //   if (UIInterfaceOrientationIsPortrait(orientation)) {
+           
+            viewControllers = @[startingViewController];
+        
+     //   }else{
+            
+    //        viewControllers = @[startingViewController,next];
+///
+     //   }
+     
         
         [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
-
+        
         [self.parentViewController reloadInputViews];
         
     }];
+    
+    
+    
     
 
 }
@@ -155,7 +178,7 @@
             [self.cashe addObject:mark];
         }
         
-        for(int i = 0 ; i<MIN(4 , self.size ); i++){
+        for(int i = 0 ; i<MIN(6 , self.size ); i++){
             
             self.cashe[i] = [self vcForindex:i Storyboard:storyboard];
             
@@ -165,7 +188,27 @@
 
     //bounds check
     int inds = index;
-    if(inds<0 || index>= self.size) return nil;
+    if(inds<0 || index>= self.size){
+    
+        UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+        
+        if (UIInterfaceOrientationIsLandscape(orientation) &&   index == self.size) {
+        
+            aszDlViewController *ret= [storyboard instantiateViewControllerWithIdentifier:@"aszDlViewController"];
+            
+
+            //det page numbers
+            ret.pageCount = self.size;
+            ret.pageNum = index+2;
+            
+            return ret;
+            
+        }
+        else return nil;
+    
+    
+    }
+    
     
     
     //get target
@@ -185,16 +228,23 @@
     if( index>0 && [self.cashe[inds-1] isEqual:mark]){
         self.cashe[index-1] = [self vcForindex:index-1 Storyboard:storyboard];
     }
+    if( index+2<self.size && [self.cashe[index+2] isEqual: mark]){
+        self.cashe[index+2] = [self vcForindex:index+2 Storyboard:storyboard];
+    }
+    
+    if( index>1 && [self.cashe[inds-2] isEqual:mark]){
+        self.cashe[index-2] = [self vcForindex:index-2 Storyboard:storyboard];
+    }
 
     
     //clear around
 
-        for(int i = 0 ; i<inds-1 && index!=0 ; i++){
+        for(int i = 0 ; i<inds-3 && index!=0 ; i++){
             
             self.cashe[i]=mark;
             
         }
-        for(int i = index+2 ; i<self.size ; i++){
+        for(int i = index+4 ; i<self.size ; i++){
             
                self.cashe[i]=mark;
             
@@ -303,8 +353,49 @@
 -(UIPageViewControllerSpineLocation) pageViewController:(UIPageViewController *)pageViewController spineLocationForInterfaceOrientation:(UIInterfaceOrientation)orientation{
     
     
-        self.doubleSided = NO;
+    if (UIInterfaceOrientationIsPortrait(orientation)) {
+        // In portrait orientation: Set the spine position to "min" and the page view controller's view controllers array to contain just one view controller. Setting the spine position to 'UIPageViewControllerSpineLocationMid' in landscape orientation sets the doubleSided property to YES, so set it to NO here.
+        UIViewController *currentViewController = pageViewController.viewControllers[0];
+        NSArray *viewControllers = @[currentViewController];
+        [pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
+        
+        pageViewController.doubleSided = NO;
         return UIPageViewControllerSpineLocationMin;
+    }
+    
+    // In landscape orientation: Set set the spine location to "mid" and the page view controller's view controllers array to contain two view controllers. If the current page is even, set it to contain the current and next view controllers; if it is odd, set the array to contain the previous and current view controllers.
+    aszDlViewController *currentViewController = pageViewController.viewControllers[0];
+    NSArray *viewControllers = nil;
+    
+    NSUInteger indexOfCurrentViewController = [self indexOfViewController:currentViewController];
+    if (indexOfCurrentViewController == 0 || indexOfCurrentViewController % 2 == 0) {
+        
+        if(indexOfCurrentViewController == (self.size - 1)){
+        
+            aszDlViewController *ret= [self.storyboard instantiateViewControllerWithIdentifier:@"aszDlViewController"];
+            
+            
+            //det page numbers
+            ret.pageCount = self.size;
+            ret.pageNum = indexOfCurrentViewController+2;
+            
+            viewControllers = @[currentViewController, ret];
+            
+        
+        }else{
+        UIViewController *nextViewController = [self pageViewController:pageViewController viewControllerAfterViewController:currentViewController];
+        viewControllers = @[currentViewController, nextViewController];
+        }
+        
+        
+    } else {
+        UIViewController *previousViewController = [self pageViewController:pageViewController viewControllerBeforeViewController:currentViewController];
+        viewControllers = @[previousViewController, currentViewController];
+    }
+    [pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
+    
+    
+    return UIPageViewControllerSpineLocationMid;
 
 
 }
@@ -315,11 +406,67 @@
 
     NSNumber *indexnum = [notification.userInfo objectForKey:@"index"];
     
-    UIViewController *startingViewController = [self viewControllerAtIndex:indexnum.intValue storyboard:self.storyboard];
+       
+    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+
     
-    NSArray *viewControllers = @[startingViewController ];
     
-    [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
+    
+    
+    if (UIInterfaceOrientationIsPortrait(orientation)) {
+
+        UIViewController *startingViewController = [self viewControllerAtIndex:indexnum.intValue storyboard:self.storyboard];
+        
+        NSArray *viewControllers = @[startingViewController ];
+        
+        [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
+
+        
+    } else if (indexnum == 0 || indexnum.intValue % 2 == 0) {
+        
+        
+        if(indexnum.intValue == (self.size - 1)){
+
+            UIViewController *startingViewController = [self viewControllerAtIndex:indexnum.intValue storyboard:self.storyboard];
+            
+            
+            aszDlViewController *ret= [self.storyboard instantiateViewControllerWithIdentifier:@"aszDlViewController"];
+            
+            
+            //det page numbers
+            ret.pageCount = self.size;
+            ret.pageNum = indexnum.intValue+2;
+            
+            NSArray *viewControllers = @[startingViewController ,ret];
+            
+            
+            
+            [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
+            
+        }else{
+            
+            
+
+            UIViewController *startingViewController = [self viewControllerAtIndex:indexnum.intValue storyboard:self.storyboard];
+            
+            
+            NSArray *viewControllers = @[startingViewController ,[self viewControllerAtIndex:indexnum.intValue+1 storyboard:self.storyboard]];
+            
+            
+            [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
+            
+        }
+    
+    } else {
+        
+        UIViewController *startingViewController = [self viewControllerAtIndex:indexnum.intValue storyboard:self.storyboard];
+        
+        NSArray *viewControllers = @[[self viewControllerAtIndex:indexnum.intValue-1 storyboard:self.storyboard] ,startingViewController ];
+        
+        [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
+        
+    }
+    
     
 }
 

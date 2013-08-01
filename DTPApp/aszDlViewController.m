@@ -69,7 +69,7 @@
     if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
         
     
-        self.dlCDVWebView.view.frame = CGRectMake(65,55,900,620);
+        self.dlCDVWebView.view.frame = CGRectMake(35,45,430,620);
         
     } else {
         
