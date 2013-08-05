@@ -46,19 +46,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "DTPApp/aszUtils.m"
-         timestampString = "396874105.831412"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "64"
-         endingLineNumber = "64"
-         landmarkName = "+jsonToDictionarry:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "ViewClassesController.m"
          timestampString = "396874379.068233"
          startingColumnNumber = "9223372036854775807"
@@ -79,19 +66,6 @@
          startingLineNumber = "33"
          endingLineNumber = "33"
          landmarkName = "-webView:shouldStartLoadWithRequest:navigationType:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "DTPApp/aszUtils.m"
-         timestampString = "396874468.869312"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "39"
-         endingLineNumber = "39"
-         landmarkName = "+jsonToArray:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint

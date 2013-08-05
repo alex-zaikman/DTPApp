@@ -27,26 +27,19 @@ NSString const * const password_def=@"password_def";
     return [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
 }
 
+
 +(NSString*)getDomain
 {
     NSString *domain = [[NSUserDefaults standardUserDefaults] stringForKey:[domain_def copy]];
     return domain;
 }
+
 +(NSArray*)jsonToArray:(NSString*)json
 {
   
-//    NSData * ddata = [Base64 decode:json];
-    NSString * actualString = json;//[[NSString alloc] initWithData:ddata encoding:NSUTF8StringEncoding];
-   
-    
-    //NSLog(@"%@",actualString);
-    
-    
-    
-    
     NSError *error;
     
-    NSString *myString = actualString;// = [self.class decodeFromPercentEscapeString:json];
+    NSString *myString = json;
     
     NSData *data = [myString dataUsingEncoding:NSUTF8StringEncoding];
     
@@ -59,15 +52,9 @@ NSString const * const password_def=@"password_def";
 +(NSDictionary*)jsonToDictionarry:(NSString*)json
 {
     
-
-  //  NSData * ddata = [Base64 decode:json];
-    NSString * actualString =json;// [[NSString alloc] initWithData:ddata encoding:NSUTF8StringEncoding];
-   // NSLog(@"%@",actualString);
-   
-    
     NSError *error;
     
-    NSString *myString = actualString; //[self.class decodeFromPercentEscapeString:json];
+    NSString *myString = json; 
     
     NSData *data = [myString dataUsingEncoding:NSUTF8StringEncoding];
     
@@ -81,20 +68,6 @@ NSString const * const password_def=@"password_def";
     
     return (__bridge NSString *) CFURLCreateStringByReplacingPercentEscapesUsingEncoding(NULL,  (__bridge CFStringRef) string,CFSTR(""), kCFStringEncodingUTF8);
     
-}
-
-#pragma mark - debug funcs
-
-+(void) LOG:(NSString *)msg
-{
-//    if(DEBUG)
-//        NSLog(@"asz - msg: %@",msg);
-}
-
-+(void) ERROR:(NSString *)err
-{
-//    if(DEBUG)
-//        NSLog(@"asz - error: %@",err);
 }
 
 

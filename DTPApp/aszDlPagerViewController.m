@@ -74,29 +74,13 @@
         self.delegate=self;
         self.dataSource=self;
         
-        
-        
-        
-        
-        aszDlViewController *startingViewController = [self viewControllerAtIndex:0 storyboard:self.storyboard];
-        
-     //   aszDlViewController *next = [self viewControllerAtIndex:1 storyboard:self.storyboard];
        
-     //   UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-        
+        aszDlViewController *startingViewController = [self viewControllerAtIndex:0 storyboard:self.storyboard];
+           
         NSArray *viewControllers;
         
-       
-     //   if (UIInterfaceOrientationIsPortrait(orientation)) {
-           
-            viewControllers = @[startingViewController];
-        
-     //   }else{
-            
-    //        viewControllers = @[startingViewController,next];
-///
-     //   }
-     
+        viewControllers = @[startingViewController];
+
         
         [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
         
@@ -250,8 +234,6 @@
             
         }
  
-    
-//   aszDlViewController * ret = [self vcForindex:index Storyboard:storyboard];
 
     return ret;
     
@@ -260,8 +242,6 @@
 -(aszDlViewController*)vcForindex:(int)index Storyboard:(UIStoryboard*)storyboard{
     
 
-    
-        
     if(index>=0 && index<self.size){
         
         
@@ -274,8 +254,6 @@
         //det page numbers
         ret.pageCount = self.size;
         ret.pageNum = index+1;
-
-        //[ret.view addSubview:ret.dlCDVWebView.view];
 
         return ret;
     }
@@ -310,7 +288,6 @@
     
     CDVViewController *ret = [[CDVViewController alloc] initWithDelegate:self.delegates[index]];
     
-
     ret.wwwFolderName = @"";
     ret.startPage = @"http://cto.timetoknow.com/cms/player/dl/index2.html";
     

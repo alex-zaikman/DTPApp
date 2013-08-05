@@ -25,10 +25,6 @@ extern NSString const * const password_def;
 
 + (UIColor *) getRandomColor;
 
-+(void) LOG:(NSString *)msg;
-
-+(void) ERROR:(NSString *)err;
-
 +(NSString*)getDomain;
 
 +(NSString*) decodeFromPercentEscapeString:(NSString *)string ;

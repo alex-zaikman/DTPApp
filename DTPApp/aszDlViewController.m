@@ -27,36 +27,6 @@
 {
     [super viewDidLoad];
     
-  //  self.dlCDVWebView = [CDVViewController new];
-    
-   // self.dlCDVWebView.useSplashScreen = NO;
-    
-//    NSString *domain = [[NSUserDefaults standardUserDefaults] stringForKey:[domain_def copy]];
-//    self.dlCDVWebView.wwwFolderName = domain;
-//    self.dlCDVWebView.startPage = @"/lms";
-//    
-//    //[aszUtils LOG:[[self.dlCDVWebView class]description ] ];
-//    static CDVWebViewDelegate *tt ;tt= [CDVWebViewDelegate new];
-//    self.dlCDVWebView.webView.delegate = tt;
-//    
-//    self.dlCDVWebView.view.frame =  CGRectMake(100, 100, 620, 780);
-//    [self.view addSubview:self.dlCDVWebView.view];
-
-    
-//    self.dlCDVWebView = [CDVViewController new];
-//    
-//    
-//    self.dlCDVWebView.wwwFolderName = @"";
-//    self.dlCDVWebView.startPage = @"http://cnn.com";
-//    
-//    
-//    self.dlCDVWebView.view.frame =CGRectMake(0, 0, 620, 780);
-//    [self.view addSubview:self.dlCDVWebView.view];
- 
-    
-//    self.dlCDVWebView.view.frame = CGRectMake(65,55,300,300);
-//     [self.view addSubview:self.dlCDVWebView.view];
-  //  [self.dlCDVWebView loadView ];
 }
 
 

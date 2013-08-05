@@ -43,11 +43,9 @@
     
     [js appendString:@");"];
     
-    //NSLog(@"%@",js);
-    
     
     NSMutableString *javaScript =[[NSMutableString alloc]init];
-    [javaScript appendString: @"var loadded = 'YES';   var boo =function(){   setTimeout(function(){  "];
+    [javaScript appendString: @"var loadded = 'YES';   var ondlload =function(){   setTimeout(function(){  "];
     [javaScript appendString:js  ];
     [javaScript appendString: @"   },0);    };  "];
     

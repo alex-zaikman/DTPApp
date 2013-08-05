@@ -112,6 +112,9 @@
 		0180CEFA179FDE8D00C26B05 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0180CEB1179FDBC800C26B05 /* StoreKit.framework */; };
 		0180CEFB179FDE8D00C26B05 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0180CEB3179FDBC800C26B05 /* Twitter.framework */; };
 		0180D02317A1219700C26B05 /* aszcdvViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0180D02217A1219600C26B05 /* aszcdvViewController.m */; };
+		019E491F17AE26C400ECD711 /* aszWebBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 019E491E17AE26C400ECD711 /* aszWebBridge.m */; };
+		019E492217AE30A700ECD711 /* aszT2KApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 019E492117AE30A700ECD711 /* aszT2KApi.m */; };
+		019E492617AE426A00ECD711 /* aszDlBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 019E492517AE426A00ECD711 /* aszDlBridge.m */; };
 		01FD998F1789ACE800B98A99 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FD998E1789ACE800B98A99 /* UIKit.framework */; };
 		01FD99911789ACE800B98A99 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FD99901789ACE800B98A99 /* Foundation.framework */; };
 		01FD99991789ACE800B98A99 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01FD99971789ACE800B98A99 /* InfoPlist.strings */; };
@@ -324,6 +327,12 @@
 		0180CF8C179FDE9000C26B05 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		0180D02117A1219600C26B05 /* aszcdvViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aszcdvViewController.h; sourceTree = "<group>"; };
 		0180D02217A1219600C26B05 /* aszcdvViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aszcdvViewController.m; sourceTree = "<group>"; };
+		019E491D17AE26C400ECD711 /* aszWebBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aszWebBridge.h; sourceTree = "<group>"; };
+		019E491E17AE26C400ECD711 /* aszWebBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aszWebBridge.m; sourceTree = "<group>"; };
+		019E492017AE30A700ECD711 /* aszT2KApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aszT2KApi.h; sourceTree = "<group>"; };
+		019E492117AE30A700ECD711 /* aszT2KApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aszT2KApi.m; sourceTree = "<group>"; };
+		019E492417AE426A00ECD711 /* aszDlBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aszDlBridge.h; sourceTree = "<group>"; };
+		019E492517AE426A00ECD711 /* aszDlBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aszDlBridge.m; sourceTree = "<group>"; };
 		01FD998B1789ACE800B98A99 /* DTPApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DTPApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01FD998E1789ACE800B98A99 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		01FD99901789ACE800B98A99 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -619,6 +628,49 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		019E491C17AE263D00ECD711 /* T2KApiBridge */ = {
+			isa = PBXGroup;
+			children = (
+				019E491D17AE26C400ECD711 /* aszWebBridge.h */,
+				019E491E17AE26C400ECD711 /* aszWebBridge.m */,
+				019E492017AE30A700ECD711 /* aszT2KApi.h */,
+				019E492117AE30A700ECD711 /* aszT2KApi.m */,
+			);
+			name = T2KApiBridge;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		019E492317AE423C00ECD711 /* DlBridge */ = {
+			isa = PBXGroup;
+			children = (
+				019E492417AE426A00ECD711 /* aszDlBridge.h */,
+				019E492517AE426A00ECD711 /* aszDlBridge.m */,
+			);
+			name = DlBridge;
+			sourceTree = "<group>";
+		};
+		019E492717AE668600ECD711 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				01FD99BA178A9A6600B98A99 /* aszUtils.h */,
+				01FD99BB178A9A6600B98A99 /* aszUtils.m */,
+				012844F917A6AD1B005AC7CB /* Base64.h */,
+				012844FA17A6AD1B005AC7CB /* Base64.m */,
+			);
+			name = utils;
+			sourceTree = "<group>";
+		};
+		019E492817AE708A00ECD711 /* old */ = {
+			isa = PBXGroup;
+			children = (
+				01FD99B51789B63F00B98A99 /* aszWebBrain.h */,
+				01FD99B61789B63F00B98A99 /* aszWebBrain.m */,
+				0166EA10178EA39E005B249D /* aszDTPApi.h */,
+				0166EA11178EA39E005B249D /* aszDTPApi.m */,
+			);
+			name = old;
+			sourceTree = "<group>";
+		};
 		01FD99821789ACE800B98A99 = {
 			isa = PBXGroup;
 			children = (
@@ -740,14 +792,10 @@
 		01FD99B41789B5CC00B98A99 /* modle */ = {
 			isa = PBXGroup;
 			children = (
-				012844F917A6AD1B005AC7CB /* Base64.h */,
-				012844FA17A6AD1B005AC7CB /* Base64.m */,
-				01FD99BA178A9A6600B98A99 /* aszUtils.h */,
-				01FD99BB178A9A6600B98A99 /* aszUtils.m */,
-				01FD99B51789B63F00B98A99 /* aszWebBrain.h */,
-				01FD99B61789B63F00B98A99 /* aszWebBrain.m */,
-				0166EA10178EA39E005B249D /* aszDTPApi.h */,
-				0166EA11178EA39E005B249D /* aszDTPApi.m */,
+				019E492817AE708A00ECD711 /* old */,
+				019E492717AE668600ECD711 /* utils */,
+				019E492317AE423C00ECD711 /* DlBridge */,
+				019E491C17AE263D00ECD711 /* T2KApiBridge */,
 			);
 			name = modle;
 			path = brain;
@@ -961,6 +1009,9 @@
 				0180CE76179FDA6800C26B05 /* UIDevice+Extensions.m in Sources */,
 				0180D02317A1219700C26B05 /* aszcdvViewController.m in Sources */,
 				012844FB17A6AD1D005AC7CB /* Base64.m in Sources */,
+				019E491F17AE26C400ECD711 /* aszWebBridge.m in Sources */,
+				019E492217AE30A700ECD711 /* aszT2KApi.m in Sources */,
+				019E492617AE426A00ECD711 /* aszDlBridge.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
