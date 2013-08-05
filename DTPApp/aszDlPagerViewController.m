@@ -8,7 +8,7 @@
 
 #import "aszDlPagerViewController.h"
 #import "aszDlViewController.h"
-#import "aszDTPApi.h"
+#import "aszT2KApi.h"
 #import "aszUtils.h"
 #import "aszDls.h"
 
@@ -59,7 +59,7 @@
     
     self.seqList = [[NSMutableArray alloc]init];
     
-    [aszDTPApi getLessonContent:self.courseId forLesson:self.lessonId Call:^(NSString *msg) {
+    [aszT2KApi getLessonContent:self.courseId forLesson:self.lessonId OnSuccess:^(NSString *msg) {
         
         if(msg){
             self.rawData = [aszUtils jsonToDictionarry: msg];
@@ -85,6 +85,8 @@
         [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
         
         [self.parentViewController reloadInputViews];
+        
+    } OnFaliure:^(NSString *err) {
         
     }];
     

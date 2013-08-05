@@ -7,9 +7,9 @@
 //
 
 #import "aszLoginViewController.h"
-#import "aszDTPApi.h"
+#import "aszT2KApi.h"
 #import "aszUtils.h"
-#import "aszWebBrain.h"
+#import "aszWebBridge.h"
 
 
 @interface aszLoginViewController ()
@@ -45,17 +45,21 @@ static BOOL logged = NO;
     [super viewDidLoad];
 
     if(!logged){
-    
-    [aszWebBrain the].cdvbrain.customDelegate=[aszWebBrain the];
-
-    [aszWebBrain the].cdvbrain.wwwFolderName = @"";
-    [aszWebBrain the].cdvbrain.startPage = API_URL;
-    
-    [aszWebBrain the].cdvbrain.view.frame =CGRectMake(30, 30, 100, 100);
-    
-    [self.view addSubview:[aszWebBrain the].cdvbrain.view];    
+        [aszWebBridge the];
         
-        [self.view setNeedsDisplay];
+//        [aszWebBridge the].cdvbrain = [CDVViewController new];
+//        
+//        
+//      //  [aszWebBridge the].cdvbrain.customDelegate= [aszWebBridge the];
+//        
+//         [aszWebBridge the].cdvbrain.wwwFolderName = @"";
+//         [aszWebBridge the].cdvbrain.startPage = T2KAPI_URL;
+//        
+//         [aszWebBridge the].cdvbrain.view.frame =CGRectMake(0,0, 900, 900);
+//        
+//    [self.view addSubview:[aszWebBridge the].cdvbrain.view];
+        
+      //  [self.view setNeedsDisplay];
     }
 
     if(logged)
@@ -98,13 +102,13 @@ static BOOL logged = NO;
             [defaults setObject:self.userName.text forKey:[username_def copy]];
             [defaults setObject:self.password.text forKey:[password_def  copy]];
             
-            [aszUtils LOG:@"defs - set"];
+            
         }else{
             //remouve default user and password on login success
             [defaults setObject:@"user name" forKey:[username_def copy]];
             [defaults setObject:@"password" forKey:[password_def  copy]];
             
-            [aszUtils LOG:@"defs - removed"];
+           
         }
         
         [defaults synchronize];
@@ -112,46 +116,63 @@ static BOOL logged = NO;
         
         //use msg
         self.outputView.text=@"Logging... \n please wait.";
-
-        
-        [aszDTPApi logInWithUser:self.userName.text  andPassword:self.password.text callBack:^(NSString *msg) {
+        [aszT2KApi loadOnSuccess:^(NSString *msg) {
             
-          //  NSDictionary *dic =  [aszUtils jsonToDictionarry:msg];
-            
+            [aszT2KApi initOnSuccess:^(NSString *msg) {
                 
-               // NSDictionary *dic =  [aszUtils jsonToDictionarry:msg];
-                
-                self.outputView.text=@"You are logged in.";
-                
-                [self.loginButton setTitle:@"Logout" forState:UIControlStateNormal];
-                
-                logged = YES;
-                
-                
-                self.loginButton.enabled=YES;
-                
-                [self.progressBar stopAnimating];
-                
-                [self dismissViewControllerAnimated:YES completion:^{
+                [aszT2KApi logInWithUser:self.userName.text  andPassword:self.password.text OnSuccess:^(NSString *msg) {
                     
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateParent" object:nil];
+                    //  NSDictionary *dic =  [aszUtils jsonToDictionarry:msg];
+                    
+                    
+                    // NSDictionary *dic =  [aszUtils jsonToDictionarry:msg];
+                    
+                    self.outputView.text=@"You are logged in.";
+                    
+                    [self.loginButton setTitle:@"Logout" forState:UIControlStateNormal];
+                    
+                    logged = YES;
+                    
+                    
+                    self.loginButton.enabled=YES;
+                    
+                    [self.progressBar stopAnimating];
+                    
+                    [self dismissViewControllerAnimated:YES completion:^{
+                        
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"updateParent" object:nil];
+                    }];
+                    
+                } OnFaliure:^(NSString *error) {
+                    
+                }];
+                
+                
+                
+
+                
+            } OnFaliure:^(NSString *err) {
+                
             }];
+            
+            
+        } OnFaliure:^(NSString *err) {
             
         }];
         
-         
-        
-        
+              
         
     }else{
       
-        [aszDTPApi logOutCall:^(NSString *msg){
+        [aszT2KApi logOutOnSuccess: ^(NSString *msg){
     
                     [self.loginButton setTitle:@"Login" forState:UIControlStateNormal];
                     logged = NO;
         
                     self.loginButton.enabled=YES;
                     [self.progressBar stopAnimating];
+        } OnFaliure:^(NSString *err) {
+            
         }];
         
     }

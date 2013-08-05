@@ -13,7 +13,6 @@
 		01157A7F179D113F004C23BE /* aszDls.m in Sources */ = {isa = PBXBuildFile; fileRef = 01157A7E179D113F004C23BE /* aszDls.m */; };
 		012844F817A656FD005AC7CB /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = 012844F717A656FD005AC7CB /* config.xml */; };
 		012844FB17A6AD1D005AC7CB /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 012844FA17A6AD1B005AC7CB /* Base64.m */; };
-		0166EA12178EA39E005B249D /* aszDTPApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 0166EA11178EA39E005B249D /* aszDTPApi.m */; };
 		0166EA1C1792D2B1005B249D /* tree.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0166EA171792D2B1005B249D /* tree.jpg */; };
 		0166EA1D1792D2B1005B249D /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0166EA181792D2B1005B249D /* logo.jpg */; };
 		0166EA1E1792D2B1005B249D /* Icon_72x72_v1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0166EA191792D2B1005B249D /* Icon_72x72_v1.png */; };
@@ -124,7 +123,6 @@
 		01FD99A31789ACE800B98A99 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01FD99A21789ACE800B98A99 /* Default@2x.png */; };
 		01FD99A51789ACE800B98A99 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01FD99A41789ACE800B98A99 /* Default-568h@2x.png */; };
 		01FD99A81789ACE800B98A99 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01FD99A61789ACE800B98A99 /* MainStoryboard.storyboard */; };
-		01FD99B71789B63F00B98A99 /* aszWebBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = 01FD99B61789B63F00B98A99 /* aszWebBrain.m */; };
 		01FD99BC178A9A6600B98A99 /* aszUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 01FD99BB178A9A6600B98A99 /* aszUtils.m */; };
 		01FD99C0178AA11400B98A99 /* aszLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01FD99BF178AA11400B98A99 /* aszLoginViewController.m */; };
 		01FD99C6178AA6F400B98A99 /* ViewClassesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01FD99C5178AA6F400B98A99 /* ViewClassesController.m */; };
@@ -170,8 +168,6 @@
 		012844F717A656FD005AC7CB /* config.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = config.xml; sourceTree = "<group>"; };
 		012844F917A6AD1B005AC7CB /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		012844FA17A6AD1B005AC7CB /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
-		0166EA10178EA39E005B249D /* aszDTPApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aszDTPApi.h; sourceTree = "<group>"; };
-		0166EA11178EA39E005B249D /* aszDTPApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aszDTPApi.m; sourceTree = "<group>"; };
 		0166EA171792D2B1005B249D /* tree.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tree.jpg; sourceTree = "<group>"; };
 		0166EA181792D2B1005B249D /* logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.jpg; sourceTree = "<group>"; };
 		0166EA191792D2B1005B249D /* Icon_72x72_v1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_72x72_v1.png; sourceTree = "<group>"; };
@@ -347,8 +343,6 @@
 		01FD99A21789ACE800B98A99 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		01FD99A41789ACE800B98A99 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		01FD99A71789ACE800B98A99 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		01FD99B51789B63F00B98A99 /* aszWebBrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aszWebBrain.h; sourceTree = "<group>"; };
-		01FD99B61789B63F00B98A99 /* aszWebBrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aszWebBrain.m; sourceTree = "<group>"; };
 		01FD99BA178A9A6600B98A99 /* aszUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = aszUtils.h; path = ../aszUtils.h; sourceTree = "<group>"; };
 		01FD99BB178A9A6600B98A99 /* aszUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = aszUtils.m; path = ../aszUtils.m; sourceTree = "<group>"; };
 		01FD99BE178AA11400B98A99 /* aszLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aszLoginViewController.h; sourceTree = "<group>"; };
@@ -663,10 +657,6 @@
 		019E492817AE708A00ECD711 /* old */ = {
 			isa = PBXGroup;
 			children = (
-				01FD99B51789B63F00B98A99 /* aszWebBrain.h */,
-				01FD99B61789B63F00B98A99 /* aszWebBrain.m */,
-				0166EA10178EA39E005B249D /* aszDTPApi.h */,
-				0166EA11178EA39E005B249D /* aszDTPApi.m */,
 			);
 			name = old;
 			sourceTree = "<group>";
@@ -951,7 +941,6 @@
 			files = (
 				01FD999B1789ACE800B98A99 /* main.m in Sources */,
 				01FD999F1789ACE800B98A99 /* aszAppDelegate.m in Sources */,
-				01FD99B71789B63F00B98A99 /* aszWebBrain.m in Sources */,
 				01FD99BC178A9A6600B98A99 /* aszUtils.m in Sources */,
 				01FD99C0178AA11400B98A99 /* aszLoginViewController.m in Sources */,
 				01FD99C6178AA6F400B98A99 /* ViewClassesController.m in Sources */,
@@ -962,7 +951,6 @@
 				01FD99E3178E96E800B98A99 /* aszDlPagerViewController.m in Sources */,
 				01FD99E6178E97F000B98A99 /* aszDlViewController.m in Sources */,
 				01FD99E9178E9CAF00B98A99 /* aszDlWebViewDelegate.m in Sources */,
-				0166EA12178EA39E005B249D /* aszDTPApi.m in Sources */,
 				01157A74179BD41C004C23BE /* aszDescriptionViewController.m in Sources */,
 				01157A78179BDFB3004C23BE /* aszSequenseViewController.m in Sources */,
 				01157A7B179C1541004C23BE /* aszSequencesCell.m in Sources */,

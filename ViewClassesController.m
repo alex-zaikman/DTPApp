@@ -8,7 +8,7 @@
 
 #import "ViewClassesController.h"
 #import "aszClassesViewCell.h"
-#import "aszDTPApi.h"
+#import "aszT2KApi.h"
 #import "aszUtils.h"
 
 
@@ -39,19 +39,22 @@
 
 -(void) refresh{
     
-    [aszDTPApi getStudyClassesCall:^(NSString *msg) {
+    [aszT2KApi getStudyClassesOnSuccess:  ^(NSString *msg) {
         
-    
-       NSString *decoddedJson = [aszUtils decodeFromPercentEscapeString:msg] ;
         
-      // [aszUtils LOG:decoddedJson];
+        NSString *decoddedJson = [aszUtils decodeFromPercentEscapeString:msg] ;
         
-       self.rawData =  [aszUtils jsonToArray: decoddedJson];
+        // [aszUtils LOG:decoddedJson];
         
-       [self.collectionView reloadData];
+        self.rawData =  [aszUtils jsonToArray: decoddedJson];
+        
+        [self.collectionView reloadData];
         
         self.loggedin=YES;
+    }  OnFaliure:^(NSString *error) {
+    
     }];
+    
     
     
 }

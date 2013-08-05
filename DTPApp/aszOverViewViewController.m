@@ -9,7 +9,7 @@
 #import "aszOverViewViewController.h"
 #import "aszRowNode.h"
 #import "aszOverViewCell.h"
-#import "aszDTPApi.h"
+#import "aszT2KApi.h"
 #import "aszUtils.h"
 #import "CDVWebViewDelegate.h"
 #import "CDVViewController.h"
@@ -45,7 +45,7 @@
 {
     [super viewDidLoad];
 
-    [aszDTPApi getCourse: [self.classId stringValue ] Call:^(NSString *msg) {
+    [aszT2KApi getCourse: [self.classId stringValue ] OnSuccess:^(NSString *msg) {
     
       
        
@@ -54,6 +54,8 @@
             [self initData:self.rawData];
             [self.tableView reloadData];
         }
+        
+    }  OnFaliure:^(NSString *error) {
         
     }];
     

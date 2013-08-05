@@ -7,8 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CDVViewController.h"
 
 @interface aszWebBridge : NSObject
+
+
+@property (nonatomic,strong) CDVViewController *cdvbrain;
 
 +(aszWebBridge*)the;
 

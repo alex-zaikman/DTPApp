@@ -12,7 +12,6 @@
 
 @interface aszUtils : NSObject
 
-#define API_URL @"http://cto.timetoknow.com/lms/js/libs/t2k/index.html"  
 
 extern NSString const * const domain_def;
 extern NSString const * const username_def;

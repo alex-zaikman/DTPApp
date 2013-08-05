@@ -85,7 +85,7 @@
     
     [instance setCustomDelegate:me];
     
-     NSArray *param=@[@"html5"];
+     NSArray *param=@[@"'html5'"];
     
     [instance callJs:@"T2K.api.load" withParams:param OnSucsses:@"aok:" OnFaliure:@"ono:"];
     
