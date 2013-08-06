@@ -45,6 +45,29 @@
     return self;
 }
 
+-(id)initWithPoolSize:(uint)size useInitData:(NSString*)data playWithPlayDataArray:(NSArray*)pData{
+    self = [super init];
+    if(self){
+        _poolSize=size;
+        _initData =data;
+    
+        _cacheGuide = [[NSMutableDictionary alloc]init];
+        
+        NSMutableArray *tmp = [[NSMutableArray alloc]init];
+        
+        for(uint i=0 ;i<_poolSize ;i++)
+        {
+            aszDlBridge *bridge = [[aszDlBridge alloc]initInit:_initData andPlay:pData[i]];
+            [tmp addObject:bridge ];
+        }
+        
+        _cache = [[NSArray alloc]initWithArray:tmp];
+        
+    }
+    return self;
+}
+
+
 -(void) playWithData:(NSString*)data forKey:(NSString*)newKey swapKey:(NSString*)oldKey{
     
 

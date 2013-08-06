@@ -15,13 +15,15 @@
 
 @interface aszDlBridge : CDVViewController  
 
-#pragma mark bridge funcs
+
 
 -(id)initCallOnLoadded:(void (^)(void))callme ;
 
 -(id)initInit:(NSString*)initdata andPlay:(NSString*)playdata;
 
 -(id)initInit:(NSString*)initdata;
+
+#pragma mark bridge funcs
 
 -(void)setFrame:(CGRect)rect;
 

@@ -32,9 +32,14 @@
 -(void)precheck;
 -(void)fsuccess:(NSString*)msg;
 -(void)ffailure:(NSString*)msg;
+
+-(NSString*)createCommandForAction:(NSString*)action withData:(NSString*)data;
+
 @end
 
 @implementation aszDlBridge
+
+
 
 -(BOOL)didDlLoad{
     return self.isLoadded;
@@ -47,7 +52,7 @@
     if(self){
         
         _initializeData=initdata;
-      
+        _playData=nil;
         
         _initandplay=YES;
         
@@ -94,6 +99,9 @@
     
     if(self){
         
+        _initializeData=nil;
+        _playData=nil;
+        
         _initandplay=NO;
         
         _loaddedCallBack=callme;
@@ -139,6 +147,20 @@
     
 }
 
+-(NSString*)createCommandForAction:(NSString*)action withData:(NSString*)data{
+   
+    NSMutableString *command = [[NSMutableString alloc]init];
+    
+    [command appendString:@"dlhost.player.api('"];
+    [command appendString:action];
+    [command appendString:@"', "];
+    [command appendString:data];
+    [command appendString:@", function(res){ callback(res,'fsuccess:' ); },function(res){ callback(res,'ffailure:' ); } );"];
+ 
+    return command;
+}
+
+
 -(void)initPlayer:(NSString*)initData OnSuccess: (void (^)(NSString *))success  OnFaliure:(void (^)(NSString *))faliure{
 
     
@@ -147,23 +169,21 @@
     self.psuccess=success;
     self.pfaliure=faliure;
     
- #warning not implemented
-    //TODO
-   [self.webView stringByEvaluatingJavaScriptFromString:@"TODO"];
+       
+   [self.webView stringByEvaluatingJavaScriptFromString: [self createCommandForAction:@"init" withData:initData]  ];
     
     
 }
 
 -(void)playSequence:(NSString*)seqData OnSuccess: (void (^)(NSString *))success  OnFaliure:(void (^)(NSString *))faliure{
- #warning not implemented
+
     
     [self precheck];
     
     self.psuccess=success;
     self.pfaliure=faliure;
     
-    //TODO
-    [self.webView stringByEvaluatingJavaScriptFromString:@"TODO"];
+    [self.webView stringByEvaluatingJavaScriptFromString: [self createCommandForAction:@"playSequence" withData:seqData]  ];
     
 }
 
@@ -208,66 +228,41 @@
 
 -(void) webViewDidFinishLoad:(UIWebView *)webView{
     
-    NSString* loadded =   [webView stringByEvaluatingJavaScriptFromString: @"var check = function(){ return loadded};   check();" ];
+    if(!self.isLoadded ){
+        NSString* loadded =   [webView stringByEvaluatingJavaScriptFromString: @"var check = function(){ return loadded};   check();" ];
     
-    if(![loadded isEqualToString:@"YES"]){
-        
- 
-        
-        if(!self.isLoadded && self.loaddedCallBack ){
-            self.loaddedCallBack();
-            //call only once
-            self.loaddedCallBack = nil;
-        }else if(!self.isLoadded && self.initandplay){
-            
-            [self initPlayer:self.initializeData OnSuccess:^(NSString *msg) {
+        if([loadded isEqualToString:@"YES"]){
                 
-                if(self.playData){
-                    [self playSequence:self.playData OnSuccess:^(NSString *msg) {
+            if(self.loaddedCallBack ){
+                self.loaddedCallBack();
+                //call only once
+                self.loaddedCallBack = nil;
+            }
+        
+            if(self.initandplay){
+            
+                [self initPlayer:self.initializeData OnSuccess:^(NSString *msg) {
+                    if(self.playData){
+                        [self playSequence:self.playData OnSuccess:^(NSString *msg) {
                         //do nothing
-                    } OnFaliure:^(NSString *err) {
-                        
-                    }];
-                }
+                        } OnFaliure:^(NSString *err) {
+                            @throw([NSException exceptionWithName:@"DL_BRIDGE_PLAY_FAILED" reason:err userInfo:nil]);
+                        }];
+                    }
                 
-            } OnFaliure:^(NSString *err) {
-                
-            }];
-            
-            
-            
-            
-            
-            
+                } OnFaliure:^(NSString *err) {
+                    @throw([NSException exceptionWithName:@"DL_BRIDGE_LOAD_FAILED" reason:err userInfo:nil]);
+                }];
+            }
+           
+            self.isLoadded = YES;
         }
-        
-        self.isLoadded = YES;
-        
-        
     }
-//
-//        NSMutableString *js=[[NSMutableString alloc]init];
-//        
-//        [js appendString:@"window.dlhost.initAndPlay("];
-//        
-//        [js appendString:self.data[0]];
-//        
-//        [js appendString:@"        ,     "];
-//        
-//        [js appendString:self.data[1]];
-//        
-//        [js appendString:@");"];
-//        
-//        
-//        NSMutableString *javaScript =[[NSMutableString alloc]init];
-//        [javaScript appendString: @"var loadded = 'YES';   var ondlload =function(){   setTimeout(function(){  "];
-//        [javaScript appendString:js  ];
-//        [javaScript appendString: @"   },0);    };  "];
-//        
-//        [webView stringByEvaluatingJavaScriptFromString: javaScript ];
-//        
-//    }
-//    
+    
+    
+    //....
+    
+    
 }
 
 @end

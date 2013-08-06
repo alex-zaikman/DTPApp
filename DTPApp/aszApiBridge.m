@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 alex zaikman. All rights reserved.
 //
 
-#import "aszWebBridge.h"
+#import "aszApiBridge.h"
 //#import "CDVViewController.h"
 
-@interface aszWebBridge() <UIWebViewDelegate>
+@interface aszApiBridge() <UIWebViewDelegate>
 
 #define T2KAPI_URL @"http://cto.timetoknow.com/lms/js/libs/t2k/t2k.html"  
 
@@ -17,11 +17,11 @@
 
 @end
 
-@implementation aszWebBridge
+@implementation aszApiBridge
 
-static aszWebBridge *the = nil;
+static aszApiBridge *the = nil;
 
-+(aszWebBridge*)the
++(aszApiBridge*)the
 {
     if(the)
         return the;
@@ -29,7 +29,7 @@ static aszWebBridge *the = nil;
     static dispatch_once_t pred;        // Lock
     dispatch_once(&pred, ^{             // This code is called at most once per app
         if(!the)
-            the = [[aszWebBridge alloc] init];
+            the = [[aszApiBridge alloc] init];
     });
     
     return the;

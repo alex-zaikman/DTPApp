@@ -7,7 +7,7 @@
 //
 
 #import "aszT2KApi.h"
-#import "aszWebBridge.h"
+#import "aszApiBridge.h"
 #import "aszUtils.h"
 
 @interface aszT2KApi() <UIWebViewDelegate>
@@ -74,7 +74,7 @@
 #pragma mark JS API
 +(void) loadOnSuccess:(void (^)(NSString *))success  OnFaliure:(void (^)(NSString *))faliure{
     
-    aszWebBridge *instance = [aszWebBridge the];
+    aszApiBridge *instance = [aszApiBridge the];
 
     
     static aszT2KApi  *me;
@@ -96,7 +96,7 @@
 
 +(void) initOnSuccess:(void (^)(NSString *))success  OnFaliure:(void (^)(NSString *))faliure{
     
-    aszWebBridge *instance = [aszWebBridge the];
+    aszApiBridge *instance = [aszApiBridge the];
     
     
     static aszT2KApi  *me;
@@ -117,7 +117,7 @@
 
 +(void) logInWithUser:(NSString*)user andPassword:(NSString*)pass OnSuccess:(void (^)(NSString *))success  OnFaliure:(void (^)(NSString *))faliure
 {
-    aszWebBridge *instance = [aszWebBridge the];
+    aszApiBridge *instance = [aszApiBridge the];
     
     user = [[@"'" stringByAppendingString:user]stringByAppendingString:@"'"];
     pass = [[@"'" stringByAppendingString:pass]stringByAppendingString:@"'"];
@@ -149,9 +149,9 @@
     me.successCall=success;
     me.falureCall=faliure;
     
-    [[aszWebBridge the] setCustomDelegate:me];
+    [[aszApiBridge the] setCustomDelegate:me];
     
-    [[aszWebBridge the] callJs:@"T2K.user.logout"  withParams:nil  OnSucsses:@"aok:" OnFaliure:@"ono:"];
+    [[aszApiBridge the] callJs:@"T2K.user.logout"  withParams:nil  OnSucsses:@"aok:" OnFaliure:@"ono:"];
 }
 
 +(void) getStudyClassesOnSuccess:(void (^)(NSString *))success  OnFaliure:(void (^)(NSString *))faliure
@@ -165,9 +165,9 @@
     me.successCall=success;
     me.falureCall=faliure;
     
-    [[aszWebBridge the] setCustomDelegate:me];
+    [[aszApiBridge the] setCustomDelegate:me];
     
-    [[aszWebBridge the] callJs:@"T2K.user.getStudyClasses"  withParams:nil  OnSucsses:@"aok:" OnFaliure:@"ono:"];
+    [[aszApiBridge the] callJs:@"T2K.user.getStudyClasses"  withParams:nil  OnSucsses:@"aok:" OnFaliure:@"ono:"];
 }
 
 +(void) getCourse:(NSString*)cid  OnSuccess:(void (^)(NSString *))success  OnFaliure:(void (^)(NSString *))faliure{
@@ -178,9 +178,9 @@
     me.successCall=success;
     me.falureCall=faliure;
     
-    [[aszWebBridge the] setCustomDelegate:me];
+    [[aszApiBridge the] setCustomDelegate:me];
     
-    [[aszWebBridge the] callJs:@"T2K.content.getCourseByClass"  withParams:@[cid]  OnSucsses:@"aok:" OnFaliure:@"ono:"];
+    [[aszApiBridge the] callJs:@"T2K.content.getCourseByClass"  withParams:@[cid]  OnSucsses:@"aok:" OnFaliure:@"ono:"];
 }
 
 +(void) getLessonContent:(NSString*)courseId forLesson:(NSString*)lessonId  OnSuccess:(void (^)(NSString *))success  OnFaliure:(void (^)(NSString *))faliure
@@ -197,9 +197,9 @@
     me.successCall=success;
     me.falureCall=faliure;
     
-    [[aszWebBridge the] setCustomDelegate:me];
+    [[aszApiBridge the] setCustomDelegate:me];
     
-    [[aszWebBridge the] callJs:@"T2K.content.getLessonContent"  withParams:param  OnSucsses:@"aok:" OnFaliure:@"ono:"];
+    [[aszApiBridge the] callJs:@"T2K.content.getLessonContent"  withParams:param  OnSucsses:@"aok:" OnFaliure:@"ono:"];
 }
 
 

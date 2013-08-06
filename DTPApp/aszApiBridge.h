@@ -11,12 +11,12 @@
 #import <Foundation/Foundation.h>
 #import "CDVViewController.h"
 
-@interface aszWebBridge : NSObject
+@interface aszApiBridge : NSObject
 
 
 @property (nonatomic,strong) CDVViewController *cdvbrain;
 
-+(aszWebBridge*)the;
++(aszApiBridge*)the;
 
 -(NSString*)callJs:(NSString*)name withParams:(NSArray*)params OnSucsses:(NSString *)sucsses OnFaliure:(NSString *)faliure;
 

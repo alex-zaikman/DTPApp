@@ -9,7 +9,7 @@
 #import "aszLoginViewController.h"
 #import "aszT2KApi.h"
 #import "aszUtils.h"
-#import "aszWebBridge.h"
+#import "aszApiBridge.h"
 
 
 @interface aszLoginViewController ()
@@ -45,7 +45,7 @@ static BOOL logged = NO;
     [super viewDidLoad];
 
     if(!logged){
-        [aszWebBridge the];
+        [aszApiBridge the];
         
 //        [aszWebBridge the].cdvbrain = [CDVViewController new];
 //        

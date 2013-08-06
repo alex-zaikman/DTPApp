@@ -20,6 +20,9 @@
 //1. arrays must be equal to pool size 
 -(void)playWithDataArray:(NSArray*)pData forKeyArray:(NSArray*)keys;
 
+//pData must be of poolSize size
+-(id)initWithPoolSize:(uint)size useInitData:(NSString*)data playWithPlayDataArray:(NSArray*)pData;
+
 //if no old key in pool will do nothing
 -(void) playWithData:(NSString*)data forKey:(NSString*)newKey swapKey:(NSString*)oldKid;
 
