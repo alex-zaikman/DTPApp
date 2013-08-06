@@ -114,6 +114,7 @@
 		019E491F17AE26C400ECD711 /* aszWebBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 019E491E17AE26C400ECD711 /* aszWebBridge.m */; };
 		019E492217AE30A700ECD711 /* aszT2KApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 019E492117AE30A700ECD711 /* aszT2KApi.m */; };
 		019E492617AE426A00ECD711 /* aszDlBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 019E492517AE426A00ECD711 /* aszDlBridge.m */; };
+		019E492B17AFCB8300ECD711 /* aszDlPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 019E492A17AFCB8200ECD711 /* aszDlPool.m */; };
 		01FD998F1789ACE800B98A99 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FD998E1789ACE800B98A99 /* UIKit.framework */; };
 		01FD99911789ACE800B98A99 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FD99901789ACE800B98A99 /* Foundation.framework */; };
 		01FD99991789ACE800B98A99 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01FD99971789ACE800B98A99 /* InfoPlist.strings */; };
@@ -329,6 +330,8 @@
 		019E492117AE30A700ECD711 /* aszT2KApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aszT2KApi.m; sourceTree = "<group>"; };
 		019E492417AE426A00ECD711 /* aszDlBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aszDlBridge.h; sourceTree = "<group>"; };
 		019E492517AE426A00ECD711 /* aszDlBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aszDlBridge.m; sourceTree = "<group>"; };
+		019E492917AFCB8200ECD711 /* aszDlPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aszDlPool.h; sourceTree = "<group>"; };
+		019E492A17AFCB8200ECD711 /* aszDlPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aszDlPool.m; sourceTree = "<group>"; };
 		01FD998B1789ACE800B98A99 /* DTPApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DTPApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01FD998E1789ACE800B98A99 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		01FD99901789ACE800B98A99 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -639,6 +642,8 @@
 			children = (
 				019E492417AE426A00ECD711 /* aszDlBridge.h */,
 				019E492517AE426A00ECD711 /* aszDlBridge.m */,
+				019E492917AFCB8200ECD711 /* aszDlPool.h */,
+				019E492A17AFCB8200ECD711 /* aszDlPool.m */,
 			);
 			name = DlBridge;
 			sourceTree = "<group>";
@@ -1000,6 +1005,7 @@
 				019E491F17AE26C400ECD711 /* aszWebBridge.m in Sources */,
 				019E492217AE30A700ECD711 /* aszT2KApi.m in Sources */,
 				019E492617AE426A00ECD711 /* aszDlBridge.m in Sources */,
+				019E492B17AFCB8300ECD711 /* aszDlPool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

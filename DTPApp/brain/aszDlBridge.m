@@ -7,46 +7,21 @@
 //
 
 #import "aszDlBridge.h"
-
+#import "aszUtils.h"
 #define DL_API_URL   @"http://cto.timetoknow.com/cms/player/dl/index2.html"
-#define DELEMITER @";:;:;"
+
 #define DL_BRIDGE_TOO_SOON @"prematureApiCall"
 #define DL_BRIDGE_NOT_LOADDED @"apiNotLoadded"
-
-
-@interface aszDlData()
-
-@property (nonatomic,strong) NSString *jdata;
-
-@end
-@implementation aszDlData
-
-
--(id)initWithJSONDataString:(NSString*)json{
-    
-    self = [super init];
-    if(self){
-        
-        _jdata=json;
-        
-    }
-    return self;
-    
-}
-
--(NSString*)getDataAsJSONString{
-    
-    return self.jdata;
-    
-}
-
-@end
-
 
 
 @interface aszDlBridge() <UIWebViewDelegate>
 
 @property (nonatomic,assign) BOOL isLoadded;
+
+@property (nonatomic,assign) BOOL initandplay;
+
+@property (nonatomic,strong) NSString *initializeData;
+@property (nonatomic,strong) NSString *playData;
 
 @property (strong,nonatomic) void (^psuccess)(NSString *);
 
@@ -65,11 +40,61 @@
     return self.isLoadded;
 }
 
+-(id)initInit:(NSString*)initdata {
+    
+    self = [super initWithDelegate:self];
+    
+    if(self){
+        
+        _initializeData=initdata;
+      
+        
+        _initandplay=YES;
+        
+        _isLoadded = NO;
+        
+        super.wwwFolderName = @"";
+        
+        super.startPage =DL_API_URL;
+        
+        super.view.frame = CGRectMake(65,55,300,300);
+        
+    }
+    return self;
+}
+
+
+-(id)initInit:(NSString*)initdata andPlay:(NSString*)playdata{
+    
+    self = [super initWithDelegate:self];
+    
+    if(self){
+        
+        _initializeData=initdata;
+        _playData=playdata;
+
+        _initandplay=YES;
+        
+        _isLoadded = NO;
+        
+        super.wwwFolderName = @"";
+        
+        super.startPage =DL_API_URL;
+        
+        super.view.frame = CGRectMake(65,55,300,300);
+        
+    }
+    return self;
+    
+}
+
 -(id)initCallOnLoadded:(void (^)(void))callme {
     
     self = [super initWithDelegate:self];
     
     if(self){
+        
+        _initandplay=NO;
         
         _loaddedCallBack=callme;
         
@@ -114,22 +139,23 @@
     
 }
 
--(void) initPlayer:(aszDlData*)initData OnSuccess: (void (^)(NSString *))success  OnFaliure:(void (^)(NSString *))faliure{
-   
+-(void)initPlayer:(NSString*)initData OnSuccess: (void (^)(NSString *))success  OnFaliure:(void (^)(NSString *))faliure{
+
     
     [self precheck];
     
     self.psuccess=success;
     self.pfaliure=faliure;
     
+ #warning not implemented
     //TODO
    [self.webView stringByEvaluatingJavaScriptFromString:@"TODO"];
     
     
 }
 
--(void) playSequence:(aszDlData*)seqData OnSuccess: (void (^)(NSString *))success  OnFaliure:(void (^)(NSString *))faliure{
-    
+-(void)playSequence:(NSString*)seqData OnSuccess: (void (^)(NSString *))success  OnFaliure:(void (^)(NSString *))faliure{
+ #warning not implemented
     
     [self precheck];
     
@@ -186,13 +212,38 @@
     
     if(![loadded isEqualToString:@"YES"]){
         
-        self.isLoadded = YES;
+ 
         
         if(!self.isLoadded && self.loaddedCallBack ){
             self.loaddedCallBack();
             //call only once
             self.loaddedCallBack = nil;
+        }else if(!self.isLoadded && self.initandplay){
+            
+            [self initPlayer:self.initializeData OnSuccess:^(NSString *msg) {
+                
+                if(self.playData){
+                    [self playSequence:self.playData OnSuccess:^(NSString *msg) {
+                        //do nothing
+                    } OnFaliure:^(NSString *err) {
+                        
+                    }];
+                }
+                
+            } OnFaliure:^(NSString *err) {
+                
+            }];
+            
+            
+            
+            
+            
+            
         }
+        
+        self.isLoadded = YES;
+        
+        
     }
 //
 //        NSMutableString *js=[[NSMutableString alloc]init];

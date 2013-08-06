@@ -6,24 +6,22 @@
 //  Copyright (c) 2013 alex zaikman. All rights reserved.
 //
 
+#ifndef aszDlData_ghrtdghrty45y6465yteh456h5rtbh46b4b4b544b64h46uh453gyh46htehj4g3
+#define aszDlData_ghrtdghrty45y6465yteh456h5rtbh46b4b4b544b64h46uh453gyh46htehj4g3
+
 #import <Foundation/Foundation.h>
 #import "CDVViewController.h"
 
 
-
-@interface aszDlData : NSObject
-
--(id)initWithJSONDataString:(NSString*)json;
-
--(NSString*)getDataAsJSONString;
-
-@end
-
-
-
 @interface aszDlBridge : CDVViewController  
 
+#pragma mark bridge funcs
+
 -(id)initCallOnLoadded:(void (^)(void))callme ;
+
+-(id)initInit:(NSString*)initdata andPlay:(NSString*)playdata;
+
+-(id)initInit:(NSString*)initdata;
 
 -(void)setFrame:(CGRect)rect;
 
@@ -31,10 +29,15 @@
 
 -(BOOL)didDlLoad;
 
-#pragma mark dl api
 
--(void) initPlayer:(aszDlData*)initData OnSuccess:(void (^)(NSString *))success  OnFaliure:(void (^)(NSString *))faliure;
+#pragma mark dl Api
 
--(void) playSequence:(aszDlData*)seqData OnSuccess: (void (^)(NSString *))success  OnFaliure:(void (^)(NSString *))faliure;
+-(void)initPlayer:(NSString*)initData OnSuccess:(void (^)(NSString *))success  OnFaliure:(void (^)(NSString *))faliure;
+
+-(void)playSequence:(NSString*)seqData OnSuccess: (void (^)(NSString *))success  OnFaliure:(void (^)(NSString *))faliure;
 
 @end
+
+
+
+#endif

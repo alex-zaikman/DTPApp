@@ -6,9 +6,12 @@
 //  Copyright (c) 2013 alex zaikman. All rights reserved.
 //
 
+#ifndef aszUtils_f3ghb45h64h4ertg54g54g45hb46h456ht4b4
+#define aszUtils_f3ghb45h64h4ertg54g54g45hb46h456ht4b4
+
 #import <Foundation/Foundation.h>
 
-
+#define DELEMITER @";:;:;"
 
 @interface aszUtils : NSObject
 
@@ -17,6 +20,10 @@ extern NSString const * const domain_def;
 extern NSString const * const username_def;
 extern NSString const * const password_def;
 
+
++(int)stringToInt:(NSString*)str;
+
++(NSString*)intToString:(int)i;
 
 +(NSDictionary*)jsonToDictionarry:(NSString*)json;
 
@@ -34,3 +41,5 @@ extern NSString const * const password_def;
 
 
 @end
+
+#endif

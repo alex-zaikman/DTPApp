@@ -113,7 +113,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Ht-CD-f2c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1048" y="-1517"/>
+            <point key="canvasLocation" x="648" y="-589"/>
         </scene>
         <!--View Classes Controller - Classes-->
         <scene sceneID="gKJ-Nm-19T">
@@ -162,7 +162,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Yj-gd-5fa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1506" y="-488"/>
+            <point key="canvasLocation" x="530" y="328"/>
         </scene>
         <!--Asz Description View Controller-->
         <scene sceneID="vmt-b2-OX5">
@@ -224,7 +224,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LEJ-cG-H2t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2893" y="-1567"/>
+            <point key="canvasLocation" x="2013" y="-575"/>
         </scene>
         <!--Asz Sequense View Controller-->
         <scene sceneID="sb9-st-DDA">
@@ -258,7 +258,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hz2-AX-u4F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4457" y="-2353"/>
+            <point key="canvasLocation" x="3481" y="-1537"/>
         </scene>
         <!--Asz Over View View Controller - Overview-->
         <scene sceneID="dJS-hf-FgL">
@@ -296,7 +296,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HlN-29-kcR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2887" y="-488"/>
+            <point key="canvasLocation" x="1911" y="328"/>
         </scene>
         <!--Asz Dl Pager View Controller - DL Player-->
         <scene sceneID="cGp-Dq-gUs">
@@ -315,7 +315,7 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Mc-Ie-buw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4278" y="-488"/>
+            <point key="canvasLocation" x="3302" y="328"/>
         </scene>
         <!--Asz Dl View Controller-->
         <scene sceneID="szD-0r-mB5">
@@ -343,7 +343,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vRK-lZ-caE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4278" y="-1438"/>
+            <point key="canvasLocation" x="3302" y="-622"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="maq-qy-hkP">
@@ -362,72 +362,9 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="paM-a4-nAZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1175" y="-512"/>
+            <point key="canvasLocation" x="-967" y="320"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="UICollectionReusableView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
-        </class>
-        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
-        </class>
-        <class className="UICollectionViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewController.h"/>
-        </class>
-        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
-        </class>
-        <class className="ViewClassesController" superclassName="UICollectionViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewClassesController.h"/>
-            <relationships>
-                <relationship kind="action" name="login:"/>
-            </relationships>
-        </class>
-        <class className="aszClassesViewCell" superclassName="UICollectionViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/aszClassesViewCell.h"/>
-        </class>
-        <class className="aszDescriptionViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/aszDescriptionViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="close:"/>
-                <relationship kind="outlet" name="dtitle" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="overview" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="aszDlPagerViewController" superclassName="UIPageViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/aszDlPagerViewController.h"/>
-        </class>
-        <class className="aszDlViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/aszDlViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="pageNumber" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="aszLoginViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/aszLoginViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="loginButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="outputView" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="password" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="progressBar" candidateClass="UIActivityIndicatorView"/>
-                <relationship kind="outlet" name="remember" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="userName" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="aszOverViewCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/aszOverViewCell.h"/>
-        </class>
-        <class className="aszOverViewViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/aszOverViewViewController.h"/>
-        </class>
-        <class className="aszSequencesCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/aszSequencesCell.h"/>
-        </class>
-        <class className="aszSequenseViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/aszSequenseViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -229,12 +229,38 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DTPApp/aszT2KApi.m"
-         timestampString = "397390018.616445"
+         timestampString = "397470160.884011"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "36"
-         endingLineNumber = "36"
+         startingLineNumber = "37"
+         endingLineNumber = "37"
          landmarkName = "-webView:shouldStartLoadWithRequest:navigationType:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "DTPApp/brain/aszDlPool.m"
+         timestampString = "397470160.884011"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "123"
+         endingLineNumber = "123"
+         landmarkName = "-getDlForKey:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "DTPApp/brain/aszDlPool.m"
+         timestampString = "397472616.823783"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "53"
+         endingLineNumber = "53"
+         landmarkName = "-playWithData:forKey:swapKey:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

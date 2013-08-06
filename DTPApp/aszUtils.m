@@ -116,4 +116,12 @@ NSString const * const password_def=@"password_def";
 }
 
 
++(int)stringToInt:(NSString*)str{
+    return [str intValue];
+}
++(NSString*)intToString:(int)i{
+    return  [NSString stringWithFormat:@"%d",i];
+}
+
+
 @end

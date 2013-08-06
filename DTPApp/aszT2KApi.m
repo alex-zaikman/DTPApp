@@ -8,6 +8,7 @@
 
 #import "aszT2KApi.h"
 #import "aszWebBridge.h"
+#import "aszUtils.h"
 
 @interface aszT2KApi() <UIWebViewDelegate>
 
@@ -38,7 +39,7 @@
     if ([requestString hasPrefix:@"http://js-call"]) {
         
         // Extract the selector name from the URL
-        NSArray *components = [requestString componentsSeparatedByString:@";:;:;"];
+        NSArray *components = [requestString componentsSeparatedByString:DELEMITER];
       
         NSString *function = [components objectAtIndex:1];
         NSString *key = [components objectAtIndex:2];

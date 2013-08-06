@@ -6,6 +6,9 @@
 //  Copyright (c) 2013 alex zaikman. All rights reserved.
 //
 
+#ifndef aszT2KApi_g4gh35ghu35bf3ug53ug3ubg3u5vbn111
+#define aszT2KApi_g4gh35ghu35bf3ug53ug3ubg3u5vbn111
+
 #import <Foundation/Foundation.h>
 
 @interface aszT2KApi : NSObject
@@ -26,3 +29,5 @@
 
 
 @end
+
+#endif
