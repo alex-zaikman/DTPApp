@@ -35,11 +35,20 @@
 
 -(NSString*)createCommandForAction:(NSString*)action withData:(NSString*)data;
 
+
+-(void)dlapi:(NSString*)msg;
 @end
 
 @implementation aszDlBridge
 
+-(void)dlapi:(NSString*)msg{
+#warning not implemented
 
+ NSDictionary *config = [aszUtils jsonToDictionarry:msg];
+    
+    
+    
+}
 
 -(BOOL)didDlLoad{
     return self.isLoadded;
