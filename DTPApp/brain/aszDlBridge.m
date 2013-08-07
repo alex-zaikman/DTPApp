@@ -225,7 +225,7 @@
         self.psuccess = nil;
         
         // Cancel the location change
-        return NO;
+        return NO; 
     }
     
     // Accept this location change
