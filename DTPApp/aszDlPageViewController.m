@@ -10,7 +10,7 @@
 #import "aszT2KApi.h"
 #import "aszNewDlViewController.h"
 #import "aszUtils.h"
-//#import "aszDlPool.h"
+#import "aszDlPool.h"
 #import "aszDlBridge.h"
 
 #define POOL_SIZE 3
@@ -30,10 +30,10 @@
 @property (nonatomic,strong) NSDictionary *rawData;
 @property (nonatomic,strong) NSMutableArray *los;
 @property (nonatomic,strong) NSMutableArray *seqList;
-//@property (nonatomic,strong) aszDlPool *pool;
+@property (nonatomic,strong) aszDlPool *pool;
 @property (nonatomic,strong) NSString *seqInitData;
 @property (nonatomic,assign) int currentViewIndex;
-@property (nonatomic,strong) aszDlBridge *tmpptr;
+
 
 -(void)prepLos:(NSArray *)learningObjects;
 
@@ -57,8 +57,8 @@
 {
     if(!self.seqList)
         self.seqList = [[NSMutableArray alloc]init];
-        
-        
+    
+    
     [self.seqList removeAllObjects];
     
     for(int i=0 ; i<[learningObjects count] ;i++){
@@ -127,7 +127,7 @@
     [initData appendString:@"student"];//[initData appendString:role];
     
     [initData appendString:  @"' }   }"];
- 
+    
     self.seqInitData = initData ;
     
     
@@ -151,33 +151,33 @@
         
         //==============prep the pool ===============================================================================================
         
-     //   this.pool = [[aszDlPool alloc]initWithPoolSize:POOL_SIZE useInitData:this.seqInitData onLoad:^{
-            
-            
-            //==================get the first page=======================================================================================
-            
-            aszNewDlViewController *startingViewController = [this viewControllerAtIndex:0 storyboard:this.storyboard];
-            
-            NSArray *viewControllers;
-            
-            viewControllers = @[startingViewController];
-            
-            
-            [this setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
-            
-            [this.parentViewController reloadInputViews];
-            
-            
-     //   }];
+        //   this.pool = [[aszDlPool alloc]initWithPoolSize:POOL_SIZE useInitData:this.seqInitData onLoad:^{
         
         
-
+        //==================get the first page=======================================================================================
+        
+        aszNewDlViewController *startingViewController = [this viewControllerAtIndex:0 storyboard:this.storyboard];
+        
+        NSArray *viewControllers;
+        
+        viewControllers = @[startingViewController];
+        
+        
+        [this setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
+        
+        [this.parentViewController reloadInputViews];
+        
+        
+        //   }];
+        
+        
+        
         
     } OnFaliure:^(NSString *err) {
         
     }];
     
-
+    
 }
 
 
@@ -190,102 +190,91 @@
     if(inds<0 || index>= [self.seqList count]){
         return nil;
     }
-    
-//    NSArray *indexs;
-//    if(index == 0 ){
-//        
-//        indexs = @[@0,@1,@2];
-//        
-//    }else if (index == [self.seqList count]-1){
-//        
-//        indexs = @[@([self.seqList count]-3),@([self.seqList count]-2),@([self.seqList count]-1)];
-//    }
-//    else{
-//        indexs = @[@(index-1),@(index),@(index+1)];
-//    }
-//
-//    
-//    NSMutableArray *sindexs = [[NSMutableArray alloc]init];
-//    for(NSNumber *ind in indexs){
-//        [sindexs addObject:[aszUtils intToString:ind.intValue]];
-//    }
-//    
-//    NSMutableArray *playdata = [[NSMutableArray alloc]init];
-//     for(NSString *ref in self.seqList){
-//         
-//         NSString  *jsonUrl = [@"http://cto.timetoknow.com"  stringByAppendingString:ref ];
-//         
-//         NSURLRequest *reqPlayData = [aszUtils requestWithUrl:jsonUrl usingMethod:@"GET" withUrlParams:nil andBodyData:nil];
-//         
-//         NSURLResponse *response = nil;
-//         NSError *error = nil;
-//         
-//         NSData *responseData = [NSURLConnection sendSynchronousRequest:reqPlayData returningResponse:&response error:&error];
-//         
-//         [playdata addObject: [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]];
-//         
-//     }
-//    
-//    
-//    [self.pool playWithDataArray:playdata forKeyArray:sindexs];
-//    
-    
-    //get the right view
-    
-    NSString  *jsonUrl = [@"http://cto.timetoknow.com"  stringByAppendingString:self.seqList[index] ];
-    
-             NSURLRequest *reqPlayData = [aszUtils requestWithUrl:jsonUrl usingMethod:@"GET" withUrlParams:nil andBodyData:nil];
-    
-             NSURLResponse *response = nil;
-             NSError *error = nil;
-    
-            NSData *responseData = [NSURLConnection sendSynchronousRequest:reqPlayData returningResponse:&response error:&error];
-    
-           NSString *playdata = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-
 
     
     
-  //  self.tmpptr =  [[aszDlBridge alloc]initInit:self.seqInitData andPlay:playdata  ];// [self.pool getDlForKey:[aszUtils intToString:index]];];
+    NSArray *indexs;
+    if(index == 0 ){
+        
+        indexs = @[@"0",@"1",@"2"];
+        
+    }else if (index == [self.seqList count]-1){
+        
+        indexs = @[[@([self.seqList count]-3) stringValue],[@([self.seqList count]-2) stringValue],[@([self.seqList count]-1) stringValue]];
+    }
+    else{
+        indexs = @[[@(index-1) stringValue],[@(index) stringValue],[@(index+1) stringValue]];
+        
+    }
     
-//[self.tmpptr releaseLock];
-//    self.tmpptr =nil;
     
+    NSMutableArray *sindexs = [[NSMutableArray alloc]init];
+    for(NSNumber *ind in indexs){
+        [sindexs addObject:[aszUtils intToString:ind.intValue]];
+    }
+    
+    NSMutableArray *playdata = [[NSMutableArray alloc]init];
+    
+    for(int i = 0  ;  i<[indexs count]  ; i++){
+        
+        NSString *ref = self.seqList[[indexs[i] intValue]];
+        
+        NSString  *jsonUrl = [@"http://cto.timetoknow.com"  stringByAppendingString:ref ];
+        
+        NSURLRequest *reqPlayData = [aszUtils requestWithUrl:jsonUrl usingMethod:@"GET" withUrlParams:nil andBodyData:nil];
+        
+        NSURLResponse *response = nil;
+        NSError *error = nil;
+        
+        NSData *responseData = [NSURLConnection sendSynchronousRequest:reqPlayData returningResponse:&response error:&error];
+        
+        [playdata addObject: [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]];
+        
+    }
+    
+    
+    NSDictionary *toplay = [NSDictionary dictionaryWithObjects:playdata forKeys:indexs];
+    
+    
+    if(!self.pool)
+        self.pool = [[aszDlPool alloc]initUseInitData:self.seqInitData playWithPlayDataDictionarry:toplay];
+    else
+        [self.pool playWithDataDictionary:toplay];
+
     aszNewDlViewController *ret = [storyboard instantiateViewControllerWithIdentifier:@"aszNewDlViewController"];
-
+    
     ret.indexCid = index;
     self.currentViewIndex=index;
     
-    
-    self.tmpptr = [[aszDlBridge alloc]initInit:self.seqInitData andPlay:playdata  ];
-    
-    CGRect supRec = ret.view.frame;
-    
-    static const int margin =55;
+    aszDlBridge *tmpptr = [self.pool getDlForKey:[aszUtils intToString:index]];
 
-    [self.tmpptr setFrame:CGRectMake(supRec.origin.x+margin ,supRec.origin.y+margin ,supRec.size.width-(2*margin) ,supRec.size.height-(2*margin))];
+    CGRect supRec = ret.view.frame;
+   
+    static const int margin =55;
     
-    [ret.view addSubview:[self.tmpptr getCDVView]];
-    
+    [tmpptr setFrame:CGRectMake(supRec.origin.x+margin ,supRec.origin.y+margin ,supRec.size.width-(2*margin) ,supRec.size.height-(2*margin))];
+   
+    [ret.view addSubview:[tmpptr getCDVView]];
+   
     return ret;
     
 }
 
 #pragma mark UIPageViewControllerDataSource
-    
-- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(aszNewDlViewController *)viewController
-    {
-        int index = viewController.indexCid+1;
 
-        return [self viewControllerAtIndex:(index) storyboard:self.storyboard];
-    }
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(aszNewDlViewController *)viewController
+{
+    int index = viewController.indexCid+1;
+    
+    return [self viewControllerAtIndex:(index) storyboard:self.storyboard];
+}
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(aszNewDlViewController *)viewController
-    {
-        int index = viewController.indexCid-1;
-
-        return [self viewControllerAtIndex:(index) storyboard:self.storyboard];
-    }
+{
+    int index = viewController.indexCid-1;
+    
+    return [self viewControllerAtIndex:(index) storyboard:self.storyboard];
+}
 
 
 //- (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController NS_AVAILABLE_IOS(6_0){
@@ -317,6 +306,14 @@
 }
 
 
+-(void)dealloc{
+    [self.pool clearPool];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [self.pool clearPool]; //important!!!!!!!
+    self.pool = nil;
+}
 
 @end
-    
+

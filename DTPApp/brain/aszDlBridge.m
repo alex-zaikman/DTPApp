@@ -307,8 +307,9 @@
 
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    [super releaseLock];
+   [super viewDidUnload];
 }
+
 
 
 

@@ -30,27 +30,27 @@
     NSString* loadded =   [webView stringByEvaluatingJavaScriptFromString: @"var check = function(){ return loadded};   check();" ];
     
     if(![loadded isEqualToString:@"YES"]){
-    
-    NSMutableString *js=[[NSMutableString alloc]init];
-    
-    [js appendString:@"window.dlhost.initAndPlay("];
-    
-    [js appendString:self.data[0]];
-    
-    [js appendString:@"        ,     "];
-    
-    [js appendString:self.data[1]];
-    
-    [js appendString:@");"];
-    
-    
-    NSMutableString *javaScript =[[NSMutableString alloc]init];
-    [javaScript appendString: @"var loadded = 'YES';   var ondlload =function(){   setTimeout(function(){  "];
-    [javaScript appendString:js  ];
-    [javaScript appendString: @"   },0);    };  "];
-    
-    [webView stringByEvaluatingJavaScriptFromString: javaScript ];
-  
+        
+        NSMutableString *js=[[NSMutableString alloc]init];
+        
+        [js appendString:@"window.dlhost.initAndPlay("];
+        
+        [js appendString:self.data[0]];
+        
+        [js appendString:@"        ,     "];
+        
+        [js appendString:self.data[1]];
+        
+        [js appendString:@");"];
+        
+        
+        NSMutableString *javaScript =[[NSMutableString alloc]init];
+        [javaScript appendString: @"var loadded = 'YES';   var ondlload =function(){   setTimeout(function(){  "];
+        [javaScript appendString:js  ];
+        [javaScript appendString: @"   },0);    };  "];
+        
+        [webView stringByEvaluatingJavaScriptFromString: javaScript ];
+        
     }
     
 }

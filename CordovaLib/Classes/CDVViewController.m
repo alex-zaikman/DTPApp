@@ -234,7 +234,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     NSURL* appURL = nil;
     NSString* loadErr = nil;
 
@@ -398,6 +398,8 @@
     }
 
     // /////////////////
+
+    
     [CDVUserAgentUtil acquireLock:^(NSInteger lockToken) {
         _userAgentLockToken = lockToken;
         [CDVUserAgentUtil setUserAgent:self.userAgent lockToken:lockToken];
@@ -605,7 +607,13 @@
     [CDVUserAgentUtil releaseLock:&_userAgentLockToken];
 }
 
+-(void)acquireLock{
+    [CDVUserAgentUtil acquireLock:^(NSInteger lockToken) {
+        
+        _userAgentLockToken = lockToken;
 
+    }];
+}
 -(void)releaseLock{
      [CDVUserAgentUtil releaseLock:&_userAgentLockToken];
 }
@@ -972,5 +980,6 @@
     [_commandQueue dispose];
     [[self.pluginObjects allValues] makeObjectsPerformSelector:@selector(dispose)];
 }
+
 
 @end

@@ -15,27 +15,16 @@
 
 @interface aszDlPool : NSObject
 
-#pragma mark init funcs
 
--(id)initWithPoolSize:(uint)size useInitData:(NSString*)data  onLoad:(void (^)(void))callme;
+-(id)initUseInitData:(NSString*)data playWithPlayDataDictionarry:(NSDictionary*)pData;
 
+-(void)playWithDataDictionary:(NSDictionary*)pData;
 
-#pragma mark play funcs
+-(id)getDlForKey:(NSString*)key;
 
-//1. arrays must be equal to pool size 
--(void)playWithDataArray:(NSArray*)pData forKeyArray:(NSArray*)keys;
+-(uint)getCurrentPoolSize;
 
-//if no old key in pool will do nothing
--(void) playWithData:(NSString*)data forKey:(NSString*)newKey swapKey:(NSString*)oldKid;
-
-#pragma mark funcs
-
--(NSArray*)cashedKeysNotInKeys:(NSArray*)newKeys;
-
-//nil if not in pool
--(aszDlBridge*)getDlForKey:(NSString*)key;
-
--(uint)getPoolSize;
+-(void)clearPool;
 
 @end
 #endif
