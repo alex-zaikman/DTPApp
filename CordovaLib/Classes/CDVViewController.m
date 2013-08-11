@@ -607,13 +607,7 @@
     [CDVUserAgentUtil releaseLock:&_userAgentLockToken];
 }
 
--(void)acquireLock{
-    [CDVUserAgentUtil acquireLock:^(NSInteger lockToken) {
-        
-        _userAgentLockToken = lockToken;
 
-    }];
-}
 -(void)releaseLock{
      [CDVUserAgentUtil releaseLock:&_userAgentLockToken];
 }

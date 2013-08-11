@@ -301,13 +301,7 @@
 }
 
 -(void) webViewDidFinishLoad:(UIWebView *)webView{
-    
-    
-}
-
--(void)viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:animated];
-   [super viewDidUnload];
+    [super releaseLock];
 }
 
 

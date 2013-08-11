@@ -53,8 +53,8 @@
     
     for(NSString *key in casheKyes){
         if(![pData valueForKey:key]){
-          //  aszDlBridge *tmp = [self.cache objectForKey:key];
-           // [tmp viewDidUnload];
+            aszDlBridge *tmp = [self.cache objectForKey:key];
+            [tmp releaseLock];
             [self.cache removeObjectForKey:key];
           //  tmp=nil;
             
