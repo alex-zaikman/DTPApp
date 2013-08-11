@@ -244,8 +244,6 @@
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         [self performSelector:NSSelectorFromString(function) withObject:param];
         
-      //  self.pfaliure = nil;
-       // self.psuccess = nil;
         
         // Cancel the location change
         return NO; 
