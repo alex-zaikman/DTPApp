@@ -13,6 +13,7 @@
 		01157A7F179D113F004C23BE /* aszDls.m in Sources */ = {isa = PBXBuildFile; fileRef = 01157A7E179D113F004C23BE /* aszDls.m */; };
 		012844F817A656FD005AC7CB /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = 012844F717A656FD005AC7CB /* config.xml */; };
 		012844FB17A6AD1D005AC7CB /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 012844FA17A6AD1B005AC7CB /* Base64.m */; };
+		0135FA5B17B7CAF900480854 /* aszDlDelegateImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0135FA5A17B7CAF900480854 /* aszDlDelegateImpl.m */; };
 		0166EA1C1792D2B1005B249D /* tree.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0166EA171792D2B1005B249D /* tree.jpg */; };
 		0166EA1D1792D2B1005B249D /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0166EA181792D2B1005B249D /* logo.jpg */; };
 		0166EA1E1792D2B1005B249D /* Icon_72x72_v1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0166EA191792D2B1005B249D /* Icon_72x72_v1.png */; };
@@ -171,6 +172,9 @@
 		012844F717A656FD005AC7CB /* config.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = config.xml; sourceTree = "<group>"; };
 		012844F917A6AD1B005AC7CB /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		012844FA17A6AD1B005AC7CB /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
+		0135FA5817B7CA0B00480854 /* aszDlCallbackDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aszDlCallbackDelegate.h; sourceTree = "<group>"; };
+		0135FA5917B7CAF900480854 /* aszDlDelegateImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aszDlDelegateImpl.h; sourceTree = "<group>"; };
+		0135FA5A17B7CAF900480854 /* aszDlDelegateImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aszDlDelegateImpl.m; sourceTree = "<group>"; };
 		0166EA171792D2B1005B249D /* tree.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tree.jpg; sourceTree = "<group>"; };
 		0166EA181792D2B1005B249D /* logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.jpg; sourceTree = "<group>"; };
 		0166EA191792D2B1005B249D /* Icon_72x72_v1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_72x72_v1.png; sourceTree = "<group>"; };
@@ -650,6 +654,7 @@
 				019E492517AE426A00ECD711 /* aszDlBridge.m */,
 				019E492917AFCB8200ECD711 /* aszDlPool.h */,
 				019E492A17AFCB8200ECD711 /* aszDlPool.m */,
+				0135FA5817B7CA0B00480854 /* aszDlCallbackDelegate.h */,
 			);
 			name = DlBridge;
 			sourceTree = "<group>";
@@ -672,6 +677,8 @@
 				019E492E17B22F0C00ECD711 /* aszDlPageViewController.m */,
 				019E493017B2316D00ECD711 /* aszNewDlViewController.h */,
 				019E493117B2316D00ECD711 /* aszNewDlViewController.m */,
+				0135FA5917B7CAF900480854 /* aszDlDelegateImpl.h */,
+				0135FA5A17B7CAF900480854 /* aszDlDelegateImpl.m */,
 			);
 			name = newDl;
 			sourceTree = "<group>";
@@ -1018,6 +1025,7 @@
 				019E492B17AFCB8300ECD711 /* aszDlPool.m in Sources */,
 				019E492F17B22F0C00ECD711 /* aszDlPageViewController.m in Sources */,
 				019E493217B2316D00ECD711 /* aszNewDlViewController.m in Sources */,
+				0135FA5B17B7CAF900480854 /* aszDlDelegateImpl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

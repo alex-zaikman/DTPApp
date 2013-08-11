@@ -12,6 +12,8 @@
 #import "aszUtils.h"
 #import "aszDlPool.h"
 #import "aszDlBridge.h"
+#import "aszDlDelegateImpl.h"
+
 
 #define POOL_SIZE 3
 
@@ -237,7 +239,7 @@
     
     
     if(!self.pool)
-        self.pool = [[aszDlPool alloc]initUseInitData:self.seqInitData playWithPlayDataDictionarry:toplay];
+        self.pool = [[aszDlPool alloc]initUseInitData:self.seqInitData playWithPlayDataDictionarry:toplay dlCallbackDelegate:[[aszDlDelegateImpl alloc]init]];
     else
         [self.pool playWithDataDictionary:toplay];
 

@@ -29,6 +29,8 @@
 
 @property (strong,nonatomic)  void (^loaddedCallBack)(void);
 
+@property (strong,nonatomic) id<aszDlCallbackDelegate> dldelegate;
+
 -(void)precheck;
 -(void)fsuccess:(NSString*)msg;
 -(void)ffailure:(NSString*)msg;
@@ -55,7 +57,7 @@
     return self.isLoadded;
 }
 
--(id)initInit:(NSString*)initdata OnLoadded:(void (^)(void))callme{
+-(id)initInit:(NSString*)initdata OnLoadded:(void (^)(void))callme  dlCallbackDelegate:(id<aszDlCallbackDelegate>)dldelegate{
     
     self = [super initWithDelegate:self];
     
@@ -63,6 +65,7 @@
         
         super.customDelegate = self;
         super.useSplashScreen = NO;
+        _dldelegate=dldelegate;
         _initializeData=initdata;
         _playData=nil;
         _loaddedCallBack=callme;
@@ -82,7 +85,7 @@
 }
 
 
--(id)initInit:(NSString*)initdata andPlay:(NSString*)playdata{
+-(id)initInit:(NSString*)initdata andPlay:(NSString*)playdata  dlCallbackDelegate:(id<aszDlCallbackDelegate>)dldelegate{
     
     self = [super initWithDelegate:self];
     
@@ -91,6 +94,7 @@
         super.customDelegate = self;
         _initializeData=initdata;
         _playData=playdata;
+        _dldelegate=dldelegate;
 
         _initandplay=YES;
         

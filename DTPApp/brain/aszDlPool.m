@@ -16,8 +16,10 @@
 
 @property (nonatomic,strong) NSString *iniData;
 
-//@property (nonatomic,strong) void(^initOnLoadded)(void);
-//
+
+
+@property (strong,nonatomic) id<aszDlCallbackDelegate> dldelegate;
+
 //@property (strong,nonatomic) void (^allLoadded)(void);
 //@property (strong,nonatomic) void (^callOnallLoadded)(void);
 @end
@@ -25,20 +27,23 @@
 
 @implementation aszDlPool
 
--(id)initUseInitData:(NSString*)data playWithPlayDataDictionarry:(NSDictionary*)pData{
+-(id)initUseInitData:(NSString*)data playWithPlayDataDictionarry:(NSDictionary*)pData dlCallbackDelegate:(id<aszDlCallbackDelegate>)dldelegate{
     
     self =[super init];
     
     if(self){
         _iniData = data;
         _cache = [NSMutableDictionary dictionary];
+        _dldelegate=dldelegate;
+        
         
         __block NSMutableDictionary *tmpCashe = _cache;
         __block NSString *idata=data;
+        __block id<aszDlCallbackDelegate> blockDelegate = dldelegate;
         
         [pData enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
             
-            [tmpCashe setValue:[[aszDlBridge alloc]initInit:idata andPlay:obj ] forKey:key];
+            [tmpCashe setValue:[[aszDlBridge alloc]initInit:idata andPlay:obj dlCallbackDelegate:blockDelegate ] forKey:key];
             
         }];
     }
@@ -64,10 +69,11 @@
     //set cashe
      __block NSMutableDictionary *tmpCashe = self.cache;
      __block NSString *idata=self.iniData;
+    __block id<aszDlCallbackDelegate> blockDelegate = self.dldelegate;
     [pData enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         
         if(![tmpCashe objectForKey:key]){
-            [tmpCashe setValue:[[aszDlBridge alloc]initInit:idata andPlay:obj ]  forKey:key];
+            [tmpCashe setValue:[[aszDlBridge alloc]initInit:idata andPlay:obj dlCallbackDelegate:blockDelegate ]  forKey:key];
         }
         
     }];

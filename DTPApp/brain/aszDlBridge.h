@@ -11,6 +11,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CDVViewController.h"
+#import "aszDlCallbackDelegate.h"
 
 
 @interface aszDlBridge : CDVViewController  
@@ -20,9 +21,9 @@
 
 -(id)initCallOnLoadded:(void (^)(void))callme ;
 
--(id)initInit:(NSString*)initdata andPlay:(NSString*)playdata;
+-(id)initInit:(NSString*)initdata andPlay:(NSString*)playdata dlCallbackDelegate:(id<aszDlCallbackDelegate>)dldelegate;
 
--(id)initInit:(NSString*)initdata OnLoadded:(void (^)(void))callme;
+-(id)initInit:(NSString*)initdata OnLoadded:(void (^)(void))callme  dlCallbackDelegate:(id<aszDlCallbackDelegate>)dldelegate;
 
 #pragma mark bridge funcs
 

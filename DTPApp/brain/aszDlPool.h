@@ -16,7 +16,7 @@
 @interface aszDlPool : NSObject
 
 
--(id)initUseInitData:(NSString*)data playWithPlayDataDictionarry:(NSDictionary*)pData;
+-(id)initUseInitData:(NSString*)data playWithPlayDataDictionarry:(NSDictionary*)pData dlCallbackDelegate:(id<aszDlCallbackDelegate>)dldelegate;
 
 -(void)playWithDataDictionary:(NSDictionary*)pData;
 
