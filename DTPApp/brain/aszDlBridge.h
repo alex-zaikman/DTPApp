@@ -16,12 +16,13 @@
 @interface aszDlBridge : CDVViewController  
 
 
+//@property (nonatomic,assign) int indexCid;
 
 -(id)initCallOnLoadded:(void (^)(void))callme ;
 
 -(id)initInit:(NSString*)initdata andPlay:(NSString*)playdata;
 
--(id)initInit:(NSString*)initdata;
+-(id)initInit:(NSString*)initdata OnLoadded:(void (^)(void))callme;
 
 #pragma mark bridge funcs
 

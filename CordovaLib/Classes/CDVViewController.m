@@ -57,6 +57,8 @@
 @synthesize commandQueue = _commandQueue;
 @synthesize customDelegate = _customDelegate;
 
+
+
 - (void)__init
 {
     if ((self != nil) && !self.initialized) {
@@ -601,6 +603,11 @@
     self.webView.delegate = nil;
     self.webView = nil;
     [CDVUserAgentUtil releaseLock:&_userAgentLockToken];
+}
+
+
+-(void)releaseLock{
+     [CDVUserAgentUtil releaseLock:&_userAgentLockToken];
 }
 
 #pragma mark UIWebViewDelegate

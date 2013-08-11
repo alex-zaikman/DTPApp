@@ -74,6 +74,6 @@
 
 @property (nonatomic,strong) id<UIWebViewDelegate> customDelegate;
 - (id)initWithDelegate:(id<UIWebViewDelegate>)delegate;
-
+-(void)releaseLock;
 @end
 #endif

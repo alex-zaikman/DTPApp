@@ -7,6 +7,8 @@
 //
 
 #import "aszDlPool.h"
+#import "aszUtils.h"
+
 
 @interface aszDlPool()
 
@@ -18,25 +20,50 @@
 
 @property (nonatomic,strong) void(^initOnLoadded)(void);
 
+@property (strong,nonatomic) void (^allLoadded)(void);
+@property (strong,nonatomic) void (^callOnallLoadded)(void);
 @end
 
 
 @implementation aszDlPool
 
 
--(id)initWithPoolSize:(uint)size useInitData:(NSString*)data{
+-(id)initWithPoolSize:(uint)size useInitData:(NSString*)data onLoad: (void (^)(void))callme{
     self = [super init];
     if(self){
+        
+        
+      
         _poolSize=size;
         _initData =data;
         _cacheGuide = [[NSMutableDictionary alloc]init];
+        
+        
+        _callOnallLoadded = callme;
+        
+       __block aszDlPool *this=self;
+        
+        _allLoadded = ^{
+        
+            static int count = 0;
+            count ++;
+            
+            if(count == this.poolSize){
+               this.callOnallLoadded();
+            }
+            
+            
+        };
         
         NSMutableArray *tmp = [[NSMutableArray alloc]init];
         
         for(uint i=0 ;i<_poolSize ;i++)
         {
-            aszDlBridge *bridge = [[aszDlBridge alloc]initInit:_initData];
+            aszDlBridge *bridge = [[aszDlBridge alloc]initInit:_initData OnLoadded:_allLoadded];
+            
+            
             [tmp addObject:bridge ];
+            [_cacheGuide setValue:@(i) forKey:[aszUtils intToString:(-1-i)]];
         }
         
         _cache = [[NSArray alloc]initWithArray:tmp];
@@ -45,37 +72,17 @@
     return self;
 }
 
--(id)initWithPoolSize:(uint)size useInitData:(NSString*)data playWithPlayDataArray:(NSArray*)pData{
-    self = [super init];
-    if(self){
-        _poolSize=size;
-        _initData =data;
-    
-        _cacheGuide = [[NSMutableDictionary alloc]init];
-        
-        NSMutableArray *tmp = [[NSMutableArray alloc]init];
-        
-        for(uint i=0 ;i<_poolSize ;i++)
-        {
-            aszDlBridge *bridge = [[aszDlBridge alloc]initInit:_initData andPlay:pData[i]];
-            [tmp addObject:bridge ];
-        }
-        
-        _cache = [[NSArray alloc]initWithArray:tmp];
-        
-    }
-    return self;
-}
 
 
 -(void) playWithData:(NSString*)data forKey:(NSString*)newKey swapKey:(NSString*)oldKey{
     
 
-    NSNumber *index = [self.cacheGuide valueForKey:oldKey];
-    [self.cacheGuide removeObjectForKey:oldKey];
-    [self.cacheGuide setObject:index forKey:newKey];
+    NSString *sindex = [self.cacheGuide valueForKey:oldKey];
     
-    aszDlBridge *cdv = self.cache[index.intValue];
+    [self.cacheGuide removeObjectForKey:oldKey];
+    [self.cacheGuide setObject:sindex forKey:newKey];
+    
+    aszDlBridge *cdv = self.cache[sindex.intValue];
     
     [cdv playSequence:data OnSuccess:^(NSString *msg) {
         //aok
@@ -97,8 +104,8 @@
     NSMutableArray *freeOldCids = [[NSMutableArray alloc]init];
     
     NSArray *oldCids=[self.cacheGuide allKeys];
-    
-    //for each old cid not in new cid
+
+        //for each old cid not in new cid
     for(int i=0; i<self.poolSize ; i++){
         
         if( ![newKeys containsObject:oldCids[i]])
@@ -119,6 +126,8 @@
    
     
     NSArray *freeOldCids = [self cashedKeysNotInKeys:keys];
+    
+    
     int oldCidIndex = 0;
     
      if([freeOldCids count]==0)return;

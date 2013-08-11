@@ -115,6 +115,8 @@
 		019E492217AE30A700ECD711 /* aszT2KApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 019E492117AE30A700ECD711 /* aszT2KApi.m */; };
 		019E492617AE426A00ECD711 /* aszDlBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 019E492517AE426A00ECD711 /* aszDlBridge.m */; };
 		019E492B17AFCB8300ECD711 /* aszDlPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 019E492A17AFCB8200ECD711 /* aszDlPool.m */; };
+		019E492F17B22F0C00ECD711 /* aszDlPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 019E492E17B22F0C00ECD711 /* aszDlPageViewController.m */; };
+		019E493217B2316D00ECD711 /* aszNewDlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 019E493117B2316D00ECD711 /* aszNewDlViewController.m */; };
 		01FD998F1789ACE800B98A99 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FD998E1789ACE800B98A99 /* UIKit.framework */; };
 		01FD99911789ACE800B98A99 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FD99901789ACE800B98A99 /* Foundation.framework */; };
 		01FD99991789ACE800B98A99 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01FD99971789ACE800B98A99 /* InfoPlist.strings */; };
@@ -332,6 +334,10 @@
 		019E492517AE426A00ECD711 /* aszDlBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aszDlBridge.m; sourceTree = "<group>"; };
 		019E492917AFCB8200ECD711 /* aszDlPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aszDlPool.h; sourceTree = "<group>"; };
 		019E492A17AFCB8200ECD711 /* aszDlPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aszDlPool.m; sourceTree = "<group>"; };
+		019E492D17B22F0C00ECD711 /* aszDlPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aszDlPageViewController.h; sourceTree = "<group>"; };
+		019E492E17B22F0C00ECD711 /* aszDlPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aszDlPageViewController.m; sourceTree = "<group>"; };
+		019E493017B2316D00ECD711 /* aszNewDlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aszNewDlViewController.h; sourceTree = "<group>"; };
+		019E493117B2316D00ECD711 /* aszNewDlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aszNewDlViewController.m; sourceTree = "<group>"; };
 		01FD998B1789ACE800B98A99 /* DTPApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DTPApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01FD998E1789ACE800B98A99 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		01FD99901789ACE800B98A99 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -659,6 +665,17 @@
 			name = utils;
 			sourceTree = "<group>";
 		};
+		019E492C17B22C2A00ECD711 /* newDl */ = {
+			isa = PBXGroup;
+			children = (
+				019E492D17B22F0C00ECD711 /* aszDlPageViewController.h */,
+				019E492E17B22F0C00ECD711 /* aszDlPageViewController.m */,
+				019E493017B2316D00ECD711 /* aszNewDlViewController.h */,
+				019E493117B2316D00ECD711 /* aszNewDlViewController.m */,
+			);
+			name = newDl;
+			sourceTree = "<group>";
+		};
 		01FD99821789ACE800B98A99 = {
 			isa = PBXGroup;
 			children = (
@@ -826,6 +843,7 @@
 		01FD99E0178E96AF00B98A99 /* dl */ = {
 			isa = PBXGroup;
 			children = (
+				019E492C17B22C2A00ECD711 /* newDl */,
 				01157A7C179D1100004C23BE /* dlwebs */,
 				01FD99E4178E97EF00B98A99 /* aszDlViewController.h */,
 				01FD99E5178E97EF00B98A99 /* aszDlViewController.m */,
@@ -998,6 +1016,8 @@
 				019E492217AE30A700ECD711 /* aszT2KApi.m in Sources */,
 				019E492617AE426A00ECD711 /* aszDlBridge.m in Sources */,
 				019E492B17AFCB8300ECD711 /* aszDlPool.m in Sources */,
+				019E492F17B22F0C00ECD711 /* aszDlPageViewController.m in Sources */,
+				019E493217B2316D00ECD711 /* aszNewDlViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

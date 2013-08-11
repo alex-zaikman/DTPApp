@@ -32,6 +32,7 @@
 -(void)precheck;
 -(void)fsuccess:(NSString*)msg;
 -(void)ffailure:(NSString*)msg;
+-(void)loadded:(NSString*)msg;
 
 -(NSString*)createCommandForAction:(NSString*)action withData:(NSString*)data;
 
@@ -54,15 +55,17 @@
     return self.isLoadded;
 }
 
--(id)initInit:(NSString*)initdata {
+-(id)initInit:(NSString*)initdata OnLoadded:(void (^)(void))callme{
     
     self = [super initWithDelegate:self];
     
     if(self){
         
+        super.customDelegate = self;
+        super.useSplashScreen = NO;
         _initializeData=initdata;
         _playData=nil;
-        
+        _loaddedCallBack=callme;
         _initandplay=YES;
         
         _isLoadded = NO;
@@ -73,6 +76,7 @@
         
         super.view.frame = CGRectMake(65,55,300,300);
         
+   
     }
     return self;
 }
@@ -83,7 +87,8 @@
     self = [super initWithDelegate:self];
     
     if(self){
-        
+           super.useSplashScreen = NO;
+        super.customDelegate = self;
         _initializeData=initdata;
         _playData=playdata;
 
@@ -96,7 +101,8 @@
         super.startPage =DL_API_URL;
         
         super.view.frame = CGRectMake(65,55,300,300);
-        
+    
+      
     }
     return self;
     
@@ -107,7 +113,8 @@
     self = [super initWithDelegate:self];
     
     if(self){
-        
+           super.useSplashScreen = NO;
+        super.customDelegate = self;
         _initializeData=nil;
         _playData=nil;
         
@@ -149,9 +156,9 @@
 
 -(void)precheck{
   
-    if(self.psuccess || self.pfaliure) @throw([NSException exceptionWithName:DL_BRIDGE_TOO_SOON reason:@"previous call still in proggress" userInfo:nil]);
+   // if(self.psuccess || self.pfaliure) @throw([NSException exceptionWithName:DL_BRIDGE_TOO_SOON reason:@"previous call still in proggress" userInfo:nil]);
     
-    if(!self.isLoadded) @throw([NSException exceptionWithName:DL_BRIDGE_NOT_LOADDED reason:@"api is not loadded yet" userInfo:nil]);
+//    if(!self.isLoadded) @throw([NSException exceptionWithName:DL_BRIDGE_NOT_LOADDED reason:@"api is not loadded yet" userInfo:nil]);
     
     
 }
@@ -160,11 +167,11 @@
    
     NSMutableString *command = [[NSMutableString alloc]init];
     
-    [command appendString:@"dlhost.player.api('"];
+    [command appendString:@"dlhost.player.api({ 'action':'"];
     [command appendString:action];
-    [command appendString:@"', "];
+    [command appendString:@"', 'data':"];
     [command appendString:data];
-    [command appendString:@", function(res){ callback(res,'fsuccess:' ); },function(res){ callback(res,'ffailure:' ); } );"];
+    [command appendString:@", 'success': function(res){ window.callback(res,'fsuccess:' ); }, 'error':function(res){ window.callback(res,'ffailure:' ); } } );"];
  
     return command;
 }
@@ -192,7 +199,19 @@
     self.psuccess=success;
     self.pfaliure=faliure;
     
-    [self.webView stringByEvaluatingJavaScriptFromString: [self createCommandForAction:@"playSequence" withData:seqData]  ];
+    NSDictionary *dic = [aszUtils jsonToDictionarry:seqData];
+    
+    NSString *key = [dic allKeys][0];
+    
+    NSMutableString *data = [[NSMutableString alloc]init];
+    
+    [data appendString:@"{ 'id':'"];
+    [data appendString:key];
+    [data appendString:@"' , 'data': "];
+    [data appendString:seqData];
+    [data appendString:@"}"];
+    
+    [self.webView stringByEvaluatingJavaScriptFromString: [self createCommandForAction:@"playSequence" withData:data]  ];
     
 }
 
@@ -221,8 +240,8 @@
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         [self performSelector:NSSelectorFromString(function) withObject:param];
         
-        self.pfaliure = nil;
-        self.psuccess = nil;
+      //  self.pfaliure = nil;
+       // self.psuccess = nil;
         
         // Cancel the location change
         return NO; 
@@ -234,44 +253,63 @@
     
 }
 
+-(void)loadded:(NSString*)msg{
+    
+    
+    self.isLoadded = YES;
+    __block aszDlBridge *this=self;
+
+    
+    if(self.initandplay){
+        
+        [self initPlayer:self.initializeData OnSuccess:^(NSString *msg) {
+            
+            if(this.playData){
+                [this playSequence:this.playData OnSuccess:^(NSString *msg) {
+                    
+                    
+                    if(this.loaddedCallBack ){
+                        this.loaddedCallBack();
+                        //call only once
+                        this.loaddedCallBack = nil;
+                    }
+
+                    
+                    
+                } OnFaliure:^(NSString *err) {
+                    @throw([NSException exceptionWithName:@"DL_BRIDGE_PLAY_FAILED" reason:err userInfo:nil]);
+                }];
+            }else{
+                if(this.loaddedCallBack ){
+                    this.loaddedCallBack();
+                    //call only once
+                    this.loaddedCallBack = nil;
+                }
+
+            }
+            
+        } OnFaliure:^(NSString *err) {
+            @throw([NSException exceptionWithName:@"DL_BRIDGE_LOAD_FAILED" reason:err userInfo:nil]);
+        }];
+    }
+    
+   else if(self.loaddedCallBack ){
+        self.loaddedCallBack();
+        //call only once
+        self.loaddedCallBack = nil;
+    }
+}
 
 -(void) webViewDidFinishLoad:(UIWebView *)webView{
     
-    if(!self.isLoadded ){
-        NSString* loadded =   [webView stringByEvaluatingJavaScriptFromString: @"var check = function(){ return loadded};   check();" ];
-    
-        if([loadded isEqualToString:@"YES"]){
-                
-            if(self.loaddedCallBack ){
-                self.loaddedCallBack();
-                //call only once
-                self.loaddedCallBack = nil;
-            }
-        
-            if(self.initandplay){
-            
-                [self initPlayer:self.initializeData OnSuccess:^(NSString *msg) {
-                    if(self.playData){
-                        [self playSequence:self.playData OnSuccess:^(NSString *msg) {
-                        //do nothing
-                        } OnFaliure:^(NSString *err) {
-                            @throw([NSException exceptionWithName:@"DL_BRIDGE_PLAY_FAILED" reason:err userInfo:nil]);
-                        }];
-                    }
-                
-                } OnFaliure:^(NSString *err) {
-                    @throw([NSException exceptionWithName:@"DL_BRIDGE_LOAD_FAILED" reason:err userInfo:nil]);
-                }];
-            }
-           
-            self.isLoadded = YES;
-        }
-    }
-    
-    
-    //....
-    
     
 }
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [super releaseLock];
+}
+
+
 
 @end
