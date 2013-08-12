@@ -20,14 +20,6 @@ NSString const * const password_def=@"password_def";
 #pragma mark - util funcs
 
 
-+ (UIColor *) getRandomColor {
-    CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
-    CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
-    CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;
-    return [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
-}
-
-
 +(NSString*)getDomain
 {
     NSString *domain = [[NSUserDefaults standardUserDefaults] stringForKey:[domain_def copy]];
@@ -83,6 +75,7 @@ NSString const * const password_def=@"password_def";
     }
     
     NSMutableURLRequest * request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString: vurl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:90.0];
+    
     
     [request addValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     

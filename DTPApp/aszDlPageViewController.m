@@ -100,14 +100,14 @@
 	// Do any additional setup after loading the view.
     
     
-    //===========prep init data must be done properly in the final svertion=================================================
+    //===========prep init data must be calculated properly in the final vertion=================================================
     
     //media url
     NSMutableString *mediaUrl=[[NSMutableString alloc]init];
     
     [mediaUrl appendString: @"\"/cms/courses/"];
     
-    [mediaUrl appendString: self.courseId];
+    [mediaUrl appendString: self.ccid];
     
     [mediaUrl appendString: @"\""];
     
@@ -117,7 +117,7 @@
     [initData appendString:@"{ width: 1024, height: 600, scale: 1, basePaths: { player:"];
     
     //this.playerPath
-    [initData appendString: @"\"http://cto.timetoknow.com/cms/player/dl\""];
+    [initData appendString: @"\"/cms/player/dl\""];
     
     
     [initData appendString: @", media:"];

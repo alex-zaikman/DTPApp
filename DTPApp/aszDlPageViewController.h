@@ -12,7 +12,7 @@
 
 @property (nonatomic,strong) NSString *courseId;
 @property (nonatomic,strong) NSString *lessonId;
-
+@property (nonatomic,strong) NSString *ccid;
 
 
 @end

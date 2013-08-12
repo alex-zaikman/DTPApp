@@ -29,8 +29,6 @@ extern NSString const * const password_def;
 
 +(NSArray*)jsonToArray:(NSString*)json;
 
-+ (UIColor *) getRandomColor;
-
 +(NSString*)getDomain;
 
 +(NSString*) decodeFromPercentEscapeString:(NSString *)string ;

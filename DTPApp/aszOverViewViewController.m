@@ -219,6 +219,9 @@
         [segue.destinationViewController performSelector:@selector(setLessonId:)
                                               withObject:  self.selectedNode.cid];
         
+         NSString *ccid = [[self.rawData objectForKey:@"data"] objectForKey:@"cid"];
+        [segue.destinationViewController performSelector:@selector(setCcid:)
+                                              withObject:  ccid];
         
     }
 }
