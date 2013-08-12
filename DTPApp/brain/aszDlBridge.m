@@ -49,7 +49,7 @@
 
  NSDictionary *config = [aszUtils jsonToDictionarry:msg];
     
-[self.dldelegate dispatcher:config];
+[self.dldelegate api:config];
      
 }
 
