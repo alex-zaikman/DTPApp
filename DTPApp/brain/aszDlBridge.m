@@ -49,8 +49,8 @@
 
  NSDictionary *config = [aszUtils jsonToDictionarry:msg];
     
-    
-    
+[self.dldelegate dispatcher:config];
+     
 }
 
 -(BOOL)didDlLoad{

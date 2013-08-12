@@ -12,6 +12,10 @@
 
 @protocol aszDlCallbackDelegate <NSObject>
 
+@required
+-(BOOL)api:(NSDictionary*) config;
+
+
 
 
 @end

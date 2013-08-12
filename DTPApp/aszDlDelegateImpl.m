@@ -11,5 +11,9 @@
 
 @implementation aszDlDelegateImpl 
 
+-(BOOL)api:(NSDictionary*) config{
+    
+    return YES;
+}
 
 @end
