@@ -81,9 +81,11 @@
             seq.thumbnailHref= [rawSeq valueForKey:@"thumbnailHref"];
             seq.contentHref= [rawSeq valueForKey:@"contentHref"];
             
+            
             [lo.seqs addObject:seq];
             
-            [self.seqList addObject:seq.contentHref];
+            if(seq.contentHref)
+                [self.seqList addObject:seq.contentHref];
         }
         
         

@@ -45,12 +45,21 @@
 @implementation aszDlBridge
 
 -(void)dlapi:(NSString*)msg{
-#warning not implemented
 
- NSDictionary *config = [aszUtils jsonToDictionarry:msg];
     
-[self.dldelegate api:config];
-     
+    NSDictionary *config = [aszUtils jsonToDictionarry:msg];
+    BOOL res = [self.dldelegate api:config];
+    if(res){
+        NSString *success = [config objectForKey:@"success"];
+        if(success)
+            [self.webView stringByEvaluatingJavaScriptFromString:success ];
+    }else{
+        NSString *failure = [config objectForKey:@"failure"];
+        if(failure)
+            [self.webView stringByEvaluatingJavaScriptFromString:failure ];
+    }
+    
+    
 }
 
 -(BOOL)didDlLoad{
