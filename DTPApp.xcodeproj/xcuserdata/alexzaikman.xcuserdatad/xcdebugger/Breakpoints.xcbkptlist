@@ -4,29 +4,29 @@
    version = "1.0">
    <FileBreakpoints>
       <FileBreakpoint
-         shouldBeEnabled = "No"
+         shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "DTPApp/brain/aszDlBridge.m"
-         timestampString = "398075828.985585"
+         filePath = "DTPApp/aszDlWebViewDelegate.m"
+         timestampString = "401010713.498016"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "51"
-         endingLineNumber = "51"
-         landmarkName = "-dlapi:"
+         startingLineNumber = "52"
+         endingLineNumber = "52"
+         landmarkName = "-webViewDidFinishLoad:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "DTPApp/brain/aszDlBridge.m"
-         timestampString = "398075928.378005"
+         filePath = "DTPApp/aszDlPagerViewController.m"
+         timestampString = "401024926.92126"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "55"
-         endingLineNumber = "55"
-         landmarkName = "-dlapi:"
+         startingLineNumber = "293"
+         endingLineNumber = "293"
+         landmarkName = "-dlWebViewForIndex:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -108,7 +108,7 @@
         
         node.overview = [tocitem valueForKey:@"overview"];
         
-        node.cid = [tocitem valueForKey:@"cid"] ;
+        node.cid = [tocitem valueForKey:@"cid"];
         
         [root addChild:node];
         

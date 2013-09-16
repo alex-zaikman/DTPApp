@@ -72,6 +72,7 @@
 
 
 #pragma mark JS API
+
 +(void) loadOnSuccess:(void (^)(NSString *))success  OnFaliure:(void (^)(NSString *))faliure{
     
     aszApiBridge *instance = [aszApiBridge the];
@@ -111,8 +112,6 @@
     [instance callJs:@"T2K.server.initData" withParams:nil OnSucsses:@"aok:" OnFaliure:@"ono:"];
     
 }
-
-
 
 
 +(void) logInWithUser:(NSString*)user andPassword:(NSString*)pass OnSuccess:(void (^)(NSString *))success  OnFaliure:(void (^)(NSString *))faliure
@@ -201,7 +200,6 @@
     
     [[aszApiBridge the] callJs:@"T2K.content.getLessonContent"  withParams:param  OnSucsses:@"aok:" OnFaliure:@"ono:"];
 }
-
 
 
 @end

@@ -47,19 +47,26 @@ static BOOL logged = NO;
     if(!logged){
         [aszApiBridge the];
         
-//        [aszWebBridge the].cdvbrain = [CDVViewController new];
-//        
-//        
-//      //  [aszWebBridge the].cdvbrain.customDelegate= [aszWebBridge the];
-//        
-//         [aszWebBridge the].cdvbrain.wwwFolderName = @"";
-//         [aszWebBridge the].cdvbrain.startPage = T2KAPI_URL;
-//        
-//         [aszWebBridge the].cdvbrain.view.frame =CGRectMake(0,0, 900, 900);
-//        
-//    [self.view addSubview:[aszWebBridge the].cdvbrain.view];
         
-      //  [self.view setNeedsDisplay];
+        
+        
+//        [aszApiBridge the].cdvbrain = [CDVViewController new];
+//        
+//        
+//    //    [aszApiBridge the].cdvbrain.customDelegate= self;
+//         [aszApiBridge the].cdvbrain.wwwFolderName = @"";
+//        
+//         [aszApiBridge the].cdvbrain.startPage = @"http://cto.timetoknow.com/lms/js/libs/t2k/t2k.html";
+//        
+//         [aszApiBridge the].cdvbrain.view.frame =CGRectMake(0,0, 900, 900);
+//        
+//          [self.view addSubview:[aszApiBridge the].cdvbrain.view];   
+//        
+//        [self.view setNeedsDisplay];
+        
+               
+        
+        
     }
 
     if(logged)

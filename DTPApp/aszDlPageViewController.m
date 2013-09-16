@@ -78,8 +78,8 @@
             naszSeq *seq = [[naszSeq alloc]init];
             
             seq.stitle= [rawSeq valueForKey:@"title"] ;
-            seq.thumbnailHref= [rawSeq valueForKey:@"thumbnailHref"];
-            seq.contentHref= [rawSeq valueForKey:@"contentHref"];
+            seq.thumbnailHref= [rawSeq valueForKey:@"thumbnailHRef"];
+            seq.contentHref= [rawSeq valueForKey:@"contentHRef"];
             
             
             [lo.seqs addObject:seq];
